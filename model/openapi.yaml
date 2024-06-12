@@ -217,6 +217,7 @@ components:
 
     Vehicle:
       type: object
+      description: "Sensor-Werte eines Fahrzeugs\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleStatus/doc/spec.md"
       properties:
         guid:
           type: string
@@ -307,8 +308,12 @@ components:
           type: string
           description: Entity creation timestamp. This will usually be allocated by the storage platform
           format: date-time
+        feature:
+          type: array
+          description: Besonderheiten die dieses Fahrzeug unterstützt
+          items:
+            $ref: '#/components/schemas/NemobilAPI.Model.Skill'
       additionalProperties: false
-      description: "Sensor-Werte eines Fahrzeugs\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleStatus/doc/spec.md"
 
     VehicleState:
       type: string
