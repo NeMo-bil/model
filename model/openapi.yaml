@@ -201,8 +201,7 @@ components:
       additionalProperties: false
       description: "Daten eines Trips\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleOperation/doc/spec.md"
 
-
-    NemobilAPI.Model.Skill:
+    Skill:
       type: object
       properties:
         skillId:
@@ -215,3 +214,111 @@ components:
           nullable: true
       additionalProperties: false
       description: Skills, die Cabs von Nemobil erfüllen können
+
+    Vehicle:
+      type: object
+      properties:
+        guid:
+          type: string
+          description: Unique identifier of the entity
+          format: uuid
+        vehicleScheduleGuid:
+          type: string
+          description: Sensorwert des Vehicle Schedule Entry
+          format: uuid
+        stateOfSchedule:
+          enum:
+            - 0 - Running
+            - 1 - StartSchedule
+            - 2 - EndSchedule
+          type: integer
+          description: "State of Schedule\r\nAnmeldung, Abmeldung oder laufend der Schicht"
+          format: int32
+        batteryLevel:
+          type: number
+          description: "Der aktuelle Prozentsatz der verbleibenden Batterie im Falle eines Elektrofahrzeugs\r\nAngabe in Prozent"
+          format: float
+        remainingRange:
+          type: number
+          description: Aktuelle Restreichweite
+          format: float
+        consumption:
+          type: number
+          description: Aktueller Energieverbrauch
+          format: float
+        energyConsumptionSinceLastStop:
+          type: number
+          description: Energieverbrauch seit dem letzten Stop
+          format: float
+        location:
+          $ref: '#/components/schemas/NemobilAPI.Model.Location'
+        state:
+          type: array
+          items:
+            $ref: '#/components/schemas/VehicleState'
+          description: "Stati des Fahrzeuges"
+        drivingState:
+          $ref: '#/components/schemas/NemobilAPI.Contracts.SonsorData.Data.DrivingState'
+        deviation:
+          type: number
+          description: "+ => Besser als Vorgesehen\r\n- => Im Verzug"
+          format: float
+        chargingPower:
+          type: number
+          description: Aktuelle Ladeleistungs
+          format: float
+        chargedPower:
+          type: number
+          description: Aktuell geladene Energie (Nur wenn das Fahrzeug aktuell geladen wird)
+          format: float
+        tireAirPressure:
+          type: number
+          description: Für alle 4 Reifen oder wie am besten?
+          format: float
+        mileageFromOdometer:
+          type: integer
+          description: "Aktueller Kilometerstand\r\nDie Gesamtentfernung, die das Flottenfahrzeug gemäß dem eingebauten Kilometerzähler in Kilometern (unitCode KMT) oder Meilen (unitCode SMI) zurückgelegt hat. Siehe auch Schema.org Vehicle/ mileageFromOdometer. Das Element timestamp hält fest, wann der Kilometerstand gemessen wurde"
+          format: int32
+        load:
+          type: integer
+          description: "Aktuelle Beladung\r\nNur CAB?"
+          format: int32
+        weight:
+          type: integer
+          description: "Aktuelles Gesamtgewicht des Fahrzeugs\r\nNur CAB?"
+          format: int32
+        chainedVehicles:
+          type: integer
+          description: "Wie viele Cabs fahre ich gerade\r\nNur PRO"
+          format: int32
+        powerSupply:
+          type: integer
+          description: "Wie viele Energie geben ich gerade an zu ladene Cabs weiter?\r\nNur PRO"
+          format: int32
+        temperatureIndoor:
+          type: number
+          description: "Aktuelle Temperatur innerhalb des Fahrzeugs\r\nNur CAB"
+          format: float
+        temperatureOutside:
+          type: number
+          description: "Aktuelle Temperatur ausßerhalb des Fahrzeugs\r\nNur CAB oder auch PRO insteressant"
+          format: float
+        dateCreated:
+          type: string
+          description: Entity creation timestamp. This will usually be allocated by the storage platform
+          format: date-time
+      additionalProperties: false
+      description: "Sensor-Werte eines Fahrzeugs\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleStatus/doc/spec.md"
+
+    VehicleState:
+      type: string
+      enum:
+        - DoorsOpened
+        - Idle
+        - WaintingForCustomer
+        - Konvoi
+        - CustomerTransport
+        - Charging
+        - Accident
+        - TrafficJam
+      description: "Status des Fahrzeugs\r\nEine Beschreibung des aktuellen Status des Fahrzeugs"
