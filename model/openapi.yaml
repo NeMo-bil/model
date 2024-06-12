@@ -1,0 +1,217 @@
+openapi: 3.0.1
+info:
+  title: NeMoBil Datenmodell
+  description: Datenmodel
+  version: v0
+paths:
+  /test:
+    get:
+      tags:
+        - test
+      responses:
+        '200':
+          description: Success
+
+components:
+  schemas:
+    TripRequest:
+      type: object
+      properties:
+        userGuid:
+          type: string
+          description: Anfragender User
+          format: uuid
+        startLoction:
+          $ref: '#/components/schemas/NemobilAPI.Model.Location'
+        targetLocation:
+          $ref: '#/components/schemas/NemobilAPI.Model.Location'
+        targetTime:
+          type: string
+          description: "<br>Gewünschte Ankunftszeit \r\n<br>(Target - Toleranz davor)"
+          format: date-time
+          nullable: true
+        pickupTime:
+          type: string
+          description: "<br>Gewünschte Abholzeit\r\n<br>(Pickup + Toleranz danach)"
+          format: date-time
+          nullable: true
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/NemobilAPI.Model.Skill'
+          description: 'Besonderheiten z.B: Kinderwagen, Rollstuhl, sonst. Einschränkungen'
+          nullable: true
+        requestedAdults:
+          type: integer
+          description: Wie viele Erwachsene sollen transportiert werden
+          format: int32
+        requestedChilds:
+          type: integer
+          description: Wie viele Kinder sollen transportiert werden
+          format: int32
+        luggage:
+          type: integer
+          description: Gepäck
+          format: int32
+        maxCabs:
+          type: integer
+          description: Wie viele Cabs sollen für den Transport maximal kommen
+          format: int32
+        personalPreferences:
+          $ref: '#/components/schemas/NemobilAPI.Contracts.RideRequest.CustomerPreferences'
+      additionalProperties: false
+      description: "<br>Parameter für eine Fahrtanfrage\r\n<br>https://github.com/moia-oss/alonso-mora/blob/master/core/src/main/java/org/matsim/alonso_mora/algorithm/DefaultAlonsoMoraRequest.java"
+
+    TripRequestProposal:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Proposal ID
+          format: uuid
+        cabPickupLocation:
+          $ref: '#/components/schemas/NemobilAPI.Model.Location'
+        cabDropoffLocation:
+          $ref: '#/components/schemas/NemobilAPI.Model.Location'
+        pickupTime:
+          type: string
+          description: "Geplante Abholzeit\r\nToleranz - Range => Interval"
+          format: date-time
+        targetTime:
+          type: string
+          description: "Erwartete Ankunftszeit\r\nToleranz - Range => Interval"
+          format: date-time
+        costs:
+          type: number
+          description: Erwartete Kosten für die Fahrt
+          format: float
+        proposalReleaseTime:
+          type: string
+          description: Bis wann wird der Proposal freigehalten
+          format: date-time
+      additionalProperties: false
+      description: Vorschlag für eine Fahrtanfrage
+
+    TripBooking:
+      type: object
+      description: Eine gebuchte Reise
+      properties:
+        id:
+          type: string
+          description: Booking ID
+          format: uuid
+        tripRequest:
+          $ref: '#/components/schemas/TripRequest'
+        tripRequestProposal:
+          $ref: '#/components/schemas/TripRequestProposal'
+        lifecycle:
+          type: string
+          description: "Zustand der gebuchten Reise"
+          enum:
+            - Requested
+            - Confirmed
+            - Canceled
+            - Rejected
+            - Done
+
+    Trip:
+      type: object
+      properties:
+        tripGuid:
+          type: string
+          description: Kennung der Fahrt
+          format: uuid
+        userGuid:
+          type: string
+          description: Anfragender User
+          format: uuid
+        creationTime:
+          type: string
+          description: Zeit der Anfrage
+          format: date-time
+        vehicle:
+          $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
+        cabStartLocation:
+          $ref: '#/components/schemas/NemobilAPI.Model.Location'
+        cabTargetLocation:
+          $ref: '#/components/schemas/NemobilAPI.Model.Location'
+        pickupTime:
+          type: string
+          description: "Geplante Abholzeit\r\nToleranz - Range => Interval"
+          format: date-time
+        targetTime:
+          type: string
+          description: "Erwartete Ankunftszeit\r\nToleranz - Range => Interval"
+          format: date-time
+        costs:
+          type: number
+          description: Kosten für die Fahrt
+          format: float
+        carpoolInformation:
+          $ref: '#/components/schemas/NemobilAPI.Model.CarpoolInformation'
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/NemobilAPI.Model.Skill'
+          description: 'Besonderheiten z.B: Kinderwagen, Rollstuhl, sonst. Einschränkungen'
+          nullable: true
+        requestedAdults:
+          type: integer
+          description: Wie viele Erwachsene sollen transportiert werden
+          format: int32
+        requestedChilds:
+          type: integer
+          description: Wie viele Kinder sollen transportiert werden
+          format: int32
+        luggage:
+          type: integer
+          description: Gepäck
+          format: int32
+        maxCabs:
+          type: integer
+          description: Wie viele Cabs sollen für den Transport maximal kommen
+          format: int32
+        personalPreferences:
+          $ref: '#/components/schemas/NemobilAPI.Contracts.RideRequest.CustomerPreferences'
+        status:
+          enum:
+            - 0 - Unplanned
+            - 1 - Planned
+            - 2 - Started
+            - 3 - Performed
+          type: integer
+          description: Status der Fahrt
+          format: int32
+        modificationDate:
+          type: string
+          description: Letztes Änderungsdatum
+          format: date-time
+        expectedEnergyRequired:
+          type: number
+          description: Geschätzte Energie für die Strecke
+          format: float
+        expectedDrivingTime:
+          type: number
+          description: Geschätzte Fahrzeit für die Strecke
+          format: float
+        expectedDistance:
+          type: number
+          description: Geschätzte Distanz für die Strecke
+          format: float
+      additionalProperties: false
+      description: "Daten eines Trips\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleOperation/doc/spec.md"
+
+
+    NemobilAPI.Model.Skill:
+      type: object
+      properties:
+        skillId:
+          type: integer
+          description: Id des Skills
+          format: int32
+        skillName:
+          type: string
+          description: Name des Skills
+          nullable: true
+      additionalProperties: false
+      description: Skills, die Cabs von Nemobil erfüllen können
