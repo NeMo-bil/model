@@ -519,7 +519,7 @@ components:
         id:
           type: string
           description: Unique identifier of the entity
-        type:
+        "@type":
           type: string
           description: Type Notification
           enum:
@@ -541,7 +541,7 @@ components:
         id:
           type: string
           description: Unique identifier of the entity
-        type:
+        "@type":
           type: string
           description: Type Payload
       additionalProperties: true

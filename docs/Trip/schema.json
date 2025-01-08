@@ -6,10 +6,10 @@
       "description" : "Kennung der Fahrt"
     },
     "user" : {
-      "$ref" : "https://NeMo-bil.github.io/model/User/schema.json"
+      "$ref" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/User/schema.json"
     },
     "vehicle" : {
-      "$ref" : "https://NeMo-bil.github.io/model/Vehicle/schema.json"
+      "$ref" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Vehicle/schema.json"
     },
     "pickupLocation" : {
       "properties" : {
@@ -577,7 +577,7 @@
   "description" : "Daten eines Trips\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleOperation/doc/spec.md",
   "$schemaVersion" : "v0",
   "title" : "Trip",
-  "$id" : "https://NeMo-bil.github.io/model/Trip/schema.json",
-  "modelTags" : "",
-  "$schema" : "http://json-schema.org/schema#"
+  "$id" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Trip/schema.json",
+  "$schema" : "http://json-schema.org/schema#",
+  "modelTags" : ""
 }

@@ -5,7 +5,7 @@
       "type" : "string",
       "description" : "Unique identifier of the entity"
     },
-    "type" : {
+    "entityType" : {
       "type" : "string",
       "description" : "Type Payload"
     }
@@ -13,7 +13,7 @@
   "additionalProperties" : true,
   "$schemaVersion" : "v0",
   "title" : "NotificationPayload",
-  "$id" : "https://NeMo-bil.github.io/model/NotificationPayload/schema.json",
-  "modelTags" : "",
-  "$schema" : "http://json-schema.org/schema#"
+  "$id" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/NotificationPayload/schema.json",
+  "$schema" : "http://json-schema.org/schema#",
+  "modelTags" : ""
 }

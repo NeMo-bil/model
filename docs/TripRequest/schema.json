@@ -6,7 +6,7 @@
       "description" : "Request ID"
     },
     "user" : {
-      "$ref" : "https://NeMo-bil.github.io/model/User/schema.json"
+      "$ref" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/User/schema.json"
     },
     "startLocation" : {
       "properties" : {
@@ -345,7 +345,7 @@
       }
     },
     "vehicle" : {
-      "$ref" : "https://NeMo-bil.github.io/model/Vehicle/schema.json"
+      "$ref" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Vehicle/schema.json"
     },
     "priority" : {
       "type" : "integer",
@@ -357,7 +357,7 @@
   "description" : "<br>Parameter für eine Fahrtanfrage\r\n<br>https://github.com/moia-oss/alonso-mora/blob/master/core/src/main/java/org/matsim/alonso_mora/algorithm/DefaultAlonsoMoraRequest.java",
   "$schemaVersion" : "v0",
   "title" : "TripRequest",
-  "$id" : "https://NeMo-bil.github.io/model/TripRequest/schema.json",
-  "modelTags" : "",
-  "$schema" : "http://json-schema.org/schema#"
+  "$id" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/TripRequest/schema.json",
+  "$schema" : "http://json-schema.org/schema#",
+  "modelTags" : ""
 }

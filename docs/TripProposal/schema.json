@@ -6,10 +6,10 @@
       "description" : "Proposal ID"
     },
     "request" : {
-      "$ref" : "https://NeMo-bil.github.io/model/TripRequest/schema.json"
+      "$ref" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/TripRequest/schema.json"
     },
     "user" : {
-      "$ref" : "https://NeMo-bil.github.io/model/User/schema.json"
+      "$ref" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/User/schema.json"
     },
     "pickupLocation" : {
       "properties" : {
@@ -478,7 +478,7 @@
   "description" : "Vorschlag für eine Fahrtanfrage",
   "$schemaVersion" : "v0",
   "title" : "TripProposal",
-  "$id" : "https://NeMo-bil.github.io/model/TripProposal/schema.json",
-  "modelTags" : "",
-  "$schema" : "http://json-schema.org/schema#"
+  "$id" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/TripProposal/schema.json",
+  "$schema" : "http://json-schema.org/schema#",
+  "modelTags" : ""
 }

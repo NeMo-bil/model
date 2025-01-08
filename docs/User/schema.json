@@ -13,7 +13,7 @@
   },
   "$schemaVersion" : "v0",
   "title" : "User",
-  "$id" : "https://NeMo-bil.github.io/model/User/schema.json",
-  "modelTags" : "",
-  "$schema" : "http://json-schema.org/schema#"
+  "$id" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/User/schema.json",
+  "$schema" : "http://json-schema.org/schema#",
+  "modelTags" : ""
 }

@@ -5,11 +5,6 @@
       "type" : "string",
       "description" : "Unique identifier of the entity"
     },
-    "type" : {
-      "type" : "string",
-      "description" : "Type Notification",
-      "enum" : [ "Notification" ]
-    },
     "subscriptionId" : {
       "type" : "string",
       "description" : "Unique identifier of the subscription"
@@ -22,13 +17,18 @@
     "data" : {
       "type" : "array",
       "items" : {
-        "$ref" : "https://NeMo-bil.github.io/model/NotificationPayload/schema.json"
+        "$ref" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/NotificationPayload/schema.json"
       }
+    },
+    "entityType" : {
+      "type" : "string",
+      "description" : "Type Notification",
+      "enum" : [ "Notification" ]
     }
   },
   "$schemaVersion" : "v0",
   "title" : "Notification",
-  "$id" : "https://NeMo-bil.github.io/model/Notification/schema.json",
-  "modelTags" : "",
-  "$schema" : "http://json-schema.org/schema#"
+  "$id" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Notification/schema.json",
+  "$schema" : "http://json-schema.org/schema#",
+  "modelTags" : ""
 }
