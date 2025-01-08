@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
-  title: NeMoBil Datenmodell
-  description: Datenmodel
+  title: NeMoBil Datamodel
+  description: Reduced data model to be used in the NeMoBil project
   version: v0
 paths:
   /test:
@@ -14,127 +14,21 @@ paths:
 
 components:
   schemas:
-    TripRequest:
-      type: object
-      properties:
-        userGuid:
-          type: string
-          description: Anfragender User
-          format: uuid
-        startLoction:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
-        targetLocation:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
-        targetTime:
-          type: string
-          description: "<br>Gewünschte Ankunftszeit \r\n<br>(Target - Toleranz davor)"
-          format: date-time
-          nullable: true
-        pickupTime:
-          type: string
-          description: "<br>Gewünschte Abholzeit\r\n<br>(Pickup + Toleranz danach)"
-          format: date-time
-          nullable: true
-        skills:
-          type: array
-          items:
-            $ref: '#/components/schemas/NemobilAPI.Model.Skill'
-          description: 'Besonderheiten z.B: Kinderwagen, Rollstuhl, sonst. Einschränkungen'
-          nullable: true
-        requestedAdults:
-          type: integer
-          description: Wie viele Erwachsene sollen transportiert werden
-          format: int32
-        requestedChilds:
-          type: integer
-          description: Wie viele Kinder sollen transportiert werden
-          format: int32
-        luggage:
-          type: integer
-          description: Gepäck
-          format: int32
-        maxCabs:
-          type: integer
-          description: Wie viele Cabs sollen für den Transport maximal kommen
-          format: int32
-        personalPreferences:
-          $ref: '#/components/schemas/NemobilAPI.Contracts.RideRequest.CustomerPreferences'
-      additionalProperties: false
-      description: "<br>Parameter für eine Fahrtanfrage\r\n<br>https://github.com/moia-oss/alonso-mora/blob/master/core/src/main/java/org/matsim/alonso_mora/algorithm/DefaultAlonsoMoraRequest.java"
-
-    TripRequestProposal:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Proposal ID
-          format: uuid
-        cabPickupLocation:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
-        cabDropoffLocation:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
-        pickupTime:
-          type: string
-          description: "Geplante Abholzeit\r\nToleranz - Range => Interval"
-          format: date-time
-        targetTime:
-          type: string
-          description: "Erwartete Ankunftszeit\r\nToleranz - Range => Interval"
-          format: date-time
-        costs:
-          type: number
-          description: Erwartete Kosten für die Fahrt
-          format: float
-        proposalReleaseTime:
-          type: string
-          description: Bis wann wird der Proposal freigehalten
-          format: date-time
-      additionalProperties: false
-      description: Vorschlag für eine Fahrtanfrage
-
-    TripBooking:
-      type: object
-      description: Eine gebuchte Reise
-      properties:
-        id:
-          type: string
-          description: Booking ID
-          format: uuid
-        tripRequest:
-          $ref: '#/components/schemas/TripRequest'
-        tripRequestProposal:
-          $ref: '#/components/schemas/TripRequestProposal'
-        lifecycle:
-          type: string
-          description: "Zustand der gebuchten Reise"
-          enum:
-            - Requested
-            - Confirmed
-            - Canceled
-            - Rejected
-            - Done
-
     Trip:
       type: object
       properties:
-        tripGuid:
+        id:
           type: string
           description: Kennung der Fahrt
-          format: uuid
-        userGuid:
-          type: string
+        user:
+          $ref: '#/components/schemas/User'
           description: Anfragender User
-          format: uuid
-        creationTime:
-          type: string
-          description: Zeit der Anfrage
-          format: date-time
         vehicle:
-          $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
-        cabStartLocation:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
-        cabTargetLocation:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
+          $ref: '#/components/schemas/Vehicle'
+        pickupLocation:
+          $ref: '#/components/schemas/Place'
+        dropoffLocation:
+          $ref: '#/components/schemas/Place'
         pickupTime:
           type: string
           description: "Geplante Abholzeit\r\nToleranz - Range => Interval"
@@ -167,25 +61,24 @@ components:
           type: integer
           description: Gepäck
           format: int32
-        maxCabs:
-          type: integer
-          description: Wie viele Cabs sollen für den Transport maximal kommen
-          format: int32
         personalPreferences:
           $ref: '#/components/schemas/NemobilAPI.Contracts.RideRequest.CustomerPreferences'
         status:
           enum:
-            - 0 - Unplanned
-            - 1 - Planned
-            - 2 - Started
-            - 3 - Performed
-          type: integer
+            - Unplanned
+            - Planned
+            - Started
+            - Canceled
+            - Rejected
+            - Performed
+          type: String
           description: Status der Fahrt
-          format: int32
-        modificationDate:
+        payment:
           type: string
-          description: Letztes Änderungsdatum
-          format: date-time
+          description: payment information of the trip
+          enum:
+            - Permitted
+            - Denied
         expectedEnergyRequired:
           type: number
           description: Geschätzte Energie für die Strecke
@@ -200,6 +93,287 @@ components:
           format: float
       additionalProperties: false
       description: "Daten eines Trips\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleOperation/doc/spec.md"
+      example:
+        id: someId
+        userGuid: someUser
+
+    TripRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Request ID
+        user:
+          $ref: '#/components/schemas/User'
+          description: Anfragender User
+        startLocation:
+          $ref: 'https://fiware.github.io/tutorials.NGSI-LD/models/ngsi-ld.yaml#/location'
+        targetLocation:
+          $ref: '#/components/schemas/Place'
+        targetTime:
+          type: string
+          description: "<br>Gewünschte Ankunftszeit \r\n<br>(Target - Toleranz davor)"
+          format: date-time
+          nullable: true
+        pickupTime:
+          type: string
+          description: "<br>Gewünschte Abholzeit\r\n<br>(Pickup + Toleranz danach)"
+          format: date-time
+          nullable: true
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/NemobilAPI.Model.Skill'
+          description: 'Besonderheiten z.B: Kinderwagen, Rollstuhl, sonst. Einschränkungen'
+          nullable: true
+        requestedAdults:
+          type: integer
+          description: Wie viele Erwachsene sollen transportiert werden
+          format: int32
+        requestedChilds:
+          type: integer
+          description: Wie viele Kinder sollen transportiert werden
+          format: int32
+        luggage:
+          type: integer
+          description: Gepäck
+          format: int32
+        personalPreferences:
+          $ref: '#/components/schemas/NemobilAPI.Contracts.RideRequest.CustomerPreferences'
+        vehicle:
+          $ref: '#/components/schemas/Vehicle'
+          nullable: true
+        priority:
+          type: integer
+          description: Priority of the request. Higher values represent more important requests
+          format: int32
+      additionalProperties: false
+      description: "<br>Parameter für eine Fahrtanfrage\r\n<br>https://github.com/moia-oss/alonso-mora/blob/master/core/src/main/java/org/matsim/alonso_mora/algorithm/DefaultAlonsoMoraRequest.java"
+    Place:
+      description: 'Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon. Should be a reference to location'
+      oneOf:
+        - description: Geojson reference to the item. Point
+          properties:
+            bbox:
+              items:
+                type: number
+              minItems: 4
+              type: array
+            coordinates:
+              items:
+                type: number
+              minItems: 2
+              type: array
+            type:
+              enum:
+                - Point
+              type: string
+          required:
+            - type
+            - coordinates
+          title: GeoJSON Point
+          type: object
+          x-ngsi:
+            type: GeoProperty
+        - description: Geojson reference to the item. LineString
+          properties:
+            bbox:
+              items:
+                type: number
+              minItems: 4
+              type: array
+            coordinates:
+              items:
+                items:
+                  type: number
+                minItems: 2
+                type: array
+              minItems: 2
+              type: array
+            type:
+              enum:
+                - LineString
+              type: string
+          required:
+            - type
+            - coordinates
+          title: GeoJSON LineString
+          type: object
+          x-ngsi:
+            type: GeoProperty
+        - description: Geojson reference to the item. Polygon
+          properties:
+            bbox:
+              items:
+                type: number
+              minItems: 4
+              type: array
+            coordinates:
+              items:
+                items:
+                  items:
+                    type: number
+                  minItems: 2
+                  type: array
+                minItems: 4
+                type: array
+              type: array
+            type:
+              enum:
+                - Polygon
+              type: string
+          required:
+            - type
+            - coordinates
+          title: GeoJSON Polygon
+          type: object
+          x-ngsi:
+            type: GeoProperty
+        - description: Geojson reference to the item. MultiPoint
+          properties:
+            bbox:
+              items:
+                type: number
+              minItems: 4
+              type: array
+            coordinates:
+              items:
+                items:
+                  type: number
+                minItems: 2
+                type: array
+              type: array
+            type:
+              enum:
+                - MultiPoint
+              type: string
+          required:
+            - type
+            - coordinates
+          title: GeoJSON MultiPoint
+          type: object
+          x-ngsi:
+            type: GeoProperty
+        - description: Geojson reference to the item. MultiLineString
+          properties:
+            bbox:
+              items:
+                type: number
+              minItems: 4
+              type: array
+            coordinates:
+              items:
+                items:
+                  items:
+                    type: number
+                  minItems: 2
+                  type: array
+                minItems: 2
+                type: array
+              type: array
+            type:
+              enum:
+                - MultiLineString
+              type: string
+          required:
+            - type
+            - coordinates
+          title: GeoJSON MultiLineString
+          type: object
+          x-ngsi:
+            type: GeoProperty
+        - description: Geojson reference to the item. MultiLineString
+          properties:
+            bbox:
+              items:
+                type: number
+              minItems: 4
+              type: array
+            coordinates:
+              items:
+                items:
+                  items:
+                    items:
+                      type: number
+                    minItems: 2
+                    type: array
+                  minItems: 4
+                  type: array
+                type: array
+              type: array
+            type:
+              enum:
+                - MultiPolygon
+              type: string
+          required:
+            - type
+            - coordinates
+          title: GeoJSON MultiPolygon
+          type: object
+          x-ngsi:
+            type: GeoProperty
+      x-ngsi:
+        type: GeoProperty
+
+    NemobilAPI.Contracts.RideRequest.CustomerPreferences:
+      type: object
+      properties:
+        allowCarpooling:
+          type: boolean
+          description: Der Kunde erlaubt Mitfahrer bei seiner Fahrt
+        toleratedDelayBefore:
+          type: integer
+          description: Der Kunde erlaubt folgende Verzögerung auf seinem Weg
+          format: int32
+        toleratedDelayAfter:
+          type: integer
+          description: Der Kunde erlaubt folgende Verzögerung auf seinem Weg
+          format: int32
+      additionalProperties: false
+      description: Wünsche des Kunden bei der Anfrage
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          description: User ID
+          format: uuid
+        surname:
+          type: string
+          description: User surname
+    TripProposal:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Proposal ID
+        request:
+          $ref: '#/components/schemas/TripRequest'
+        user:
+          $ref: '#/components/schemas/User'
+        pickupLocation:
+          $ref: '#/components/schemas/Place'
+        dropoffLocation:
+          $ref: '#/components/schemas/Place'
+        pickupTime:
+          type: string
+          description: "Geplante Abholzeit\r\nToleranz - Range => Interval"
+          format: date-time
+        targetTime:
+          type: string
+          description: "Erwartete Ankunftszeit\r\nToleranz - Range => Interval"
+          format: date-time
+        costs:
+          type: number
+          description: Erwartete Kosten für die Fahrt
+          format: float
+        proposalReleaseTime:
+          type: string
+          description: Bis wann wird der Proposal freigehalten
+          format: date-time
+      additionalProperties: false
+      description: Vorschlag für eine Fahrtanfrage
+
 
     Skill:
       type: object
@@ -219,22 +393,30 @@ components:
       type: object
       description: "Sensor-Werte eines Fahrzeugs\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleStatus/doc/spec.md"
       properties:
-        guid:
+        id:
           type: string
           description: Unique identifier of the entity
-          format: uuid
+        location:
+          $ref: '#/components/schemas/Place'
+        licensePlate:
+          type: string
+          description: License plate of the vehicle
+        nextStopLocation:
+          $ref: '#/components/schemas/Place'
+        nextStopArrival:
+          type: string
+          description: "Planned time of arrivial at next stop"
+          format: date-time
         vehicleScheduleGuid:
           type: string
-          description: Sensorwert des Vehicle Schedule Entry
-          format: uuid
+          description: ID des Vehicle Schedule Entry
         stateOfSchedule:
           enum:
-            - 0 - Running
-            - 1 - StartSchedule
-            - 2 - EndSchedule
-          type: integer
+            - Running
+            - StartSchedule
+            - EndSchedule
+          type: String
           description: "State of Schedule\r\nAnmeldung, Abmeldung oder laufend der Schicht"
-          format: int32
         batteryLevel:
           type: number
           description: "Der aktuelle Prozentsatz der verbleibenden Batterie im Falle eines Elektrofahrzeugs\r\nAngabe in Prozent"
@@ -247,19 +429,19 @@ components:
           type: number
           description: Aktueller Energieverbrauch
           format: float
-        energyConsumptionSinceLastStop:
-          type: number
-          description: Energieverbrauch seit dem letzten Stop
-          format: float
-        location:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
         state:
           type: array
           items:
             $ref: '#/components/schemas/VehicleState'
           description: "Stati des Fahrzeuges"
-        drivingState:
-          $ref: '#/components/schemas/NemobilAPI.Contracts.SonsorData.Data.DrivingState'
+        bearing:
+          type: number
+          description: "Current heading of the vehicle relative to north"
+          format: float
+        speed:
+          type: number
+          description: "Current speed"
+          format: float
         deviation:
           type: number
           description: "+ => Besser als Vorgesehen\r\n- => Im Verzug"
@@ -272,42 +454,22 @@ components:
           type: number
           description: Aktuell geladene Energie (Nur wenn das Fahrzeug aktuell geladen wird)
           format: float
-        tireAirPressure:
-          type: number
-          description: Für alle 4 Reifen oder wie am besten?
-          format: float
         mileageFromOdometer:
           type: integer
           description: "Aktueller Kilometerstand\r\nDie Gesamtentfernung, die das Flottenfahrzeug gemäß dem eingebauten Kilometerzähler in Kilometern (unitCode KMT) oder Meilen (unitCode SMI) zurückgelegt hat. Siehe auch Schema.org Vehicle/ mileageFromOdometer. Das Element timestamp hält fest, wann der Kilometerstand gemessen wurde"
-          format: int32
-        load:
-          type: integer
-          description: "Aktuelle Beladung\r\nNur CAB?"
-          format: int32
-        weight:
-          type: integer
-          description: "Aktuelles Gesamtgewicht des Fahrzeugs\r\nNur CAB?"
           format: int32
         chainedVehicles:
           type: integer
           description: "Wie viele Cabs fahre ich gerade\r\nNur PRO"
           format: int32
+        chainedPosition:
+          type: integer
+          description: "Position inside the convoy"
+          format: int32
         powerSupply:
           type: integer
           description: "Wie viele Energie geben ich gerade an zu ladene Cabs weiter?\r\nNur PRO"
           format: int32
-        temperatureIndoor:
-          type: number
-          description: "Aktuelle Temperatur innerhalb des Fahrzeugs\r\nNur CAB"
-          format: float
-        temperatureOutside:
-          type: number
-          description: "Aktuelle Temperatur ausßerhalb des Fahrzeugs\r\nNur CAB oder auch PRO insteressant"
-          format: float
-        dateCreated:
-          type: string
-          description: Entity creation timestamp. This will usually be allocated by the storage platform
-          format: date-time
         feature:
           type: array
           description: Besonderheiten die dieses Fahrzeug unterstützt
@@ -315,6 +477,30 @@ components:
             $ref: '#/components/schemas/NemobilAPI.Model.Skill'
       additionalProperties: false
 
+    NemobilAPI.Model.CarpoolInformation:
+      type: object
+      properties:
+        passengersOnBoard:
+          type: boolean
+          description: Sind bereits Mitfahrer im Cab
+        passengerBoarding:
+          type: boolean
+          description: Steigt während der Fahrt jemand hinzu
+      additionalProperties: false
+      description: Informationen über Carpooling
+    NemobilAPI.Model.Skill:
+      type: object
+      properties:
+        skillId:
+          type: integer
+          description: Id des Skills
+          format: int32
+        skillName:
+          type: string
+          description: Name des Skills
+          nullable: true
+      additionalProperties: false
+      description: Skills, die Cabs von Nemobil erfüllen können
     VehicleState:
       type: string
       enum:
@@ -327,3 +513,35 @@ components:
         - Accident
         - TrafficJam
       description: "Status des Fahrzeugs\r\nEine Beschreibung des aktuellen Status des Fahrzeugs"
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the entity
+        type:
+          type: string
+          description: Type Notification
+          enum:
+            - Notification
+        subscriptionId:
+          type: string
+          description: Unique identifier of the subscription
+        notifiedAt:
+          type: string
+          description: "Time of notification"
+          format: date-time
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/NotificationPayload'
+    NotificationPayload:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the entity
+        type:
+          type: string
+          description: Type Payload
+      additionalProperties: true
