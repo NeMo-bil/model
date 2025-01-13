@@ -11,24 +11,29 @@ info:
     url: https://reisewitz.com
   version: v0
 paths:
-  /BaseData/chargingPoint:
+  /basedatas/v1/chaininglocation:
     post:
       tags:
         - BaseData
+      summary: Koppelpunkt.
       requestBody:
+        description: ''
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Model.Charging.ChargingPoint'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.BaseData.V1.Data.ChainingLocation
           text/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Model.Charging.ChargingPoint'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.BaseData.V1.Data.ChainingLocation
           application/*+json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Model.Charging.ChargingPoint'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.BaseData.V1.Data.ChainingLocation
       responses:
         '200':
-          description: Success
+          description: Returns the newly created chaining location
           content:
             text/plain:
               schema:
@@ -39,24 +44,31 @@ paths:
             text/json:
               schema:
                 type: string
-  /BaseData/chaininglocation:
+        '400':
+          description: If the item is null
+  /basedatas/v1/parking:
     post:
       tags:
         - BaseData
+      summary: Parkplatz.
       requestBody:
+        description: ''
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Model.ChainingLocation'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.BaseData.V1.Data.ParkingLocation
           text/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Model.ChainingLocation'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.BaseData.V1.Data.ParkingLocation
           application/*+json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Model.ChainingLocation'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.BaseData.V1.Data.ParkingLocation
       responses:
         '200':
-          description: Success
+          description: Returns the newly created parking location
           content:
             text/plain:
               schema:
@@ -67,190 +79,255 @@ paths:
             text/json:
               schema:
                 type: string
-  /BaseData/parking:
+        '400':
+          description: If the item is null
+  /basedatas/v1/vehicletype-setting:
     post:
       tags:
         - BaseData
+      summary: Fahrzeug-Einstellungen.
       requestBody:
+        description: ''
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.BaseData.Data.ParkingLocation'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.BaseData.V1.VehicleTypeSetting
           text/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.BaseData.Data.ParkingLocation'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.BaseData.V1.VehicleTypeSetting
           application/*+json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.BaseData.Data.ParkingLocation'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.BaseData.V1.VehicleTypeSetting
       responses:
         '200':
-          description: Success
+          description: Returns true if the vehicle type setting was created successfully
           content:
             text/plain:
               schema:
-                type: string
+                type: boolean
             application/json:
               schema:
-                type: string
+                type: boolean
             text/json:
               schema:
-                type: string
-  /BaseData/operationArea:
-    post:
-      tags:
-        - BaseData
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.BaseData.Data.OperationArea'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.BaseData.Data.OperationArea'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.BaseData.Data.OperationArea'
-      responses:
-        '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                type: string
-            application/json:
-              schema:
-                type: string
-            text/json:
-              schema:
-                type: string
-  /BaseData/config:
-    post:
-      tags:
-        - BaseData
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Model.PlanningConfiguration'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Model.PlanningConfiguration'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Model.PlanningConfiguration'
-      responses:
-        '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                type: string
-            application/json:
-              schema:
-                type: string
-            text/json:
-              schema:
-                type: string
-  /Charging:
+                type: boolean
+        '400':
+          description: If the item is null
+  /basedatas/v1/vehicletype-settings:
     get:
       tags:
-        - Charging
+        - BaseData
+      summary: Ausgabe aller RoutingSettings.
       responses:
         '200':
-          description: Success
+          description: OK
           content:
             text/plain:
               schema:
                 type: array
                 items:
-                  type: string
+                  $ref: >-
+                    #/components/schemas/Nemobil.API.Contracts.BaseData.V1.VehicleTypeSetting
             application/json:
               schema:
                 type: array
                 items:
-                  type: string
+                  $ref: >-
+                    #/components/schemas/Nemobil.API.Contracts.BaseData.V1.VehicleTypeSetting
             text/json:
               schema:
                 type: array
                 items:
-                  type: string
+                  $ref: >-
+                    #/components/schemas/Nemobil.API.Contracts.BaseData.V1.VehicleTypeSetting
+  /basedatas/v1/operationarea:
     post:
       tags:
-        - Charging
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: string
-          text/json:
-            schema:
-              type: string
-          application/*+json:
-            schema:
-              type: string
-      responses:
-        '200':
-          description: Success
-  /Charging/{id}:
-    get:
-      tags:
-        - Charging
+        - BaseData
+      summary: Betriebsgebiet für die Planung.
       parameters:
-        - name: id
-          in: path
+        - name: Guid
+          in: query
+          description: Gets or sets id der OperationArea.
+          schema:
+            type: string
+            format: uuid
+        - name: LocationBorder
+          in: query
+          description: Gets or sets polygon in welchem Bereich das gültig sein soll.
           required: true
           schema:
-            type: integer
-            format: int32
+            type: array
+            items:
+              $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
+        - name: GuiltyRange.StartTime
+          in: query
+          description: Start des Intervalls.
+          schema:
+            type: string
+            format: date-time
+        - name: GuiltyRange.EndTime
+          in: query
+          description: Ende des Intervalls.
+          schema:
+            type: string
+            format: date-time
+        - name: Operator
+          in: query
+          description: Gets or sets welchem Betreiber ist dieses Gebiet zugeordnet.
+          schema:
+            type: string
+            format: uuid
       responses:
         '200':
-          description: Success
+          description: Returns true if the operation area was created successfully
           content:
             text/plain:
               schema:
-                type: string
+                type: boolean
             application/json:
               schema:
-                type: string
+                type: boolean
             text/json:
               schema:
-                type: string
+                type: boolean
+        '404':
+          description: If the operation area already exists
+  /basedatas/v1/operationarea/{id}:
     put:
       tags:
-        - Charging
+        - BaseData
+      summary: Betriebsgebiet für die Planung.
       parameters:
-        - name: id
-          in: path
+        - name: Guid
+          in: query
+          description: Gets or sets id der OperationArea.
+          schema:
+            type: string
+            format: uuid
+        - name: LocationBorder
+          in: query
+          description: Gets or sets polygon in welchem Bereich das gültig sein soll.
           required: true
           schema:
-            type: integer
-            format: int32
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: string
-          text/json:
-            schema:
-              type: string
-          application/*+json:
-            schema:
-              type: string
-      responses:
-        '200':
-          description: Success
-  /Charging/charging/complete/{guid}:
-    put:
-      tags:
-        - Charging
-      parameters:
-        - name: guid
+            type: array
+            items:
+              $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
+        - name: GuiltyRange.StartTime
+          in: query
+          description: Start des Intervalls.
+          schema:
+            type: string
+            format: date-time
+        - name: GuiltyRange.EndTime
+          in: query
+          description: Ende des Intervalls.
+          schema:
+            type: string
+            format: date-time
+        - name: Operator
+          in: query
+          description: Gets or sets welchem Betreiber ist dieses Gebiet zugeordnet.
+          schema:
+            type: string
+            format: uuid
+        - name: id
           in: path
           required: true
           schema:
             type: string
-            format: uuid
+      responses:
+        '200':
+          description: Returns true if the operation area was updated successfully
+        '404':
+          description: If the operation area does not exist
+    delete:
+      tags:
+        - BaseData
+      summary: Betriebsgebiet für die Planung.
+      parameters:
+        - name: value
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+    get:
+      tags:
+        - BaseData
+      summary: Betriebsgebiet für die Planung.
+      parameters:
+        - name: value
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /basedatas/v1/configuration:
+    post:
+      tags:
+        - BaseData
+      summary: Einstellungen für die Planung.
       requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.BaseData.V1.PlanningConfiguration
+          text/json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.BaseData.V1.PlanningConfiguration
+          application/*+json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.BaseData.V1.PlanningConfiguration
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+  /chargings/v1/chargingpoint/{id}:
+    get:
+      tags:
+        - Charging
+      summary: Abrufen eines ChargingPoints.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: ''
         content:
           application/json:
             schema:
@@ -263,42 +340,386 @@ paths:
               type: string
       responses:
         '200':
-          description: Success
-  /Charging/charging/price/{chargingPoint}:
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.Charging.V1.ChargingPoint
+            application/json:
+              schema:
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.Charging.V1.ChargingPoint
+            text/json:
+              schema:
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.Charging.V1.ChargingPoint
+  /chargings/v1/chargingpoints:
+    get:
+      tags:
+        - Charging
+      summary: Ladepunkte ausgeben.
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: >-
+                    #/components/schemas/Nemobil.API.Contracts.Charging.V1.ChargingPoint
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: >-
+                    #/components/schemas/Nemobil.API.Contracts.Charging.V1.ChargingPoint
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: >-
+                    #/components/schemas/Nemobil.API.Contracts.Charging.V1.ChargingPoint
+  /chargings/v1/chargingpoint:
     post:
       tags:
         - Charging
-      summary: Neue Preisdaten von den Ladeanbietern
+      summary: Erstellen eines ChargingPoints.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Charging.V1.ChargingPoint
+          text/json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Charging.V1.ChargingPoint
+          application/*+json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Charging.V1.ChargingPoint
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+    delete:
+      tags:
+        - Charging
+      summary: Löschen eines ChargingPoints.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              type: string
+          text/json:
+            schema:
+              type: string
+          application/*+json:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+  /chargings/v1/charging/complete/{session}:
+    put:
+      tags:
+        - Charging
+      summary: Ladevorgang abschließen.
+      parameters:
+        - name: session
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              type: string
+          text/json:
+            schema:
+              type: string
+          application/*+json:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+  /chargings/v1/charging/price/{chargingPointOption}:
+    post:
+      tags:
+        - Charging
+      summary: Neue Preisdaten von den Ladeanbietern.
       parameters:
         - name: chargingPoint
-          in: path
+          in: query
           description: ''
-          required: true
           schema:
             type: string
             format: uuid
+        - name: chargingPointOption
+          in: path
+          required: true
+          schema:
+            type: string
       requestBody:
         description: ''
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Model.Charging.PricingInfo'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Charging.V1.PricingInfo
           text/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Model.Charging.PricingInfo'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Charging.V1.PricingInfo
           application/*+json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Model.Charging.PricingInfo'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Charging.V1.PricingInfo
       responses:
         '200':
-          description: Success
-  /api/Forecast:
+          description: OK
+  /chargings/v1/chargingpoint-assingment:
+    post:
+      tags:
+        - Charging
+      summary: Erstellen eines ChargingPoint-Assignments.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Charging.V1.CreateChargingAssignmentParameter
+          text/json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Charging.V1.CreateChargingAssignmentParameter
+          application/*+json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Charging.V1.CreateChargingAssignmentParameter
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+    delete:
+      tags:
+        - Charging
+      summary: Löschen eines ChargingPoint-Assignments.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              type: string
+          text/json:
+            schema:
+              type: string
+          application/*+json:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+  /chargings/v1/chargingpoint-assignment/{id}:
+    get:
+      tags:
+        - Charging
+      summary: Abrufen einer Ladepunkt-Belegung.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              type: string
+          text/json:
+            schema:
+              type: string
+          application/*+json:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.Charging.V1.ChargingPointAssignment
+            application/json:
+              schema:
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.Charging.V1.ChargingPointAssignment
+            text/json:
+              schema:
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.Charging.V1.ChargingPointAssignment
+  /chargings/v1/chargingpoint-assignments:
+    get:
+      tags:
+        - Charging
+      summary: Abrufen aller Ladepunkt-Belegungen eines Ladepunkts.
+      parameters:
+        - name: chargingPointGuid
+          in: query
+          description: ''
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: >-
+                    #/components/schemas/Nemobil.API.Contracts.Charging.V1.ChargingPointAssignment
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: >-
+                    #/components/schemas/Nemobil.API.Contracts.Charging.V1.ChargingPointAssignment
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: >-
+                    #/components/schemas/Nemobil.API.Contracts.Charging.V1.ChargingPointAssignment
+  /debug/v1/proposals:
+    get:
+      tags:
+        - Debug
+      summary: Abrufen aller Proposals.
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items: {}
+            application/json:
+              schema:
+                type: array
+                items: {}
+            text/json:
+              schema:
+                type: array
+                items: {}
+  /debug/v1/testLogging:
+    post:
+      tags:
+        - Debug
+      summary: Schreibt Debug-Log-Meldungen in den DebugController log
+      requestBody:
+        description: The parameter.
+        content:
+          application/json:
+            schema:
+              type: string
+          text/json:
+            schema:
+              type: string
+          application/*+json:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: OK
+  /debug/v1/ping/{url}:
+    get:
+      tags:
+        - Debug
+      summary: Macht einen Ping an die URL.
+      parameters:
+        - name: url
+          in: path
+          description: The url.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /debug/v1/serialize-data:
+    get:
+      tags:
+        - Debug
+      summary: "Serialisiert den aktuellen Schedule Stand.\r\nZum anschauen im Spy."
+      responses:
+        '200':
+          description: OK
+  /forecasts/v1:
     get:
       tags:
         - Forecast
       responses:
         '200':
-          description: Success
+          description: OK
           content:
             text/plain:
               schema:
@@ -331,8 +752,8 @@ paths:
               type: string
       responses:
         '200':
-          description: Success
-  /api/Forecast/{id}:
+          description: OK
+  /forecasts/v1/{id}:
     get:
       tags:
         - Forecast
@@ -345,7 +766,7 @@ paths:
             format: int32
       responses:
         '200':
-          description: Success
+          description: OK
           content:
             text/plain:
               schema:
@@ -379,7 +800,7 @@ paths:
               type: string
       responses:
         '200':
-          description: Success
+          description: OK
     delete:
       tags:
         - Forecast
@@ -392,102 +813,134 @@ paths:
             format: int32
       responses:
         '200':
-          description: Success
-  /Location/location/{id}:
-    get:
-      tags:
-        - Location
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                type: string
-            application/json:
-              schema:
-                type: string
-            text/json:
-              schema:
-                type: string
-  /Location/nodeid/{id}:
-    get:
-      tags:
-        - Location
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                type: string
-            application/json:
-              schema:
-                type: string
-            text/json:
-              schema:
-                type: string
-  /Location:
+          description: OK
+  /locations/v1/nearest:
     post:
       tags:
-        - Location
+        - Locations
+      summary: Gets the nearest location to the specified location.
       requestBody:
+        description: The location to find the nearest location to.
         content:
           application/json:
             schema:
-              type: string
+              $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
           text/json:
             schema:
-              type: string
+              $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
           application/*+json:
             schema:
-              type: string
+              $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
       responses:
         '200':
-          description: Success
-  /Report/tours:
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location
+            application/json:
+              schema:
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location
+            text/json:
+              schema:
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location
+  /locations/v1/route:
+    post:
+      tags:
+        - Locations
+      summary: Gets the route between the specified start and end locations.
+      requestBody:
+        description: The route request containing start and end locations and the time.
+        content:
+          application/json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Routing.V1.GetRouteRequest
+          text/json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Routing.V1.GetRouteRequest
+          application/*+json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Routing.V1.GetRouteRequest
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.Routing.V1.RouteResponse
+            application/json:
+              schema:
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.Routing.V1.RouteResponse
+            text/json:
+              schema:
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.Routing.V1.RouteResponse
+  /reports/v1/trips:
     get:
       tags:
         - Report
-      summary: Abfrage von mehreren Touren
+      summary: Abfrage von mehreren Touren.
       responses:
         '200':
-          description: Success
+          description: OK
           content:
             text/plain:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/NemobilAPI.Model.Trip'
+                  $ref: '#/components/schemas/Nemobil.API.Contracts.Trip.V1.Trip'
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/NemobilAPI.Model.Trip'
+                  $ref: '#/components/schemas/Nemobil.API.Contracts.Trip.V1.Trip'
             text/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/NemobilAPI.Model.Trip'
-  /Report/tour/{id}:
+                  $ref: '#/components/schemas/Nemobil.API.Contracts.Trip.V1.Trip'
+  /reports/v1/trip/{id}:
     get:
       tags:
         - Report
-      summary: "Abfrage einer Tour\r\nInformationen vom Planungs-Service abfragen"
+      summary: "Abfrage einer Tour\r\nInformationen vom Planungs-Service abfragen."
+      parameters:
+        - name: guid
+          in: query
+          description: ''
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Nemobil.API.Contracts.Trip.V1.Trip'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Nemobil.API.Contracts.Trip.V1.Trip'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Nemobil.API.Contracts.Trip.V1.Trip'
+  /reports/v1/triphistory/{id}:
+    get:
+      tags:
+        - Report
+      summary: "Abfrage der Historie einer Tour\r\nMit Zeitfilter? auf Trip-Guid."
       parameters:
         - name: guid
           in: query
@@ -502,171 +955,243 @@ paths:
             type: string
       responses:
         '200':
-          description: Success
+          description: OK
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/NemobilAPI.Model.Trip'
+                $ref: '#/components/schemas/Nemobil.API.Contracts.Trip.V1.TripHistory'
             application/json:
               schema:
-                $ref: '#/components/schemas/NemobilAPI.Model.Trip'
+                $ref: '#/components/schemas/Nemobil.API.Contracts.Trip.V1.TripHistory'
             text/json:
               schema:
-                $ref: '#/components/schemas/NemobilAPI.Model.Trip'
-  /Report/tourhistory/{id}:
+                $ref: '#/components/schemas/Nemobil.API.Contracts.Trip.V1.TripHistory'
+  /reports/v1/report:
     get:
       tags:
         - Report
-      summary: "Abfrage der Historie einer Tour\r\nMit Zeitfilter? auf Trip-Guid"
+      summary: Abfrage des Tour-Report-Ergebnisses.
+      requestBody:
+        description: Parameter für den Tour-Report.
+        content:
+          application/json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Reporting.V1.TourReportParameter
+          text/json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Reporting.V1.TourReportParameter
+          application/*+json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Reporting.V1.TourReportParameter
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.Reporting.V1.TourReportResult
+            application/json:
+              schema:
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.Reporting.V1.TourReportResult
+            text/json:
+              schema:
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.Reporting.V1.TourReportResult
+  /reports/v1/scheduleplan:
+    post:
+      tags:
+        - Report
+      summary: >-
+        Ermittelt den Fahrplan für Fahrzeuge basierend auf den angegebenen
+        Parametern.
+      requestBody:
+        description: Parameter zur Filterung der Fahrpläne.
+        content:
+          application/json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Reporting.V1.GetSchedulePlanParameter
+          text/json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Reporting.V1.GetSchedulePlanParameter
+          application/*+json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Reporting.V1.GetSchedulePlanParameter
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.Reporting.V1.VehicleSchedulePlanResult
+            application/json:
+              schema:
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.Reporting.V1.VehicleSchedulePlanResult
+            text/json:
+              schema:
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.Reporting.V1.VehicleSchedulePlanResult
+  /schedules/v1/cabs:
+    get:
+      tags:
+        - Schedule
+      summary: Gibt alle Cab Fahrpläne im System aus.
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: >-
+                    #/components/schemas/Nemobil.API.Contracts.Schedule.V1.PlanningCab
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: >-
+                    #/components/schemas/Nemobil.API.Contracts.Schedule.V1.PlanningCab
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: >-
+                    #/components/schemas/Nemobil.API.Contracts.Schedule.V1.PlanningCab
+  /schedules/v1/pros:
+    get:
+      tags:
+        - Schedule
+      summary: Gibt alle Pro Fahrpläne im System aus.
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: >-
+                    #/components/schemas/Nemobil.API.Contracts.Schedule.V1.PlanningPro
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: >-
+                    #/components/schemas/Nemobil.API.Contracts.Schedule.V1.PlanningPro
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: >-
+                    #/components/schemas/Nemobil.API.Contracts.Schedule.V1.PlanningPro
+  /sensors/v1/vehicle-update:
+    post:
+      tags:
+        - Sensor
+      summary: Daten der Fahrzeuge werden hier dem System mitgeteilt.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.SonsorData.V1.Data.VehicleStatus
+          text/json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.SonsorData.V1.Data.VehicleStatus
+          application/*+json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.SonsorData.V1.Data.VehicleStatus
+      responses:
+        '200':
+          description: OK
+  /sensors/v1/chargingpoint-update:
+    post:
+      tags:
+        - Sensor
+      summary: Updates von den Ladesäulen.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.SonsorData.V1.Data.ChargingPointStatus
+          text/json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.SonsorData.V1.Data.ChargingPointStatus
+          application/*+json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.SonsorData.V1.Data.ChargingPointStatus
+      responses:
+        '200':
+          description: OK
+  /sensors/v1/interrupt:
+    post:
+      tags:
+        - Sensor
+      summary: "\r\nMelden einer Störung oder Unterbrechung/Notstop/-aus.\r\n\r\n\r\n            Fahrzeug meldet eine Störung des Systems?\r\n            Im Fahrzeug wurde der Not-Aus betätigt?\r\n            Meldung von Staus?.\r\n            "
       parameters:
-        - name: guid
+        - name: vehicleGuid
           in: query
           description: ''
           schema:
             type: string
-            format: uuid
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
       responses:
         '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                $ref: '#/components/schemas/NemobilAPI.Model.TripHistory'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NemobilAPI.Model.TripHistory'
-            text/json:
-              schema:
-                $ref: '#/components/schemas/NemobilAPI.Model.TripHistory'
-  /Report/report:
+          description: OK
+  /simulations/v1/change-time:
+    post:
+      tags:
+        - Simulations
+      summary: Ändern der aktuellen Zeit.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              type: string
+              format: date-time
+          text/json:
+            schema:
+              type: string
+              format: date-time
+          application/*+json:
+            schema:
+              type: string
+              format: date-time
+      responses:
+        '200':
+          description: OK
+  /simulations/v1/simulationTime:
     get:
       tags:
-        - Report
+        - Simulations
+      summary: Abrufen der aktuellen Simulationszeit.
       responses:
         '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/NemobilAPI.Contracts.TourReportResult'
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/NemobilAPI.Contracts.TourReportResult'
-            text/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/NemobilAPI.Contracts.TourReportResult'
-  /Sensor/vehicleUpdate:
+          description: OK
+  /simulations/v1/vehicle-breakdown:
     post:
       tags:
-        - Sensor
-      summary: Daten der Fahrzeuge werden hier dem System mitgeteilt
+        - Simulations
+      summary: Fahrzeug Ausfall simulieren.
       requestBody:
-        description: ''
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.SonsorData.Data.VehicleStatus'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.SonsorData.Data.VehicleStatus'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.SonsorData.Data.VehicleStatus'
-      responses:
-        '200':
-          description: Success
-  /Sensor/chargingPointUpdate:
-    post:
-      tags:
-        - Sensor
-      summary: Updates von den Ladesäulen
-      requestBody:
-        description: ''
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.SonsorData.Data.ChargingPointStatus'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.SonsorData.Data.ChargingPointStatus'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.SonsorData.Data.ChargingPointStatus'
-      responses:
-        '200':
-          description: Success
-  /Sensor/interrupt:
-    post:
-      tags:
-        - Sensor
-      summary: "<br>Melden einer Störung oder Unterbrechung/Notstop/-aus\r\n<br>\r\n            Fahrzeug meldet eine Störung des Systems?\r\n            Im Fahrzeug wurde der Not-Aus betätigt?\r\n            Meldung von Staus?\r\n            "
-      responses:
-        '200':
-          description: Success
-  /Simulation/changeTime:
-    post:
-      tags:
-        - Simulation
-      summary: Ändern der aktuellen Zeit
-      requestBody:
-        description: ''
-        content:
-          application/json:
-            schema:
-              type: string
-              format: date-time
-          text/json:
-            schema:
-              type: string
-              format: date-time
-          application/*+json:
-            schema:
-              type: string
-              format: date-time
-      responses:
-        '200':
-          description: Success
-  /Simulation/changeTimeTickRate:
-    post:
-      tags:
-        - Simulation
-      summary: Veränderung der Tick-Rate
-      requestBody:
-        description: ''
-        content:
-          application/json:
-            schema:
-              type: number
-              format: float
-          text/json:
-            schema:
-              type: number
-              format: float
-          application/*+json:
-            schema:
-              type: number
-              format: float
-      responses:
-        '200':
-          description: Success
-  /Simulation/vehicleBreakdown:
-    post:
-      tags:
-        - Simulation
-      summary: Fahrzeug Ausfall simulieren
-      requestBody:
-        description: vehicle to beakdown
+        description: vehicle to beakdown.
         content:
           application/json:
             schema:
@@ -682,32 +1207,89 @@ paths:
               format: uuid
       responses:
         '200':
-          description: Success
-  /Simulation/trafficJam:
+          description: OK
+  /simulations/v1/traffic-jam:
     post:
       tags:
-        - Simulation
-      summary: Stau simulieren
+        - Simulations
+      summary: Stau simulieren.
       requestBody:
-        description: traffic jam data
+        description: traffic jam data.
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.Forecast.TrafficData'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Forecast.V1.TrafficData
           text/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.Forecast.TrafficData'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Forecast.V1.TrafficData
           application/*+json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.Forecast.TrafficData'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Forecast.V1.TrafficData
       responses:
         '200':
-          description: Success
-  /Trip/status/{guid}:
+          description: OK
+  /simulations/v1/reset:
+    get:
+      tags:
+        - Simulations
+      summary: Ein Simulations-Szenario initialisieren.
+      responses:
+        '200':
+          description: OK
+  /simulations/v1/init-simulation-basedata:
+    post:
+      tags:
+        - Simulations
+      summary: Ein Simulations-Szenario initialisieren.
+      requestBody:
+        description: Szenario für Simulation.
+        content:
+          application/json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Simulation.V1.SimulationBaseData
+          text/json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Simulation.V1.SimulationBaseData
+          application/*+json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Simulation.V1.SimulationBaseData
+      responses:
+        '200':
+          description: OK
+  /simulations/v1/simulate:
+    post:
+      tags:
+        - Simulations
+      summary: Ein Simulations-Durchlauf.
+      requestBody:
+        description: Durchlauf der Simulation.
+        content:
+          application/json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Simulation.V1.SimulationRunParameter
+          text/json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Simulation.V1.SimulationRunParameter
+          application/*+json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Simulation.V1.SimulationRunParameter
+      responses:
+        '200':
+          description: OK
+  /trips/v1/status/{guid}:
     get:
       tags:
         - Trip
-      summary: Aktuelle Informationen/Status der aktuellen Buchung
+      summary: Aktuelle Informationen/Status der aktuellen Buchung.
       parameters:
         - name: guid
           in: path
@@ -715,54 +1297,99 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
       responses:
         '200':
-          description: Success
+          description: OK
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/NemobilAPI.Contracts.Trip.TripStatusResponse'
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.Trip.V1.TripStatusResponse
             application/json:
               schema:
-                $ref: '#/components/schemas/NemobilAPI.Contracts.Trip.TripStatusResponse'
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.Trip.V1.TripStatusResponse
             text/json:
               schema:
-                $ref: '#/components/schemas/NemobilAPI.Contracts.Trip.TripStatusResponse'
-  /Trip:
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.Trip.V1.TripStatusResponse
+  /trips/v1/request:
     post:
       tags:
         - Trip
-      summary: Es wird eine neue Buchungsanfrage erstellt
+      summary: Es wird eine neue Buchungsanfrage erstellt.
       requestBody:
+        description: ''
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.RideRequest.TripRequestParameter'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Trip.V1.TripRequestParameter
           text/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.RideRequest.TripRequestParameter'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Trip.V1.TripRequestParameter
           application/*+json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.RideRequest.TripRequestParameter'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Trip.V1.TripRequestParameter
       responses:
         '200':
-          description: Success
+          description: OK
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/NemobilAPI.Contracts.RideRequest.TripRequestResponse'
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.Trip.V1.TripRequestResponse
             application/json:
               schema:
-                $ref: '#/components/schemas/NemobilAPI.Contracts.RideRequest.TripRequestResponse'
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.Trip.V1.TripRequestResponse
             text/json:
               schema:
-                $ref: '#/components/schemas/NemobilAPI.Contracts.RideRequest.TripRequestResponse'
-  /Trip/cancel/{guid}:
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.Trip.V1.TripRequestResponse
+  /trips/v1/booking:
+    post:
+      tags:
+        - Trip
+      summary: Es wird eine erfolgreiche Buchungsanfrage gebucht.
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Trip.V1.BookTripParameter
+          text/json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Trip.V1.BookTripParameter
+          application/*+json:
+            schema:
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Trip.V1.BookTripParameter
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.Trip.V1.BookTripResponse
+            application/json:
+              schema:
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.Trip.V1.BookTripResponse
+            text/json:
+              schema:
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.Trip.V1.BookTripResponse
+  /trips/v1/cancel/{guid}:
     put:
       tags:
         - Trip
-      summary: Kunde storniert seine Fahrt
+      summary: Kunde storniert seine Fahrt.
       parameters:
         - name: guid
           in: path
@@ -770,10 +1397,9 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
       responses:
         '200':
-          description: Success
+          description: OK
           content:
             text/plain:
               schema:
@@ -784,11 +1410,28 @@ paths:
             text/json:
               schema:
                 type: boolean
-  /Trip/success/{guid}:
+  /trips/v1/success/{guid}:
     put:
       tags:
         - Trip
-      summary: Fahrgast ist am Ziel angekommen
+      summary: >-
+        Markiert die Fahrt als abgeschlossen, wenn der Fahrgast am Ziel
+        angekommen ist.
+      parameters:
+        - name: guid
+          in: path
+          description: Die eindeutige Kennung (GUID) der Fahrt.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+  /trips/v1/start/{guid}:
+    put:
+      tags:
+        - Trip
+      summary: Fahrgast ist eingestiegen.
       parameters:
         - name: guid
           in: path
@@ -796,93 +1439,100 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
       responses:
         '200':
-          description: Success
-  /VehicleSchedule/cabs:
+          description: OK
+  /vehicleschedules/v1/cabs:
     get:
       tags:
         - VehicleSchedule
-      summary: Gibt alle Cab Fahrpläne im System aus
+      summary: Gibt alle Cab Schedule im System aus.
       responses:
         '200':
-          description: Success
+          description: OK
           content:
             text/plain:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
+                  $ref: >-
+                    #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.CabSchedule
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
+                  $ref: >-
+                    #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.CabSchedule
             text/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
-  /VehicleSchedule/pros:
+                  $ref: >-
+                    #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.CabSchedule
+  /vehicleschedules/v1/pros:
     get:
       tags:
         - VehicleSchedule
-      summary: Gibt alle Pro Fahrpläne im System aus
+      summary: Gibt alle Pro Schedule im System aus.
       responses:
         '200':
-          description: Success
+          description: OK
           content:
             text/plain:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule'
+                  $ref: >-
+                    #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.ProSchedule
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule'
+                  $ref: >-
+                    #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.ProSchedule
             text/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule'
-  /VehicleSchedule/cab/{cabGuid}:
+                  $ref: >-
+                    #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.ProSchedule
+  /vehicleschedules/v1/cab/{cabGuid}:
     get:
       tags:
         - VehicleSchedule
-      summary: Gibt das Cap zu der passenden cabGuid aus
-      description: Returns a single cab
+      summary: Gibt das Cap zu der passenden cabGuid aus.
+      description: Returns a single cab.
       parameters:
         - name: cabGuid
           in: path
-          description: ID of cab to return
+          description: ID of cab to return.
           required: true
           schema:
             type: string
-            format: uuid
       responses:
         '200':
-          description: Successful found
+          description: Successful found.
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.CabSchedule
             application/json:
               schema:
-                $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.CabSchedule
             text/json:
               schema:
-                $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.CabSchedule
         '400':
-          description: Invalid ID supplied
+          description: Invalid ID supplied.
         '404':
-          description: Cab not found
+          description: Cab not found.
     put:
       tags:
         - VehicleSchedule
-      summary: Aktualisiert einen Cab-Schedule Eintrag
+      summary: Aktualisiert einen Cab-Schedule Eintrag.
       parameters:
         - name: cabGuid
           in: path
@@ -890,22 +1540,24 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
       requestBody:
         description: ''
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.CabSchedule
           text/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.CabSchedule
           application/*+json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.CabSchedule
       responses:
         '200':
-          description: Successful found
+          description: Successful found.
           content:
             text/plain:
               schema:
@@ -917,13 +1569,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.IActionResult'
         '400':
-          description: Invalid ID supplied
+          description: Invalid ID supplied.
         '404':
-          description: Cab not found
+          description: Cab not found.
     delete:
       tags:
         - VehicleSchedule
-      summary: Löscht den Cab-Schedule Eintrag
+      summary: Löscht den Cab-Schedule Eintrag.
       parameters:
         - name: cabGuid
           in: path
@@ -931,15 +1583,14 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
       responses:
         '200':
-          description: Success
-  /VehicleSchedule/pro/{proGuid}:
+          description: OK
+  /vehicleschedules/v1/pro/{proGuid}:
     get:
       tags:
         - VehicleSchedule
-      summary: Gibt das Pro zu der passenden proGuid aus
+      summary: Gibt das Pro zu der passenden proGuid aus.
       parameters:
         - name: proGuid
           in: path
@@ -947,24 +1598,26 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
       responses:
         '200':
-          description: Success
+          description: OK
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule'
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.ProSchedule
             application/json:
               schema:
-                $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule'
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.ProSchedule
             text/json:
               schema:
-                $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule'
+                $ref: >-
+                  #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.ProSchedule
     put:
       tags:
         - VehicleSchedule
-      summary: Aktualisiert einen Pro-Schedule Eintrag
+      summary: Aktualisiert einen Pro-Schedule Eintrag.
       parameters:
         - name: proGuid
           in: path
@@ -972,26 +1625,28 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
       requestBody:
         description: ''
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.ProSchedule
           text/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.ProSchedule
           application/*+json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.ProSchedule
       responses:
         '200':
-          description: Success
+          description: OK
     delete:
       tags:
         - VehicleSchedule
-      summary: Löscht den Pro-Schedule Eintrag
+      summary: Löscht den Pro-Schedule Eintrag.
       parameters:
         - name: proGuid
           in: path
@@ -999,51 +1654,56 @@ paths:
           required: true
           schema:
             type: string
-            format: uuid
       responses:
         '200':
-          description: Success
-  /VehicleSchedule/cab:
+          description: OK
+  /vehicleschedules/v1/cab:
     post:
       tags:
         - VehicleSchedule
-      summary: Erstellt ein Cab-Schedule Eintrag
+      summary: Erstellt ein Cab-Schedule Eintrag.
       requestBody:
         description: ''
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.CabSchedule
           text/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.CabSchedule
           application/*+json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.CabSchedule
       responses:
         '200':
-          description: Success
-  /VehicleSchedule/pro:
+          description: OK
+  /vehicleschedules/v1/pro:
     post:
       tags:
         - VehicleSchedule
-      summary: Erstellt ein Pro-Schedule Eintrag
+      summary: Erstellt ein Pro-Schedule Eintrag.
       requestBody:
         description: ''
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.ProSchedule
           text/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.ProSchedule
           application/*+json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.ProSchedule
       responses:
         '200':
-          description: Success
-  /api/WeatherForecast:
+          description: OK
+  /weatherforecasts/v1:
     post:
       tags:
         - WeatherForecast
@@ -1051,17 +1711,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.WeatherForecast'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Forecast.V1.WeatherForecast
           text/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.WeatherForecast'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Forecast.V1.WeatherForecast
           application/*+json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.WeatherForecast'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Forecast.V1.WeatherForecast
       responses:
         '200':
-          description: Success
-  /api/WeatherForecast/{guid}:
+          description: OK
+  /weatherforecasts/v1/{guid}:
     put:
       tags:
         - WeatherForecast
@@ -1076,1015 +1739,1726 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.WeatherForecast'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Forecast.V1.WeatherForecast
           text/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.WeatherForecast'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Forecast.V1.WeatherForecast
           application/*+json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.WeatherForecast'
+              $ref: >-
+                #/components/schemas/Nemobil.API.Contracts.Forecast.V1.WeatherForecast
       responses:
         '200':
-          description: Success
+          description: OK
 components:
   schemas:
     Microsoft.AspNetCore.Mvc.IActionResult:
       type: object
       additionalProperties: false
-    NemobilAPI.Contracts.BaseData.Data.OperationArea:
+    Nemobil.API.Contracts.BaseData.V1.Data.ChainingLocation:
+      required:
+        - guid
+        - locationEnd
+        - locationStart
       type: object
       properties:
         guid:
           type: string
-          description: Id der OperationArea
+          description: Gets or sets Guid.
+          nullable: true
+        locationStart:
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
+        locationEnd:
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
+        additionalTime:
+          type: integer
+          description: Gets or sets zusätzliche Zeit durch besondere Gegebenheiten.
+          format: int32
+      additionalProperties: false
+      description: "Ort an dem ein Kupplungsvorgang stattfinden kann\r\nDie Kopplung soll langfristig auf geraden Strecken ermöglicht werden, daher gibt es einen Start und einen Endpunkt."
+    Nemobil.API.Contracts.BaseData.V1.Data.OperationArea:
+      required:
+        - guiltyRange
+        - locationBorder
+      type: object
+      properties:
+        guid:
+          type: string
+          description: Gets or sets id der OperationArea.
           format: uuid
         locationBorder:
           type: array
           items:
-            $ref: '#/components/schemas/NemobilAPI.Model.Location'
-          description: Polygon in welchem Bereich das gültig sein soll
+            $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
+          description: Gets or sets polygon in welchem Bereich das gültig sein soll.
           nullable: true
         guiltyRange:
-          $ref: '#/components/schemas/NemobilAPI.Model.Interval'
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Interval'
         operator:
           type: string
-          description: Welchem Betreiber ist dieses Gebiet zugeordnet
+          description: Gets or sets welchem Betreiber ist dieses Gebiet zugeordnet.
           format: uuid
       additionalProperties: false
-      description: Arbeitsbereich von Betriebsgebiet
-    NemobilAPI.Contracts.BaseData.Data.ParkingLocation:
-      type: object
-      properties:
-        location:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
-        maximumStoppingTime:
-          type: number
-          description: Maximale Standzeit in Sekunden
-          format: float
-      additionalProperties: false
-      description: Objekt für eine Location
-    NemobilAPI.Contracts.Forecast.TrafficData:
-      type: object
-      additionalProperties: false
-      description: Verkehrsdaten
-    NemobilAPI.Contracts.RideRequest.CustomerPreferences:
-      type: object
-      properties:
-        allowCarpooling:
-          type: boolean
-          description: Der Kunde erlaubt Mitfahrer bei seiner Fahrt
-        toleratedDelayBefore:
-          type: integer
-          description: Der Kunde erlaubt folgende Verzögerung auf seinem Weg
-          format: int32
-        toleratedDelayAfter:
-          type: integer
-          description: Der Kunde erlaubt folgende Verzögerung auf seinem Weg
-          format: int32
-      additionalProperties: false
-      description: Wünsche des Kunden bei der Anfrage
-    NemobilAPI.Contracts.RideRequest.TripRequestParameter:
-      type: object
-      properties:
-        userGuid:
-          type: string
-          description: Anfragender User
-          format: uuid
-        currentLoction:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
-        targetLocation:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
-        targetTime:
-          type: string
-          description: "<br>Gewünschte Ankunftszeit \r\n<br>(Target - Toleranz davor)"
-          format: date-time
-          nullable: true
-        pickupTime:
-          type: string
-          description: "<br>Gewünschte Abholzeit\r\n<br>(Pickup + Toleranz danach)"
-          format: date-time
-          nullable: true
-        skills:
-          type: array
-          items:
-            $ref: '#/components/schemas/NemobilAPI.Model.Skill'
-          description: 'Besonderheiten z.B: Kinderwagen, Rollstuhl, sonst. Einschränkungen'
-          nullable: true
-        requestedAdults:
-          type: integer
-          description: Wie viele Erwachsene sollen transportiert werden
-          format: int32
-        requestedChilds:
-          type: integer
-          description: Wie viele Kinder sollen transportiert werden
-          format: int32
-        luggage:
-          type: integer
-          description: Gepäck
-          format: int32
-        maxCabs:
-          type: integer
-          description: Wie viele Cabs sollen für den Transport maximal kommen
-          format: int32
-        personalPreferences:
-          $ref: '#/components/schemas/NemobilAPI.Contracts.RideRequest.CustomerPreferences'
-      additionalProperties: false
-      description: "<br>Parameter für eine Fahrtanfrage\r\n<br>https://github.com/moia-oss/alonso-mora/blob/master/core/src/main/java/org/matsim/alonso_mora/algorithm/DefaultAlonsoMoraRequest.java"
-    NemobilAPI.Contracts.RideRequest.TripRequestResponse:
-      type: object
-      properties:
-        bookingTransaction:
-          type: string
-          description: Guid der Buchung
-          format: uuid
-        proposals:
-          type: array
-          items:
-            $ref: '#/components/schemas/NemobilAPI.Model.TripRequestProposal'
-          description: Vorschläge, zwischen denen der Kunde auswählen kann
-          nullable: true
-      additionalProperties: false
-      description: Ergebnisse der Planung nach einer Fahrtanfrage
-    NemobilAPI.Contracts.SonsorData.Data.ChargingPointStatus:
-      type: object
-      properties:
-        chargingPointGuid:
-          type: string
-          description: Guid des Ladepunkts
-          format: uuid
-        state:
-          enum:
-            - 0 - Free
-            - 1 - InUse
-            - 2 - Maintenance
-          type: integer
-          description: Status des Ladepunkts
-          format: int32
-      additionalProperties: false
-      description: Statusmeldung des Ladepunkts
-    NemobilAPI.Contracts.SonsorData.Data.DrivingState:
-      type: object
-      properties:
-        bearing:
-          type: integer
-          description: "Aktuelle Fahrtrichtung des Fahrzeugs\r\nDie aktuelle Peilung des Flottenfahrzeugs in Grad relativ zu Nord. Das Zeitstempel-Element des Attributs sollte angeben, wann der Messwert ermittelt wurde"
-          format: int32
-        speed:
-          type: integer
-          description: Die aktuelle Geschwindigkeit des Fahrzeugs (km/h).
-          format: int32
-      additionalProperties: false
-      description: Fahrdaten
-    NemobilAPI.Contracts.SonsorData.Data.VehicleStatus:
+      description: Arbeitsbereich von Betriebsgebiet.
+    Nemobil.API.Contracts.BaseData.V1.Data.ParkingLocation:
+      required:
+        - guid
+        - location
       type: object
       properties:
         guid:
           type: string
-          description: Unique identifier of the entity
-          format: uuid
-        vehicleScheduleGuid:
-          type: string
-          description: Sensorwert des Vehicle Schedule Entry
-          format: uuid
-        stateOfSchedule:
-          enum:
-            - 0 - Running
-            - 1 - StartSchedule
-            - 2 - EndSchedule
-          type: integer
-          description: "State of Schedule\r\nAnmeldung, Abmeldung oder laufend der Schicht"
-          format: int32
-        batteryLevel:
-          type: number
-          description: "Der aktuelle Prozentsatz der verbleibenden Batterie im Falle eines Elektrofahrzeugs\r\nAngabe in Prozent"
-          format: float
-        remainingRange:
-          type: number
-          description: Aktuelle Restreichweite
-          format: float
-        consumption:
-          type: number
-          description: Aktueller Energieverbrauch
-          format: float
-        energyConsumptionSinceLastStop:
-          type: number
-          description: Energieverbrauch seit dem letzten Stop
-          format: float
+          description: Gets or sets Guid.
+          nullable: true
         location:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
-        state:
-          enum:
-            - 0 - None
-            - 1 - DoorsOpened
-            - 2 - Idle
-            - 4 - WaintingForCustomer
-            - 8 - Konvoi
-            - 16 - CustomerTransport
-            - 32 - Charging
-            - 64 - Accident
-            - 128 - TrafficJam
-          type: integer
-          description: "Status des Fahrzeugs\r\nEine Beschreibung des aktuellen Status des Fahrzeugs"
-          format: int32
-        drivingState:
-          $ref: '#/components/schemas/NemobilAPI.Contracts.SonsorData.Data.DrivingState'
-        deviation:
-          type: number
-          description: "+ => Besser als Vorgesehen\r\n- => Im Verzug"
-          format: float
-        chargingPower:
-          type: number
-          description: Aktuelle Ladeleistungs
-          format: float
-        chargedPower:
-          type: number
-          description: Aktuell geladene Energie (Nur wenn das Fahrzeug aktuell geladen wird)
-          format: float
-        tireAirPressure:
-          type: number
-          description: Für alle 4 Reifen oder wie am besten?
-          format: float
-        mileageFromOdometer:
-          type: integer
-          description: "Aktueller Kilometerstand\r\nDie Gesamtentfernung, die das Flottenfahrzeug gemäß dem eingebauten Kilometerzähler in Kilometern (unitCode KMT) oder Meilen (unitCode SMI) zurückgelegt hat. Siehe auch Schema.org Vehicle/ mileageFromOdometer. Das Element timestamp hält fest, wann der Kilometerstand gemessen wurde"
-          format: int32
-        load:
-          type: integer
-          description: "Aktuelle Beladung\r\nNur CAB?"
-          format: int32
-        weight:
-          type: integer
-          description: "Aktuelles Gesamtgewicht des Fahrzeugs\r\nNur CAB?"
-          format: int32
-        chainedVehicles:
-          type: integer
-          description: "Wie viele Cabs fahre ich gerade\r\nNur PRO"
-          format: int32
-        powerSupply:
-          type: integer
-          description: "Wie viele Energie geben ich gerade an zu ladene Cabs weiter?\r\nNur PRO"
-          format: int32
-        temperatureIndoor:
-          type: number
-          description: "Aktuelle Temperatur innerhalb des Fahrzeugs\r\nNur CAB"
-          format: float
-        temperatureOutside:
-          type: number
-          description: "Aktuelle Temperatur ausßerhalb des Fahrzeugs\r\nNur CAB oder auch PRO insteressant"
-          format: float
-        dateCreated:
-          type: string
-          description: Entity creation timestamp. This will usually be allocated by the storage platform
-          format: date-time
-      additionalProperties: false
-      description: "Sensor-Werte eines Fahrzeugs\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleStatus/doc/spec.md"
-    NemobilAPI.Contracts.TourReportResult:
-      type: object
-      properties:
-        vehicleGuid:
-          type: string
-          description: Fahrzeug
-          format: uuid
-        timeInterval:
-          $ref: '#/components/schemas/NemobilAPI.Model.Interval'
-        drivingTime:
-          type: integer
-          description: Fahrzeit in Sekunden
-          format: int64
-        drivingDistance:
-          type: number
-          description: Gefahrene Distanz
-          format: double
-        idleTime:
-          type: integer
-          description: Wartezeit
-          format: int64
-        trips:
-          type: array
-          items:
-            $ref: '#/components/schemas/NemobilAPI.Model.Trip'
-          description: Liste der Fahrten
-          nullable: true
-        energyConsumption:
-          type: number
-          description: Energie verbraucht
-          format: double
-        energyCharged:
-          type: number
-          description: Energie geladen
-          format: double
-        revenue:
-          type: number
-          description: Umsatz
-          format: double
-        costs:
-          type: number
-          description: Kosten im Zeitraum
-          format: double
-      additionalProperties: false
-      description: Report einer Tour
-    NemobilAPI.Contracts.Trip.TripStatusResponse:
-      type: object
-      properties:
-        costs:
-          type: number
-          description: Kosten für die Fahrt
-          format: float
-        carpoolInformation:
-          $ref: '#/components/schemas/NemobilAPI.Model.CarpoolInformation'
-        skills:
-          type: array
-          items:
-            $ref: '#/components/schemas/NemobilAPI.Model.Skill'
-          description: 'Besonderheiten z.B: Kinderwagen, Rollstuhl, sonst. Einschränkungen'
-          nullable: true
-        requestedAdults:
-          type: integer
-          description: Wie viele Erwachsene sollen transportiert werden
-          format: int32
-        requestedChilds:
-          type: integer
-          description: Wie viele Kinder sollen transportiert werden
-          format: int32
-        luggage:
-          type: integer
-          description: Gepäck
-          format: int32
-        status:
-          enum:
-            - 0 - Unplanned
-            - 1 - Planned
-            - 2 - Started
-            - 3 - Performed
-          type: integer
-          description: Status der Fahrt
-          format: int32
-        pickupTime:
-          type: string
-          description: "Geplante Abholzeit\r\nToleranz - Range => Interval"
-          format: date-time
-        targetTime:
-          type: string
-          description: "Erwartete Ankunftszeit\r\nToleranz - Range => Interval"
-          format: date-time
-        targetTimeMin:
-          type: string
-          description: Frühste erwartete Ankunftszeit
-          format: date-time
-        targetTimeMax:
-          type: string
-          description: Späteste erwartete Ankunftszeit
-          format: date-time
-      additionalProperties: false
-      description: Rückgabe einer Statusabfrage der Buchung
-    NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule:
-      required:
-        - label
-        - licensePlate
-      type: object
-      properties:
-        id:
-          type: string
-          description: Id des Fahrzeug Einsatzblocks
-          format: uuid
-        schedule:
-          $ref: '#/components/schemas/NemobilAPI.Model.Schedule'
-        label:
-          maxLength: 150
-          minLength: 1
-          type: string
-          description: Name des Fahrzeugs
-        licensePlate:
-          maxLength: 15
-          minLength: 1
-          type: string
-          description: Nummernschild des Fahrzeugs
-        powerConsumption:
-          $ref: '#/components/schemas/NemobilAPI.Model.PowerConsumptionParameter'
-        flatratPowerConsumption:
-          type: number
-          description: Pauschaler Energieverbrauch
-          format: float
-        risk:
-          type: number
-          description: Wie viel Toleranz sollen wir bei der Restreichweite lassen
-          format: float
-        totalEnergyCapacity:
-          type: number
-          description: Wie viel Energie kann das Fahrzeug insgesamt speichern
-          format: float
-        initialEnergyCapacity:
-          type: number
-          description: "Mit wie viel Energie startet das Fahrzeug den Dienst\r\nEnergie mit dem Start überprüfen"
-          format: float
-        initialLocation:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
-        maxSpeed:
-          type: number
-          description: Was ist die maximale Geschwindigkeit des Fahrzeugs
-          format: float
-        regenerativePower:
-          type: number
-          description: Energie, die das Fahrzeug ins Netz speisen kann
-          format: float
-        operatingCompany:
-          type: string
-          description: "Welchem Betreiber ist dieses Fahrzeug zugeordnet\r\nDetails of the organization that is operating this fleet vehicle."
-          format: uuid
-        maxiumRegenerativePower:
-          type: number
-          description: Maximale Rückspeiseleistung
-          format: float
-        defaultEnergyConsuptionPerKm:
-          type: integer
-          description: Geschätzer Durchschnittsverbrauch pro Kilometer
-          format: int32
-        skills:
-          type: array
-          items:
-            type: integer
-            format: int32
-          description: "Welche Features bietet das Cab?\r\n- 1 => Rollstuhl bspw."
-          nullable: true
-        restrictions:
-          type: object
-          additionalProperties:
-            type: number
-            format: float
-            nullable: true
-          description: "Kapazitäten des Cabs\r\nBspw. \"Personen\": 4"
-          nullable: true
-        chargingCurve:
-          type: array
-          items:
-            type: number
-            format: float
-          description: "Wie entwickelt sich die Ladekurve\r\n[0] => 0% \r\nAlternativ: Wie viel lange wird für 5% im passenden Korridor gebraucht?"
-          nullable: true
-        maxSpeedAutonomous:
-          type: number
-          description: Maximale Geschwindigkeit autonom
-          format: float
-      additionalProperties: false
-      description: Cab-Fahrzeug Eintrag
-    NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule:
-      required:
-        - label
-        - licensePlate
-      type: object
-      properties:
-        id:
-          type: string
-          description: Id des Fahrzeug Einsatzblocks
-          format: uuid
-        schedule:
-          $ref: '#/components/schemas/NemobilAPI.Model.Schedule'
-        label:
-          maxLength: 150
-          minLength: 1
-          type: string
-          description: Name des Fahrzeugs
-        licensePlate:
-          maxLength: 15
-          minLength: 1
-          type: string
-          description: Nummernschild des Fahrzeugs
-        powerConsumption:
-          $ref: '#/components/schemas/NemobilAPI.Model.PowerConsumptionParameter'
-        flatratPowerConsumption:
-          type: number
-          description: Pauschaler Energieverbrauch
-          format: float
-        risk:
-          type: number
-          description: Wie viel Toleranz sollen wir bei der Restreichweite lassen
-          format: float
-        totalEnergyCapacity:
-          type: number
-          description: Wie viel Energie kann das Fahrzeug insgesamt speichern
-          format: float
-        initialEnergyCapacity:
-          type: number
-          description: "Mit wie viel Energie startet das Fahrzeug den Dienst\r\nEnergie mit dem Start überprüfen"
-          format: float
-        initialLocation:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
-        maxSpeed:
-          type: number
-          description: Was ist die maximale Geschwindigkeit des Fahrzeugs
-          format: float
-        regenerativePower:
-          type: number
-          description: Energie, die das Fahrzeug ins Netz speisen kann
-          format: float
-        operatingCompany:
-          type: string
-          description: "Welchem Betreiber ist dieses Fahrzeug zugeordnet\r\nDetails of the organization that is operating this fleet vehicle."
-          format: uuid
-        maxiumRegenerativePower:
-          type: number
-          description: Maximale Rückspeiseleistung
-          format: float
-        defaultEnergyConsuptionPerKm:
-          type: integer
-          description: Geschätzer Durchschnittsverbrauch pro Kilometer
-          format: int32
-        maxCabChain:
-          type: integer
-          description: Wie viele Cabs können maximal an das Pro gehangen werden
-          format: int32
-        additionalEnergyConsumptionPerCab:
-          type: array
-          items:
-            type: number
-            format: float
-          description: Liste mit zusätzlichem Verbrauch pro angehangenem Cab
-          nullable: true
-      additionalProperties: false
-      description: Pro-Fahrzeug Eintrag
-    NemobilAPI.Contracts.WeatherForecast:
-      type: object
-      properties:
-        forecastGuid:
-          type: string
-          description: Unique identifier of the entity
-          format: uuid
-        dateCreated:
-          type: string
-          description: Entity creation timestamp
-          format: date-time
-        temperature:
-          type: number
-          description: Temperature of the item
-          format: float
-        region:
-          type: array
-          items:
-            $ref: '#/components/schemas/NemobilAPI.Model.Location'
-          description: Bereich, in dem die Wettervorhersage gültig ist
-          nullable: true
-        areaServed:
-          type: array
-          items:
-            $ref: '#/components/schemas/NemobilAPI.Model.Location'
-          description: "Alternative zu Region\r\nThe geographic area where a service or offered item is provided"
-          nullable: true
-        gustSpeed:
-          type: number
-          description: A sudden burst of high-speed wind over the observed average wind speed lasting only for a few seconds
-          format: float
-        wetStreet:
-          type: boolean
-          description: Nasse Straßen brauchen mehr Energie
-        snowHeight:
-          type: number
-          description: https://github.com/smart-data-models/dataModel.Weather/blob/master/WeatherObserved/doc/spec.md
-          format: float
-        validFrom:
-          type: string
-          description: Validity period start date and time
-          format: date-time
-        validTo:
-          type: string
-          description: Validity period end date and time
-          format: date-time
-        windDirection:
-          type: integer
-          description: Direction of the wind bet
-          format: int32
-        windSpeed:
-          type: integer
-          description: Intensity of the wind
-          format: int32
-      additionalProperties: false
-      description: "Wettervorhersage\r\nhttps://github.com/smart-data-models/dataModel.Weather/blob/master/WeatherForecast/doc/spec.md"
-    NemobilAPI.Model.CarpoolInformation:
-      type: object
-      properties:
-        passengersOnBoard:
-          type: boolean
-          description: Sind bereits Mitfahrer im Cab
-        passengerBoarding:
-          type: boolean
-          description: Steigt während der Fahrt jemand hinzu
-      additionalProperties: false
-      description: Informationen über Carpooling
-    NemobilAPI.Model.ChainingLocation:
-      type: object
-      properties:
-        locationStart:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
-        locationEnd:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
-        additionalTime:
-          type: integer
-          description: Zusätzliche Zeit durch besondere Gegebenheiten
-          format: int32
-      additionalProperties: false
-      description: "Ort an dem ein Kupplungsvorgang stattfinden kann\r\nDie Kopplung soll langfristig auf geraden Strecken ermöglicht werden, daher gibt es einen Start und einen Endpunkt."
-    NemobilAPI.Model.Charging.ChargingOperator:
-      type: object
-      additionalProperties: false
-      description: "Betreiber: operator\r\nWie bildet man die Preisprofile ab?\r\nFortlaufende Daten. Zeitreihentabelle. Werden die Daten später nochmal gebraucht?\r\nPreisprofil (15 Min pro Anbieter (pro 24h)) (Sensor)\r\nEinspeise-Preisprofil (15 Min pro Anbieter (pro 24h)) (Sensor)\r\nPro Profil einen Betreiber hinterlegen, eine Station kann x Profile haben"
-    NemobilAPI.Model.Charging.ChargingPoint:
-      type: object
-      properties:
-        location:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
         maximumStoppingTime:
           type: number
-          description: Maximale Standzeit in Sekunden
+          description: Gets or sets maximale Standzeit in Sekunden.
           format: float
+      additionalProperties: false
+      description: Objekt für eine Location.
+    Nemobil.API.Contracts.BaseData.V1.Interval:
+      type: object
+      properties:
+        startTime:
+          type: string
+          description: Start des Intervalls.
+          format: date-time
+        endTime:
+          type: string
+          description: Ende des Intervalls.
+          format: date-time
+      additionalProperties: false
+      description: Ein Zeitintervall.
+    Nemobil.API.Contracts.BaseData.V1.Location:
+      type: object
+      properties:
+        longitude:
+          type: number
+          description: Gets or sets longitude.
+          format: double
+        latitude:
+          type: number
+          description: Gets or sets latitude.
+          format: double
+      additionalProperties: false
+      description: Location.
+    Nemobil.API.Contracts.BaseData.V1.OpeningTimeEntry:
+      type: object
+      properties:
+        weekDays:
+          enum:
+            - None
+            - Sunday
+            - Monday
+            - Tuesday
+            - Wednesday
+            - Thursday
+            - Friday
+            - Saturday
+            - All
+          type: string
+          description: Gets or sets the weekday.
+        min:
+          type: string
+          description: Gets or sets the von.
+          format: date-span
+        max:
+          type: string
+          description: Gets or sets the bis.
+          format: date-span
+      additionalProperties: false
+      description: Element einer Öffnungszeit.
+    Nemobil.API.Contracts.BaseData.V1.PlanningConfiguration:
+      type: object
+      properties:
+        toleranceDrivingTime:
+          type: number
+          description: >-
+            Gets or sets wie viel Toleranz sollen wir bei den Fahrzeiten
+            beachten.
+          format: float
+        toleranceCapacity:
+          type: number
+          description: >-
+            Gets or sets wie viel Toleranz sollen wir bei den Akkus
+            berücksichtigen.
+          format: float
+        chainTime:
+          type: integer
+          description: Gets or sets zeit für die Kupplung einplanen.
+          format: int32
+        proposalTimer:
+          type: integer
+          description: Gets or sets wie lange sind die Vorschläge für die Kunden gültig.
+          format: int32
+        proposalCount:
+          type: integer
+          description: Gets or sets wie viele Vorschläge soll der Kunde bekommen.
+          format: int32
+        planningHorizon:
+          type: integer
+          description: Gets or sets wie viele Stunden im vorraus soll geplant werden.
+          format: int32
+        chargingStartThreshold:
+          type: number
+          description: "Gets or sets ab wann soll auf jeden Fall geladen werden\r\nPro und Cab trennen?."
+          format: float
+        chargingEndThreshold:
+          type: number
+          description: "Gets or sets ab wann kann aufegrhört werden zu laden\r\nPro und Cab trennen?."
+          format: float
+        useProThreshhold:
+          type: integer
+          description: >-
+            Gets or sets bis zu welcher Distanz soll das Cab direkt fahren, ohne
+            das ein Pro verwendet wird.
+          format: int32
+        mode:
+          enum:
+            - Insert
+            - InsertOpt
+            - InsertOptRelocate
+          type: string
+          description: Gets or sets planungs- und Optimierungsansatz.
+      additionalProperties: false
+      description: Einstellungsmöglichkeiten der Planung.
+    Nemobil.API.Contracts.BaseData.V1.VehicleTypeSetting:
+      type: object
+      properties:
+        key:
+          type: string
+          description: Eindeutige Identifier
+          nullable: true
+        bezeichnung:
+          type: string
+          description: Bezeichnung
+          nullable: true
+        reisewitzRouteServiceUrl:
+          type: string
+          description: Url zum ReisewitzRoutingService
+          nullable: true
+      additionalProperties: false
+      description: Einstellungen für Fahrzeugtypen
+    Nemobil.API.Contracts.Charging.V1.ChargingOperator:
+      required:
+        - name
+      type: object
+      properties:
+        chargingOperatorGuid:
+          type: string
+          description: Gets or sets guid des Betreibers.
+          format: uuid
+        name:
+          type: string
+          description: Gets or sets name des Betreibers.
+          nullable: true
+        defaultPrice:
+          type: number
+          description: >-
+            Gets or sets wenn keine Daten zur Verfügung stehen, wird dieser
+            Preis verwendet.
+          format: float
+      additionalProperties: false
+      description: "Betreiber: operator\r\nWie bildet man die Preisprofile ab?\r\nFortlaufende Daten. Zeitreihentabelle. Werden die Daten später nochmal gebraucht?\r\nPreisprofil (15 Min pro Anbieter (pro 24h)) (Sensor)\r\nEinspeise-Preisprofil (15 Min pro Anbieter (pro 24h)) (Sensor)\r\nPro Profil einen Betreiber hinterlegen, eine Station kann x Profile haben."
+    Nemobil.API.Contracts.Charging.V1.ChargingPoint:
+      required:
+        - guid
+        - location
+      type: object
+      properties:
         guid:
           type: string
-          description: Kennung der Ladesäule
-          format: uuid
+          description: Gets or sets Guid.
+          nullable: true
+        location:
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
+        maximumStoppingTime:
+          type: number
+          description: Gets or sets maximale Standzeit in Sekunden.
+          format: float
         type:
           enum:
-            - 0 - Electric
-            - 1 - Hydrogen
-          type: integer
-          description: Typ der Ladesäule
-          format: int32
+            - Electric
+            - Hydrogen
+            - AC
+            - DC
+          type: string
+          description: Gets or sets typ der Ladesäule.
         state:
           enum:
-            - 0 - Free
-            - 1 - InUse
-            - 2 - Maintenance
-          type: integer
-          description: "Status der Ladesäule\r\n\r\nstatus[string]: Status der Ladestation.Enum:'almostEmpty, almostFull, empty, full, outOfService, withIncidence, working'. Oder jede andere anwendungsspezifische."
-          format: int32
+            - Free
+            - InUse
+            - Maintenance
+          type: string
+          description: "\r\nGets or sets status der Ladesäule\r\n\r\nstatus[string]: Status der Ladestation.Enum:'almostEmpty, almostFull, empty, full, outOfService, withIncidence, working'. Oder jede andere anwendungsspezifische."
         maximumPowerSupply:
           type: number
-          description: Maximale Leistung der Ladesäule
+          description: Gets or sets maximale Leistung der Ladesäule (in W).
           format: float
         maximumRegenerativePower:
           type: number
-          description: Maximale Einspeiseleistung von Fahrzeugen
+          description: Gets or sets maximale Einspeiseleistung von Fahrzeugen.
           format: float
         openingHours:
           type: array
           items:
-            $ref: '#/components/schemas/NemobilAPI.Model.OpeningTimeEntry'
-          description: Öffnungszeiten der Ladestation
+            $ref: >-
+              #/components/schemas/Nemobil.API.Contracts.BaseData.V1.OpeningTimeEntry
+          description: Gets or sets öffnungszeiten der Ladestation.
           nullable: true
         operators:
           type: array
           items:
-            $ref: '#/components/schemas/NemobilAPI.Model.Charging.ChargingOperator'
-          description: Welche Betreiber gibt es an diesem Ladepunkt
+            $ref: >-
+              #/components/schemas/Nemobil.API.Contracts.Charging.V1.ChargingOperator
+          description: Gets or sets welche Betreiber gibt es an diesem Ladepunkt.
           nullable: true
         voltage:
           type: number
-          description: Die von der Ladestation angebotene Gesamtspannung
+          description: Gets or sets die von der Ladestation angebotene Gesamtspannung.
           format: float
         amperage:
           type: number
-          description: Die von der Ladestation angebotene Gesamtstromstärke
+          description: Gets or sets die von der Ladestation angebotene Gesamtstromstärke.
           format: float
         owner:
           type: string
-          description: Eine Liste mit einer JSON-kodierten Zeichenfolge, die auf die eindeutigen Kennungen der Eigentümer verweist
+          description: >-
+            Gets or sets eine Liste mit einer JSON-kodierten Zeichenfolge, die
+            auf die eindeutigen Kennungen der Eigentümer verweist.
           format: uuid
       additionalProperties: false
-      description: "<br>Ladepunkt für ein Fahrzeug\r\n<br>https://github.com/smart-data-models/dataModel.Transportation/blob/master/EVChargingStation/doc/spec_DE.md\r\n<br>\r\n            TODO:\r\n            Trennung von Wasserstoff und Sauerstoff\r\n            Aktuelle Infos über Ladeleistung und freie Ladestellen\r\n            \r\n<br>\r\n            TODO:\r\n            ChargingHub ist eine erweiterte ParkingLocation mit weiteren Anzeigen - Charginghub Cab 1 - 1\r\n            Maximale Parkdauer\r\n            Betriebszeit (Tagesweise)\r\n            Status (Wartung, Belegt, Frei) (Sensor)\r\n            Preisprofil (15 Min pro Anbieter (pro 24h)) (Sensor)\r\n            \r\n<br>Maximale Rückspeiseleistung (+ Preis)"
-    NemobilAPI.Model.Charging.PricingInfo:
+      description: "\r\nLadepunkt für ein Fahrzeug.\r\n\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/EVChargingStation/doc/spec_DE.md.\r\n\r\n\r\n            TODO:\r\n            Trennung von Wasserstoff und Sauerstoff\r\n            Aktuelle Infos über Ladeleistung und freie Ladestellen.\r\n            \r\n\r\n\r\n            TODO:\r\n            ChargingHub ist eine erweiterte ParkingLocation mit weiteren Anzeigen - Charginghub Cab 1 - 1\r\n            Maximale Parkdauer\r\n            Betriebszeit (Tagesweise)\r\n            Status (Wartung, Belegt, Frei) (Sensor)\r\n            Preisprofil (15 Min pro Anbieter (pro 24h)) (Sensor).\r\n            \r\n\r\nMaximale Rückspeiseleistung (+ Preis)."
+    Nemobil.API.Contracts.Charging.V1.ChargingPointAssignment:
+      required:
+        - chargingPoint
+      type: object
+      properties:
+        chargingPoint:
+          $ref: '#/components/schemas/Nemobil.API.Contracts.Charging.V1.ChargingPoint'
+        startTime:
+          type: string
+          description: Gets or sets the start time.
+          format: date-time
+        endTime:
+          type: string
+          description: Gets or sets the end time.
+          format: date-time
+        state:
+          enum:
+            - None
+            - Active
+            - Planned
+            - Completed
+          type: string
+          description: Gets or sets the state.
+        chargedEnergy:
+          type: number
+          description: Gets or sets the charged energy.
+          format: float
+      additionalProperties: false
+      description: The charging point assignment.
+    Nemobil.API.Contracts.Charging.V1.CreateChargingAssignmentParameter:
+      required:
+        - chargingPointGuid
+        - endTime
+        - startTime
+        - vehicleGuid
+      type: object
+      properties:
+        chargingPointGuid:
+          type: string
+          description: Ladepunkt der Ladezuweisung.
+          nullable: true
+        vehicleGuid:
+          type: string
+          description: Fahrzeug der Ladezuweisung.
+          nullable: true
+        startTime:
+          type: string
+          description: Startzeit der Ladezuweisung.
+          format: date-time
+        endTime:
+          type: string
+          description: Endzeit der Ladezuweisung.
+          format: date-time
+      additionalProperties: false
+      description: Parameter zum Erstellen einer Ladezuweisung.
+    Nemobil.API.Contracts.Charging.V1.PricingInfo:
+      required:
+        - costPerInterval
       type: object
       properties:
         operator:
           type: string
-          description: Lieferant des Stroms
+          description: Gets or sets lieferant des Stroms.
           format: uuid
         costPerInterval:
           type: array
           items:
             type: integer
             format: int32
-          description: "Cost of the energy in cent. 15 min intervals \r\n0 => 0 - 0:14\r\n1 => 0:15 - 0:29\r\n...\r\n95 => 23:45 - 23:59"
+          description: "Gets or sets cost of the energy in cent. 15 min intervals\r\n0 => 0 - 0:14\r\n1 => 0:15 - 0:29\r\n...\r\n95 => 23:45 - 23:59."
           nullable: true
       additionalProperties: false
-      description: Kosten für das Laden oder Vergütung für eingespeiste Energie pro kWh
-    NemobilAPI.Model.Interval:
+      description: Kosten für das Laden oder Vergütung für eingespeiste Energie pro kWh.
+    Nemobil.API.Contracts.Forecast.V1.TrafficData:
       type: object
       additionalProperties: false
-    NemobilAPI.Model.Location:
+      description: Verkehrsdaten.
+    Nemobil.API.Contracts.Forecast.V1.WeatherForecast:
       type: object
       properties:
-        longitude:
-          type: number
-          format: double
-        latitude:
-          type: number
-          format: double
-      additionalProperties: false
-    NemobilAPI.Model.OpeningTimeEntry:
-      type: object
-      properties:
-        weekDays:
-          enum:
-            - 0 - None
-            - 1 - Sunday
-            - 2 - Monday
-            - 4 - Tuesday
-            - 8 - Wednesday
-            - 16 - Thursday
-            - 32 - Friday
-            - 64 - Saturday
-            - 127 - All
-          type: integer
-          description: Gets or sets the weekday.
-          format: int32
-        min:
-          $ref: '#/components/schemas/System.TimeSpan'
-        max:
-          $ref: '#/components/schemas/System.TimeSpan'
-      additionalProperties: false
-      description: Element einer Öffnungszeit
-    NemobilAPI.Model.PlanningConfiguration:
-      type: object
-      properties:
-        toleranceDrivingTime:
-          type: number
-          description: Wie viel Toleranz sollen wir bei den Fahrzeiten beachten
-          format: float
-        toleranceCapacity:
-          type: number
-          description: Wie viel Toleranz sollen wir bei den Akkus berücksichtigen
-          format: float
-        chainTime:
-          type: integer
-          description: Zeit für die Kupplung einplanen
-          format: int32
-        proposalTimer:
-          type: integer
-          description: Wie lange sind die Vorschläge für die Kunden gültig
-          format: int32
-        proposalCount:
-          type: integer
-          description: Wie viele Vorschläge soll der Kunde bekommen
-          format: int32
-        planningHorizon:
-          type: integer
-          description: Wie viele Stunden im vorraus soll geplant werden
-          format: int32
-        chargingStartThreshold:
-          type: number
-          description: "Ab wann soll auf jeden Fall geladen werden\r\nPro und Cab trennen?"
-          format: float
-        chargingEndThreshold:
-          type: number
-          description: "Ab wann kann aufegrhört werden zu laden\r\nPro und Cab trennen?"
-          format: float
-        useProThreshhold:
-          type: number
-          description: Bis zu welcher Distanz soll das Cab direkt fahren, ohne das ein Pro verwendet wird
-          format: float
-        mode:
-          enum:
-            - 0 - Insert
-            - 1 - InsertOpt
-            - 2 - InsertOptRelocate
-          type: integer
-          description: Planungs- und Optimierungsansatz
-          format: int32
-      additionalProperties: false
-      description: Einstellungsmöglichkeiten der Planung
-    NemobilAPI.Model.PowerConsumptionParameter:
-      type: object
-      properties:
-        speed:
-          type: number
-          description: Hohe Geschwindigkeiten(über 65 MPH oder 105 km/h) können die Effizienz eines E-Autos erheblich verringern, was zu einem höheren Verbrauch führt.
-          format: float
-        wind:
-          type: number
-          description: Ein starker Gegenwind kann zu einem höheren Energieverbrauch führen.
-          format: float
-        loadCapacity:
-          type: number
-          description: Schwerere Lasten erhöhen den Energieverbrauch.Mehr Gewicht bedeutet, dass der Motor härter arbeiten muss.
-          format: float
-        tireTraction:
-          type: number
-          description: Eine schlechte Reifentraktion kann die Effizienz verringern und zu einem höheren Verbrauch führen.Eine ordnungsgemäße Wartung der Reifen gewährleistet eine optimale Traktion und kann dazu beitragen, den Energieverbrauch zu senken.
-          format: float
-        weatherConditions:
-          type: number
-          description: Extreme Temperaturen, sowohl heiß als auch kalt, beeinträchtigen die Batterieleistung, was zu einem höheren Energieverbrauch führen kann.
-          format: float
-        climatronic:
-          type: number
-          description: Die Nutzung der Heizungs-, Lüftungs- und Klimaanlagen in einem E-Auto verbraucht Energie.Daher kann eine übermäßige Nutzung der Klimaanlage die Reichweite verringern.
-          format: float
-        regenerativeBraking:
-          type: number
-          description: Es steigert die Effizienz von Elektroautos, wenn die kinetische Energie beim Bremsen in elektrische Energie umgewandelt wird und so die Fahrzeugbatterie wieder auflädt und den Energieverbrauch senkt.
-          format: float
-      additionalProperties: false
-      description: "Faktoren, die den Verbrauch von Elektroautos beeinflussen\r\nhttps://www.cardino.de/blog-posts/berechnung-des-verbrauchs-ihres-elektroautos?0c368a56_page=2"
-    NemobilAPI.Model.Schedule:
-      type: object
-      additionalProperties: false
-      description: Zeitbereich
-    NemobilAPI.Model.Skill:
-      type: object
-      properties:
-        skillId:
-          type: integer
-          description: Id des Skills
-          format: int32
-        skillName:
+        forecastGuid:
           type: string
-          description: Name des Skills
+          description: Gets or sets unique identifier of the entity.
+          format: uuid
+        dateCreated:
+          type: string
+          description: Gets or sets entity creation timestamp.
+          format: date-time
+        temperature:
+          type: number
+          description: Gets or sets temperature of the item.
+          format: float
+        region:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
+          description: Gets or sets bereich, in dem die Wettervorhersage gültig ist.
+          nullable: true
+        areaServed:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
+          description: "Gets or sets alternative zu Region\r\nThe geographic area where a service or offered item is provided."
+          nullable: true
+        gustSpeed:
+          type: number
+          description: >-
+            Gets or sets a sudden burst of high-speed wind over the observed
+            average wind speed lasting only for a few seconds.
+          format: float
+        wetStreet:
+          type: boolean
+          description: >-
+            Gets or sets a value indicating whether nasse Straßen brauchen mehr
+            Energie.
+        snowHeight:
+          type: number
+          description: >-
+            Gets or sets
+            https://github.com/smart-data-models/dataModel.Weather/blob/master/WeatherObserved/doc/spec.md.
+          format: float
+        validFrom:
+          type: string
+          description: Gets or sets validity period start date and time.
+          format: date-time
+        validTo:
+          type: string
+          description: Gets or sets validity period end date and time.
+          format: date-time
+        windDirection:
+          type: integer
+          description: Gets or sets direction of the wind bet.
+          format: int32
+        windSpeed:
+          type: integer
+          description: Gets or sets intensity of the wind.
+          format: int32
+      additionalProperties: false
+      description: "Wettervorhersage\r\nhttps://github.com/smart-data-models/dataModel.Weather/blob/master/WeatherForecast/doc/spec.md."
+    Nemobil.API.Contracts.Reporting.V1.GetSchedulePlanParameter:
+      type: object
+      properties:
+        vehicleGuids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: ''
+          nullable: true
+        timeRange:
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Interval'
+      additionalProperties: false
+      description: Anfrage nach Fahrplänen.
+    Nemobil.API.Contracts.Reporting.V1.TourReportParameter:
+      required:
+        - timeRange
+      type: object
+      properties:
+        timeRange:
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Interval'
+        operator:
+          type: string
+          description: Welcher Operator soll betrachtet werden?
+          nullable: true
+        vehicleScheduleGuids:
+          type: array
+          items:
+            type: string
+          description: Im Report enthaltene Fahrzeug Betriebspläne.
           nullable: true
       additionalProperties: false
-      description: Skills, die Cabs von Nemobil erfüllen können
-    NemobilAPI.Model.Trip:
+      description: Parameter für den Tour Report.
+    Nemobil.API.Contracts.Reporting.V1.TourReportResult:
+      required:
+        - timeInterval
+        - vehicleGuid
+      type: object
+      properties:
+        vehicleGuid:
+          type: string
+          description: Gets or sets fahrzeug.
+          nullable: true
+        timeInterval:
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Interval'
+        drivingTime:
+          type: integer
+          description: Gets or sets fahrzeit in Sekunden.
+          format: int64
+        drivingDistance:
+          type: number
+          description: Gets or sets gefahrene Distanz.
+          format: double
+        idleTime:
+          type: integer
+          description: Gets or sets wartezeit.
+          format: int64
+        trips:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nemobil.API.Contracts.Trip.V1.Trip'
+          description: Gets or sets liste der Fahrten.
+          nullable: true
+        energyConsumption:
+          type: number
+          description: Gets or sets energie verbraucht.
+          format: double
+        energyCharged:
+          type: number
+          description: Gets or sets energie geladen.
+          format: double
+        revenue:
+          type: number
+          description: Gets or sets umsatz.
+          format: double
+        costs:
+          type: number
+          description: Gets or sets kosten im Zeitraum.
+          format: double
+      additionalProperties: false
+      description: Report einer Tour.
+    Nemobil.API.Contracts.Reporting.V1.VehicleSchedulePlanResult:
+      type: object
+      properties:
+        vehicleSchedulePlans:
+          type: array
+          items:
+            $ref: >-
+              #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.VehicleSchedulePlan
+          description: ''
+          nullable: true
+      additionalProperties: false
+      description: Result mit den gewüschten Fahrplänen.
+    Nemobil.API.Contracts.Routing.V1.GetRouteRequest:
+      type: object
+      properties:
+        start:
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
+        end:
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
+        time:
+          type: string
+          description: ''
+          format: date-time
+      additionalProperties: false
+      description: Anfrage für eine Route.
+    Nemobil.API.Contracts.Routing.V1.RouteResponse:
+      type: object
+      properties:
+        distance:
+          type: integer
+          format: int32
+        drivingTime:
+          type: integer
+          format: int32
+        energyConsumption:
+          type: integer
+          format: int32
+      additionalProperties: false
+    Nemobil.API.Contracts.Schedule.V1.CabStop:
+      required:
+        - arrival
+        - consumedEnergy
+        - departure
+        - distance
+        - drivingTime
+        - duration
+        - key
+        - latestStartDrivingToStop
+        - location
+        - remainingEnergy
+        - stopType
+        - tripGuid
+        - userGuid
+        - vehicleSchedule
+      type: object
+      properties:
+        key:
+          type: string
+          description: Get or sets the key of the stop.
+          nullable: true
+        location:
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
+        latestStartDrivingToStop:
+          type: string
+          description: Spätester Losfahrzeitpunkt
+          format: date-time
+        arrival:
+          type: string
+          description: Gets or sets wann ist die Ankunft am Stop.
+          format: date-time
+        departure:
+          type: string
+          description: Gets or sets abfahrt vom Stop.
+          format: date-time
+        duration:
+          type: integer
+          description: Gets or sets dauer des Stops.
+          format: int32
+        drivingTime:
+          type: integer
+          description: Gets or sets fahrzeit zum Stop.
+          format: int32
+        distance:
+          type: integer
+          description: Gets or sets distanz zum Stop.
+          format: int32
+        vehicleSchedule:
+          type: string
+          description: Gets or sets welches Schedule gehört der Stop an.
+          nullable: true
+        tripGuid:
+          type: string
+          description: Gets or sets welchem Trip ist der Stop zugeordnet.
+          nullable: true
+        userGuid:
+          type: string
+          description: Gets or sets welchem User ist der Stop zugeordnet.
+          nullable: true
+        stopType:
+          enum:
+            - Pickup
+            - Dropoff
+            - Relocation
+            - Charging
+            - Parking
+            - BusinessTrip
+            - Maintenance
+            - Absence
+            - Depot
+          type: string
+          description: Gets or sets welche Stopart ist der Stop.
+        consumedEnergy:
+          type: number
+          description: Gets or sets welche Energie wurde für die Strecke verbraucht.
+          format: float
+        remainingEnergy:
+          type: number
+          description: Gets or sets energiestand des Fahrzeugs.
+          format: float
+        currentQuantities:
+          type: number
+          description: Gets or sets aktuelle Beladung des Fahrzeugs.
+          format: float
+        appointment:
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Interval'
+      additionalProperties: false
+      description: "\r\nStop eines Cabs."
+    Nemobil.API.Contracts.Schedule.V1.ChainingStop:
+      required:
+        - arrival
+        - departure
+        - distance
+        - drivingTime
+        - duration
+        - key
+        - latestStartDrivingToStop
+        - location
+      type: object
+      properties:
+        key:
+          type: string
+          description: Get or sets the key of the stop.
+          nullable: true
+        location:
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
+        latestStartDrivingToStop:
+          type: string
+          description: Spätester Losfahrzeitpunkt
+          format: date-time
+        arrival:
+          type: string
+          description: Gets or sets wann ist die Ankunft am Stop.
+          format: date-time
+        departure:
+          type: string
+          description: Gets or sets abfahrt vom Stop.
+          format: date-time
+        duration:
+          type: integer
+          description: Gets or sets dauer des Stops.
+          format: int32
+        drivingTime:
+          type: integer
+          description: Gets or sets fahrzeit zum Stop.
+          format: int32
+        distance:
+          type: integer
+          description: Gets or sets distanz zum Stop.
+          format: int32
+        vehicleSchedule:
+          type: string
+          description: Gets or sets welchem Pro-Schedule gehört der Stop an.
+          format: uuid
+        chainedCabs:
+          type: integer
+          description: Gets or sets wie viele Cabs sind aneinander gekettet.
+          format: int32
+      additionalProperties: false
+      description: Stop eines Pros.
+    Nemobil.API.Contracts.Schedule.V1.PlanningCab:
+      required:
+        - currentLocation
+      type: object
+      properties:
+        vehicle:
+          $ref: >-
+            #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.CabSchedule
+        currentLocation:
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
+        estimatedTimeAtStop:
+          type: string
+          description: Gets or sets welche Zeit hat das Fahrzeug wenn es ankommt.
+          format: date-time
+        estimatedEnergyAtStop:
+          type: string
+          description: Gets or sets welche Energie hat das Fahrzeug wenn es ankommt.
+          format: date-time
+        tripStops:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nemobil.API.Contracts.Schedule.V1.CabStop'
+          description: Gets or sets stops des Cabs.
+          nullable: true
+      additionalProperties: false
+      description: Informationen des Cabs bei der Planung.
+    Nemobil.API.Contracts.Schedule.V1.PlanningPro:
+      required:
+        - currentLocation
+      type: object
+      properties:
+        vehicle:
+          $ref: >-
+            #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.ProSchedule
+        currentLocation:
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
+        chainingStops:
+          type: array
+          items:
+            $ref: >-
+              #/components/schemas/Nemobil.API.Contracts.Schedule.V1.ChainingStop
+          description: >-
+            Gets or sets stops an denen das Fahrzeug eine Kopplung oder
+            Entkopplung mit einem Cab durchführt.
+          nullable: true
+      additionalProperties: false
+      description: Informationen des Pros bei der Planung.
+    Nemobil.API.Contracts.Simulation.V1.SimulationBaseData:
+      required:
+        - planningConfiguration
+        - simulationInitTime
+      type: object
+      properties:
+        cabSchedules:
+          type: array
+          items:
+            $ref: >-
+              #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.CabSchedule
+          description: Gets or sets cab Schedules.
+          nullable: true
+        proSchedules:
+          type: array
+          items:
+            $ref: >-
+              #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.ProSchedule
+          description: Gets or sets pro Schedules.
+          nullable: true
+        chargingPoints:
+          type: array
+          items:
+            $ref: >-
+              #/components/schemas/Nemobil.API.Contracts.Charging.V1.ChargingPoint
+          description: Gets or sets liste der ChargingPoints.
+          nullable: true
+        chainingLocations:
+          type: array
+          items:
+            $ref: >-
+              #/components/schemas/Nemobil.API.Contracts.BaseData.V1.Data.ChainingLocation
+          description: >-
+            Gets or sets positionen an denen Cabs an ein Pro angekettet werden
+            können.
+          nullable: true
+        parkingLocations:
+          type: array
+          items:
+            $ref: >-
+              #/components/schemas/Nemobil.API.Contracts.BaseData.V1.Data.ParkingLocation
+          description: Gets or sets positionen an denen Fahrzeuge parken können.
+          nullable: true
+        operationAreas:
+          type: array
+          items:
+            $ref: >-
+              #/components/schemas/Nemobil.API.Contracts.BaseData.V1.Data.OperationArea
+          description: Gets or sets definierte Betriebsgebiete.
+          nullable: true
+        simulationInitTime:
+          type: string
+          description: Gets or sets Startzeit der Simulation.
+          format: date-time
+        planningConfiguration:
+          $ref: >-
+            #/components/schemas/Nemobil.API.Contracts.BaseData.V1.PlanningConfiguration
+      additionalProperties: false
+      description: Initialisierung einer Simulation.
+    Nemobil.API.Contracts.Simulation.V1.SimulationRunParameter:
+      type: object
+      properties:
+        simulationSteps:
+          type: array
+          items:
+            $ref: >-
+              #/components/schemas/Nemobil.API.Contracts.Simulation.V1.SimulationStep
+          description: >-
+            Gets or sets schritte, die in der Simulation durchgeführt werden
+            sollen.
+          nullable: true
+        createInitialReport:
+          type: boolean
+          description: >-
+            Gets or sets a value indicating whether soll ein initialer Report
+            erstellt werden?.
+      additionalProperties: false
+      description: Ein Simulation-Lauf.
+    Nemobil.API.Contracts.Simulation.V1.SimulationStep:
+      required:
+        - requestParameter
+      type: object
+      properties:
+        requestParameter:
+          $ref: >-
+            #/components/schemas/Nemobil.API.Contracts.Trip.V1.TripRequestParameter
+        simulatedTime:
+          type: string
+          description: "Gets or sets zu welchem Zeitpunkt soll Step im System simuliert werden\r\n17 Uhr => Das System setzt die Zeit auf 17 Uhr und für dann die Anfrage aus."
+          format: date-time
+        bookProposal:
+          type: boolean
+          description: >-
+            Gets or sets a value indicating whether soll die Fahrt gebucht
+            werden?.
+        createReport:
+          type: boolean
+          description: >-
+            Gets or sets a value indicating whether soll ein Report erstellt
+            werden?.
+      additionalProperties: false
+      description: Ein Simulationsschritt.
+    Nemobil.API.Contracts.SonsorData.V1.Data.ChargingPointStatus:
+      type: object
+      properties:
+        chargingPointGuid:
+          type: string
+          description: Gets or sets guid des Ladepunkts.
+          format: uuid
+        state:
+          enum:
+            - Free
+            - InUse
+            - Maintenance
+          type: string
+          description: Gets or sets status des Ladepunkts.
+      additionalProperties: false
+      description: Statusmeldung des Ladepunkts.
+    Nemobil.API.Contracts.SonsorData.V1.Data.DrivingState:
+      type: object
+      properties:
+        bearing:
+          type: integer
+          description: "Gets or sets aktuelle Fahrtrichtung des Fahrzeugs\r\nDie aktuelle Peilung des Flottenfahrzeugs in Grad relativ zu Nord. Das Zeitstempel-Element des Attributs sollte angeben, wann der Messwert ermittelt wurde."
+          format: int32
+        speed:
+          type: integer
+          description: Gets or sets die aktuelle Geschwindigkeit des Fahrzeugs (km/h).
+          format: int32
+      additionalProperties: false
+      description: Fahrdaten.
+    Nemobil.API.Contracts.SonsorData.V1.Data.VehicleStatus:
+      required:
+        - location
+      type: object
+      properties:
+        guid:
+          type: string
+          description: Gets or sets unique identifier of the entity.
+          format: uuid
+        vehicleScheduleGuid:
+          type: string
+          description: Gets or sets sensorwert des Vehicle Schedule Entry.
+          format: uuid
+        stateOfSchedule:
+          enum:
+            - Planned
+            - Active
+            - Started
+            - Completed
+          type: string
+          description: "Gets or sets state of Schedule\r\nAnmeldung, Abmeldung oder laufend der Schicht."
+        batteryLevel:
+          type: number
+          description: "Gets or sets der aktuelle Prozentsatz der verbleibenden Batterie im Falle eines Elektrofahrzeugs\r\nAngabe in Prozent."
+          format: float
+        remainingRange:
+          type: number
+          description: Gets or sets aktuelle Restreichweite.
+          format: float
+        consumption:
+          type: number
+          description: Gets or sets aktueller Energieverbrauch.
+          format: float
+        energyConsumptionSinceLastStop:
+          type: number
+          description: Gets or sets energieverbrauch seit dem letzten Stop.
+          format: float
+        location:
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
+        state:
+          enum:
+            - None
+            - DoorsOpened
+            - Idle
+            - WaintingForCustomer
+            - Konvoi
+            - CustomerTransport
+            - Charging
+            - Accident
+            - TrafficJam
+          type: string
+          description: "Gets or sets status des Fahrzeugs\r\nEine Beschreibung des aktuellen Status des Fahrzeugs."
+        drivingState:
+          $ref: >-
+            #/components/schemas/Nemobil.API.Contracts.SonsorData.V1.Data.DrivingState
+        deviation:
+          type: number
+          description: "Gets or sets + => Besser als Vorgesehen\r\n- => Im Verzug."
+          format: float
+        chargingPower:
+          type: number
+          description: Gets or sets aktuelle Ladeleistungs.
+          format: float
+        chargedPower:
+          type: number
+          description: >-
+            Gets or sets aktuell geladene Energie (Nur wenn das Fahrzeug aktuell
+            geladen wird).
+          format: float
+        tireAirPressure:
+          type: number
+          description: Gets or sets für alle 4 Reifen oder wie am besten?.
+          format: float
+        mileageFromOdometer:
+          type: integer
+          description: "Gets or sets aktueller Kilometerstand\r\nDie Gesamtentfernung, die das Flottenfahrzeug gemäß dem eingebauten Kilometerzähler in Kilometern (unitCode KMT) oder Meilen (unitCode SMI) zurückgelegt hat. Siehe auch Schema.org Vehicle/ mileageFromOdometer. Das Element timestamp hält fest, wann der Kilometerstand gemessen wurde."
+          format: int32
+        load:
+          type: integer
+          description: "Gets or sets aktuelle Beladung\r\nNur CAB?."
+          format: int32
+        weight:
+          type: integer
+          description: "Gets or sets aktuelles Gesamtgewicht des Fahrzeugs\r\nNur CAB?."
+          format: int32
+        chainedVehicles:
+          type: integer
+          description: "Gets or sets wie viele Cabs fahre ich gerade\r\nNur PRO."
+          format: int32
+        powerSupply:
+          type: integer
+          description: "Gets or sets wie viele Energie geben ich gerade an zu ladene Cabs weiter?\r\nNur PRO."
+          format: int32
+        temperatureIndoor:
+          type: number
+          description: "Gets or sets aktuelle Temperatur innerhalb des Fahrzeugs\r\nNur CAB."
+          format: float
+        temperatureOutside:
+          type: number
+          description: "Gets or sets aktuelle Temperatur ausßerhalb des Fahrzeugs\r\nNur CAB oder auch PRO insteressant."
+          format: float
+        dateCreated:
+          type: string
+          description: >-
+            Gets or sets entity creation timestamp. This will usually be
+            allocated by the storage platform.
+          format: date-time
+      additionalProperties: false
+      description: "Sensor-Werte eines Fahrzeugs\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleStatus/doc/spec.md."
+    Nemobil.API.Contracts.Trip.V1.BookTripParameter:
+      required:
+        - proposalKey
+        - source
+        - transactionGuid
+        - userGuid
+      type: object
+      properties:
+        transactionGuid:
+          type: string
+          description: Gets or sets transactionGuid.
+          nullable: true
+        userGuid:
+          type: string
+          description: Gets or sets nutzer User.
+          nullable: true
+        proposalKey:
+          type: string
+          description: >-
+            Gets or sets eindeutiger Key des Vorschlages - Proposal ist im
+            System hinterlegt.
+          nullable: true
+        source:
+          type: string
+          description: >-
+            Gets or sets herkunft dieser Buchungsanfrage um bspw. später
+            entscheiden zu können woher ein Termin kam.
+          nullable: true
+      additionalProperties: false
+      description: Klasse zum Buchen einer erfolgreichen Fahrtanfrage.
+    Nemobil.API.Contracts.Trip.V1.BookTripResponse:
+      type: object
+      properties:
+        successful:
+          type: boolean
+          description: Gets or sets a value indicating whether erfolgreich gebucht.
+        statusCode:
+          enum:
+            - Successful
+            - ProposalNotFound
+            - ProposalNotMatching
+            - CabNotFound
+            - ParameterInvalid
+            - TripNotFound
+            - TripNotCreated
+            - ProposalInvalid
+          type: string
+          description: Gets or sets status der Terminbuchung (ggf. ErrorCode).
+        createdTripGuid:
+          type: string
+          description: Get or sets CreatedTripGuid
+          nullable: true
+      additionalProperties: false
+      description: Rückmeldung von der Buchung.
+    Nemobil.API.Contracts.Trip.V1.CarpoolInformation:
+      type: object
+      properties:
+        passengersOnBoard:
+          type: boolean
+          description: >-
+            Gets or sets a value indicating whether sind bereits Mitfahrer im
+            Cab.
+        passengerBoarding:
+          type: boolean
+          description: >-
+            Gets or sets a value indicating whether steigt während der Fahrt
+            jemand hinzu.
+      additionalProperties: false
+      description: Informationen über Carpooling.
+    Nemobil.API.Contracts.Trip.V1.CustomerPreferences:
+      type: object
+      properties:
+        allowCarpooling:
+          type: boolean
+          description: >-
+            Gets or sets a value indicating whether der Kunde erlaubt Mitfahrer
+            bei seiner Fahrt.
+        toleratedDelayBefore:
+          type: integer
+          description: Gets or sets der Kunde erlaubt folgende Verzögerung auf seinem Weg.
+          format: int32
+        toleratedDelayAfter:
+          type: integer
+          description: Gets or sets der Kunde erlaubt folgende Verzögerung auf seinem Weg.
+          format: int32
+      additionalProperties: false
+      description: Wünsche des Kunden bei der Anfrage.
+    Nemobil.API.Contracts.Trip.V1.Trip:
+      required:
+        - cabDropoffLocation
+        - cabStartLocation
+        - tripGuid
+        - userGuid
       type: object
       properties:
         tripGuid:
           type: string
-          description: Kennung der Fahrt
-          format: uuid
+          description: Gets or sets kennung der Fahrt.
+          nullable: true
         userGuid:
           type: string
-          description: Anfragender User
-          format: uuid
+          description: Gets or sets anfragender User.
+          nullable: true
         creationTime:
           type: string
-          description: Zeit der Anfrage
+          description: Gets or sets zeit der Anfrage.
           format: date-time
         vehicleLabel:
           type: string
-          description: "Fahrzeug für den Transport\r\nMehr Infos notwendig"
+          description: "Gets or sets fahrzeug für den Transport\r\nMehr Infos notwendig."
           nullable: true
         cabStartLocation:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
-        cabTargetLocation:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
-        pickupTime:
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
+        cabDropoffLocation:
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
+        estimatedPickupTime:
           type: string
-          description: "Geplante Abholzeit\r\nToleranz - Range => Interval"
+          description: "Gets or sets geplante Abholzeit\r\nToleranz - Range => Interval."
           format: date-time
-        targetTime:
+        estimatedDropoffTime:
           type: string
-          description: "Erwartete Ankunftszeit\r\nToleranz - Range => Interval"
+          description: "Gets or sets erwartete Ankunftszeit\r\nToleranz - Range => Interval."
           format: date-time
         costs:
           type: number
-          description: Kosten für die Fahrt
+          description: Gets or sets kosten für die Fahrt.
           format: float
         carpoolInformation:
-          $ref: '#/components/schemas/NemobilAPI.Model.CarpoolInformation'
-        skills:
-          type: array
-          items:
-            $ref: '#/components/schemas/NemobilAPI.Model.Skill'
-          description: 'Besonderheiten z.B: Kinderwagen, Rollstuhl, sonst. Einschränkungen'
-          nullable: true
+          $ref: >-
+            #/components/schemas/Nemobil.API.Contracts.Trip.V1.CarpoolInformation
+        rampNeeded:
+          type: boolean
+          description: >-
+            Gets or sets Rampe benötigt für Besonderheiten z.B: Kinderwagen,
+            Rollstuhl, sonstiges.
         requestedAdults:
           type: integer
-          description: Wie viele Erwachsene sollen transportiert werden
+          description: Gets or sets wie viele Erwachsene sollen transportiert werden.
           format: int32
         requestedChilds:
           type: integer
-          description: Wie viele Kinder sollen transportiert werden
+          description: Gets or sets wie viele Kinder sollen transportiert werden.
           format: int32
         luggage:
           type: integer
-          description: Gepäck
+          description: Gets or sets gepäck.
           format: int32
         maxCabs:
           type: integer
-          description: Wie viele Cabs sollen für den Transport maximal kommen
+          description: Gets or sets wie viele Cabs sollen für den Transport maximal kommen.
           format: int32
         personalPreferences:
-          $ref: '#/components/schemas/NemobilAPI.Contracts.RideRequest.CustomerPreferences'
+          $ref: >-
+            #/components/schemas/Nemobil.API.Contracts.Trip.V1.CustomerPreferences
         status:
           enum:
-            - 0 - Unplanned
-            - 1 - Planned
-            - 2 - Started
-            - 3 - Performed
-          type: integer
-          description: Status der Fahrt
-          format: int32
+            - Unplanned
+            - Planned
+            - Started
+            - Completed
+            - Canceled
+          type: string
+          description: Gets or sets status der Fahrt.
+        cabArrival:
+          type: string
+          description: Gets or sets wann ist das Cab am Treffpunkt angekommen.
+          format: date-time
+        customerCheckin:
+          type: string
+          description: Gets or sets wann ist der Kunde in das Cab eingestiegen.
+          format: date-time
+        customerCheckout:
+          type: string
+          description: Gets or sets wann ist der Kunde aus dem Cab ausgestiegen.
+          format: date-time
         modificationDate:
           type: string
-          description: Letztes Änderungsdatum
+          description: Gets or sets letztes Änderungsdatum.
           format: date-time
         expectedEnergyRequired:
           type: number
-          description: Geschätzte Energie für die Strecke
+          description: Gets or sets geschätzte Energie für die Strecke.
           format: float
         expectedDrivingTime:
           type: number
-          description: Geschätzte Fahrzeit für die Strecke
+          description: Gets or sets geschätzte Fahrzeit für die Strecke.
           format: float
         expectedDistance:
           type: number
-          description: Geschätzte Distanz für die Strecke
+          description: Gets or sets geschätzte Distanz für die Strecke.
           format: float
       additionalProperties: false
-      description: "Daten eines Trips\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleOperation/doc/spec.md"
-    NemobilAPI.Model.TripHistory:
+      description: "Daten eines Trips\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleOperation/doc/spec.md."
+    Nemobil.API.Contracts.Trip.V1.TripHistory:
       type: object
       properties:
         tripGuid:
           type: string
-          description: Kennung des Trips zu dem der Eintrag gehört
+          description: Gets or sets kennung des Trips zu dem der Eintrag gehört.
           format: uuid
         history:
           type: array
           items:
-            $ref: '#/components/schemas/NemobilAPI.Model.TripHistoryEntry'
-          description: Einträge der History
+            $ref: >-
+              #/components/schemas/Nemobil.API.Contracts.Trip.V1.TripHistoryEntry
+          description: Gets or sets einträge der History.
           nullable: true
       additionalProperties: false
-      description: Änderungshistorie eines Trips
-    NemobilAPI.Model.TripHistoryEntry:
-      type: object
-      additionalProperties: false
-      description: Eintrag über Änderung an einer Fahrt
-    NemobilAPI.Model.TripRequestProposal:
+      description: Änderungshistorie eines Trips.
+    Nemobil.API.Contracts.Trip.V1.TripHistoryEntry:
+      required:
+        - reason
       type: object
       properties:
+        guid:
+          type: string
+          description: Gets or sets eindeutiger Identifier.
+          format: uuid
+        tripGuid:
+          type: string
+          description: Gets or sets guid des Trips.
+          format: uuid
+        reason:
+          type: string
+          description: Gets or sets grund der Änderung.
+          nullable: true
+        modificationTime:
+          type: string
+          description: Gets or sets datum der Änderung.
+          format: date-time
+      additionalProperties: false
+      description: Eintrag über Änderung an einer Fahrt.
+    Nemobil.API.Contracts.Trip.V1.TripRequestParameter:
+      required:
+        - currentLocation
+        - targetLocation
+        - userGuid
+      type: object
+      properties:
+        userGuid:
+          type: string
+          description: Gets or sets anfragender User.
+          nullable: true
+        currentLocation:
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
+        targetLocation:
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
+        targetTime:
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Interval'
+        pickupTime:
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Interval'
+        needRamp:
+          type: boolean
+          description: Gets or sets need of a ramp for wheelchair or stroller.
+        requestedAdults:
+          type: integer
+          description: Gets or sets wie viele Erwachsene sollen transportiert werden.
+          format: int32
+        requestedChilds:
+          type: integer
+          description: Gets or sets wie viele Kinder sollen transportiert werden.
+          format: int32
+        luggage:
+          type: integer
+          description: Gets or sets gepäck.
+          format: int32
+        maxCabs:
+          type: integer
+          description: Gets or sets wie viele Cabs sollen für den Transport maximal kommen.
+          format: int32
+        personalPreferences:
+          $ref: >-
+            #/components/schemas/Nemobil.API.Contracts.Trip.V1.CustomerPreferences
+        transactionGuid:
+          type: string
+          description: Gets transactionGuid für die Anfrage.
+          nullable: true
+          readOnly: true
+        priority:
+          type: integer
+          description: Gets or sets priorität der Anfrage, nur für den Betreiber.
+          format: int32
+        vehicleGuid:
+          type: string
+          description: >-
+            Gets or sets soll nur ein bestimmtes Fahrzeug bei der Anfrage
+            betrachtet werden.
+          nullable: true
+      additionalProperties: false
+      description: "\r\nParameter für eine Fahrtanfrage.\r\n\r\nhttps://github.com/moia-oss/alonso-mora/blob/master/core/src/main/java/org/matsim/alonso_mora/algorithm/DefaultAlonsoMoraRequest.java."
+    Nemobil.API.Contracts.Trip.V1.TripRequestProposal:
+      required:
+        - cabStartLocation
+        - cabTargetLocation
+        - guid
+        - requestedStartLocation
+        - requestedTargetLocation
+      type: object
+      properties:
+        guid:
+          type: string
+          description: Gets eindeutiger Schlüssel für den Vorschlag.
+          nullable: true
         vehicleLabel:
           type: string
-          description: "Fahrzeug für den Transport\r\nMehr Infos notwendig"
+          description: "Gets or sets fahrzeug für den Transport\r\nMehr Infos notwendig."
           nullable: true
         cabStartLocation:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
         cabTargetLocation:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
         requestedStartLocation:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
         requestedTargetLocation:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
         pickupTime:
           type: string
-          description: "Geplante Abholzeit\r\nToleranz - Range => Interval"
+          description: "Gets or sets geplante Abholzeit\r\nToleranz - Range => Interval."
           format: date-time
-        targetTime:
+        dropoffTime:
           type: string
-          description: "Erwartete Ankunftszeit\r\nToleranz - Range => Interval"
+          description: "Gets or sets erwartete Ankunftszeit\r\nToleranz - Range => Interval."
           format: date-time
         costs:
           type: number
-          description: Kosten für die Fahrt
+          description: Gets or sets kosten für die Fahrt.
           format: float
         carpoolInformation:
-          $ref: '#/components/schemas/NemobilAPI.Model.CarpoolInformation'
+          $ref: >-
+            #/components/schemas/Nemobil.API.Contracts.Trip.V1.CarpoolInformation
         proposalReleaseTime:
           type: string
-          description: Bis wann wird der Proposal freigehalten
+          description: Gets or sets bis wann wird der Proposal freigehalten.
           format: date-time
       additionalProperties: false
-      description: Vorschlag für eine Fahrtanfrage
-    System.TimeSpan:
+      description: Vorschlag für eine Fahrtanfrage.
+    Nemobil.API.Contracts.Trip.V1.TripRequestResponse:
+      required:
+        - bookingTransaction
+        - userGuid
       type: object
       properties:
-        ticks:
-          type: integer
-          format: int64
-        days:
-          type: integer
-          format: int32
-          readOnly: true
-        hours:
-          type: integer
-          format: int32
-          readOnly: true
-        milliseconds:
-          type: integer
-          format: int32
-          readOnly: true
-        minutes:
-          type: integer
-          format: int32
-          readOnly: true
-        seconds:
-          type: integer
-          format: int32
-          readOnly: true
-        totalDays:
-          type: number
-          format: double
-          readOnly: true
-        totalHours:
-          type: number
-          format: double
-          readOnly: true
-        totalMilliseconds:
-          type: number
-          format: double
-          readOnly: true
-        totalMinutes:
-          type: number
-          format: double
-          readOnly: true
-        totalSeconds:
-          type: number
-          format: double
-          readOnly: true
+        bookingTransaction:
+          type: string
+          description: Gets or sets guid der Buchung.
+          nullable: true
+        userGuid:
+          type: string
+          description: Gets or sets guid des Benutzers.
+          nullable: true
+        successful:
+          type: boolean
+          description: Gets or sets a value indicating whether war die Anfrage erfolgreich.
+        possibleStartLocation:
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
+        possibleTargetLocation:
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
+        earliestPossibleStart:
+          type: string
+          description: Gets or sets frühestmöglicher Startzeitpunkt.
+          format: date-time
+          nullable: true
+        proposals:
+          type: array
+          items:
+            $ref: >-
+              #/components/schemas/Nemobil.API.Contracts.Trip.V1.TripRequestProposal
+          description: Gets or sets vorschläge, zwischen denen der Kunde auswählen kann.
+          nullable: true
       additionalProperties: false
+      description: Ergebnisse der Planung nach einer Fahrtanfrage.
+    Nemobil.API.Contracts.Trip.V1.TripStatusResponse:
+      type: object
+      properties:
+        costs:
+          type: number
+          description: Gets or sets kosten für die Fahrt.
+          format: float
+        carpoolInformation:
+          $ref: >-
+            #/components/schemas/Nemobil.API.Contracts.Trip.V1.CarpoolInformation
+        rampNeeded:
+          type: boolean
+          description: >-
+            Gets or sets Rampe benötigt für Besonderheiten z.B: Kinderwagen,
+            Rollstuhl, sonstiges.
+        requestedAdults:
+          type: integer
+          description: Gets or sets wie viele Erwachsene sollen transportiert werden.
+          format: int32
+        requestedChilds:
+          type: integer
+          description: Gets or sets wie viele Kinder sollen transportiert werden.
+          format: int32
+        luggage:
+          type: integer
+          description: Gets or sets gepäck.
+          format: int32
+        status:
+          enum:
+            - Unplanned
+            - Planned
+            - Started
+            - Completed
+            - Canceled
+          type: string
+          description: Gets or sets status der Fahrt.
+        pickupTime:
+          type: string
+          description: "Gets or sets geplante Abholzeit\r\nToleranz - Range => Interval."
+          format: date-time
+        dropoffTime:
+          type: string
+          description: "Gets or sets erwartete Abfahrtszeit\r\nToleranz - Range => Interval."
+          format: date-time
+        pickupTimeMin:
+          type: string
+          description: Gets or sets frühste erwartete Abfahrtszeit.
+          format: date-time
+        pickupTimeMax:
+          type: string
+          description: Gets or sets späteste erwartete Abfahrtszeit.
+          format: date-time
+        dropoffTimeMin:
+          type: string
+          description: Gets or sets frühste erwartete Ankunftszeit.
+          format: date-time
+        dropoffTimeMax:
+          type: string
+          description: Gets or sets späteste erwartete Ankunftszeit.
+          format: date-time
+      additionalProperties: false
+      description: Rückgabe einer Statusabfrage der Buchung.
+    Nemobil.API.Contracts.VehicleSchedule.V1.Data.CabSchedule:
+      required:
+        - id
+        - initialEnergyCapacity
+        - initialLocation
+        - label
+        - licensePlate
+        - operatingCompany
+        - powerConsumption
+        - schedule
+        - totalEnergyCapacity
+        - vehicleType
+      type: object
+      properties:
+        id:
+          type: string
+          description: Gets id des Fahrzeug Einsatzblocks.
+          nullable: true
+        schedule:
+          $ref: >-
+            #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Schedule
+        label:
+          maxLength: 150
+          minLength: 1
+          type: string
+          description: Gets or sets name des Fahrzeugs.
+        licensePlate:
+          maxLength: 15
+          minLength: 1
+          type: string
+          description: Gets or sets nummernschild des Fahrzeugs.
+        powerConsumption:
+          $ref: >-
+            #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.PowerConsumptionParameter
+        flatratEnergyConsumption:
+          type: number
+          description: Gets or sets pauschaler Energieverbrauch.
+          format: float
+        risk:
+          type: number
+          description: >-
+            Gets or sets wie viel Toleranz sollen wir bei der Restreichweite
+            lassen.
+          format: float
+        totalEnergyCapacity:
+          type: number
+          description: Gets or sets wie viel Energie kann das Fahrzeug insgesamt speichern.
+          format: float
+        initialEnergyCapacity:
+          type: number
+          description: "Gets or sets mit wie viel Energie startet das Fahrzeug den Dienst\r\nEnergie mit dem Start überprüfen."
+          format: float
+        initialLocation:
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
+        maxSpeed:
+          type: number
+          description: Gets or sets was ist die maximale Geschwindigkeit des Fahrzeugs.
+          format: float
+        regenerativePower:
+          type: number
+          description: Gets or sets energie, die das Fahrzeug ins Netz speisen kann.
+          format: float
+        operatingCompany:
+          type: string
+          description: "Gets or sets welchem Betreiber ist dieses Fahrzeug zugeordnet\r\nDetails of the organization that is operating this fleet vehicle."
+          nullable: true
+        maxiumRegenerativePower:
+          type: number
+          description: Gets or sets maximale Rückspeiseleistung.
+          format: float
+        defaultEnergyConsuptionPerM:
+          type: number
+          description: Gets or sets geschätzer Durchschnittsverbrauch pro Meter.
+          format: float
+        vehicleType:
+          type: string
+          description: Gets or sets kennung für das Laden der Routing-Informationen.
+          nullable: true
+        stateOfSchedule:
+          enum:
+            - Planned
+            - Active
+            - Started
+            - Completed
+          type: string
+          description: "Gets or sets state of Schedule\r\nAnmeldung, Abmeldung oder laufend der Schicht."
+        hasRamp:
+          type: boolean
+          description: Hat das Cab eine Rampe?
+        seats:
+          type: integer
+          description: Gets or sets wie viele Sitzplätze hat das Cab.
+          format: int32
+        childSeats:
+          type: integer
+          description: Gets or sets wie viele Kindersitze hat das Cab.
+          format: int32
+        luggage:
+          type: integer
+          description: Gets or sets Anzahl des Gepäcks.
+          format: int32
+        chargingCurve:
+          type: array
+          items:
+            type: number
+            format: float
+          description: "Gets or sets wie entwickelt sich die Ladekurve\r\n[0] => 0%\r\nAlternativ: Wie viel lange wird für 5% im passenden Korridor gebraucht?."
+          nullable: true
+        maxSpeedAutonomous:
+          type: number
+          description: Gets or sets maximale Geschwindigkeit autonom.
+          format: float
+      additionalProperties: false
+      description: Cab-Fahrzeug Eintrag.
+    Nemobil.API.Contracts.VehicleSchedule.V1.Data.ProSchedule:
+      required:
+        - id
+        - initialEnergyCapacity
+        - initialLocation
+        - label
+        - licensePlate
+        - operatingCompany
+        - powerConsumption
+        - schedule
+        - totalEnergyCapacity
+        - vehicleType
+      type: object
+      properties:
+        id:
+          type: string
+          description: Gets id des Fahrzeug Einsatzblocks.
+          nullable: true
+        schedule:
+          $ref: >-
+            #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Schedule
+        label:
+          maxLength: 150
+          minLength: 1
+          type: string
+          description: Gets or sets name des Fahrzeugs.
+        licensePlate:
+          maxLength: 15
+          minLength: 1
+          type: string
+          description: Gets or sets nummernschild des Fahrzeugs.
+        powerConsumption:
+          $ref: >-
+            #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.PowerConsumptionParameter
+        flatratEnergyConsumption:
+          type: number
+          description: Gets or sets pauschaler Energieverbrauch.
+          format: float
+        risk:
+          type: number
+          description: >-
+            Gets or sets wie viel Toleranz sollen wir bei der Restreichweite
+            lassen.
+          format: float
+        totalEnergyCapacity:
+          type: number
+          description: Gets or sets wie viel Energie kann das Fahrzeug insgesamt speichern.
+          format: float
+        initialEnergyCapacity:
+          type: number
+          description: "Gets or sets mit wie viel Energie startet das Fahrzeug den Dienst\r\nEnergie mit dem Start überprüfen."
+          format: float
+        initialLocation:
+          $ref: '#/components/schemas/Nemobil.API.Contracts.BaseData.V1.Location'
+        maxSpeed:
+          type: number
+          description: Gets or sets was ist die maximale Geschwindigkeit des Fahrzeugs.
+          format: float
+        regenerativePower:
+          type: number
+          description: Gets or sets energie, die das Fahrzeug ins Netz speisen kann.
+          format: float
+        operatingCompany:
+          type: string
+          description: "Gets or sets welchem Betreiber ist dieses Fahrzeug zugeordnet\r\nDetails of the organization that is operating this fleet vehicle."
+          nullable: true
+        maxiumRegenerativePower:
+          type: number
+          description: Gets or sets maximale Rückspeiseleistung.
+          format: float
+        defaultEnergyConsuptionPerM:
+          type: number
+          description: Gets or sets geschätzer Durchschnittsverbrauch pro Meter.
+          format: float
+        vehicleType:
+          type: string
+          description: Gets or sets kennung für das Laden der Routing-Informationen.
+          nullable: true
+        stateOfSchedule:
+          enum:
+            - Planned
+            - Active
+            - Started
+            - Completed
+          type: string
+          description: "Gets or sets state of Schedule\r\nAnmeldung, Abmeldung oder laufend der Schicht."
+        maxCabChain:
+          type: integer
+          description: >-
+            Gets or sets wie viele Cabs können maximal an das Pro gehangen
+            werden.
+          format: int32
+        additionalEnergyConsumptionPerCab:
+          type: array
+          items:
+            type: number
+            format: float
+          description: Gets or sets liste mit zusätzlichem Verbrauch pro angehangenem Cab.
+          nullable: true
+      additionalProperties: false
+      description: Pro-Fahrzeug Eintrag.
+    Nemobil.API.Contracts.VehicleSchedule.V1.PowerConsumptionParameter:
+      type: object
+      properties:
+        speed:
+          type: number
+          description: >-
+            Gets or sets hohe Geschwindigkeiten(über 65 MPH oder 105 km/h)
+            können die Effizienz eines E-Autos erheblich verringern, was zu
+            einem höheren Verbrauch führt.
+          format: float
+        wind:
+          type: number
+          description: >-
+            Gets or sets ein starker Gegenwind kann zu einem höheren
+            Energieverbrauch führen.
+          format: float
+        loadCapacity:
+          type: number
+          description: >-
+            Gets or sets schwerere Lasten erhöhen den Energieverbrauch.Mehr
+            Gewicht bedeutet, dass der Motor härter arbeiten muss.
+          format: float
+        tireTraction:
+          type: number
+          description: >-
+            Gets or sets eine schlechte Reifentraktion kann die Effizienz
+            verringern und zu einem höheren Verbrauch führen.Eine ordnungsgemäße
+            Wartung der Reifen gewährleistet eine optimale Traktion und kann
+            dazu beitragen, den Energieverbrauch zu senken.
+          format: float
+        weatherConditions:
+          type: number
+          description: >-
+            Gets or sets extreme Temperaturen, sowohl heiß als auch kalt,
+            beeinträchtigen die Batterieleistung, was zu einem höheren
+            Energieverbrauch führen kann.
+          format: float
+        climatronic:
+          type: number
+          description: >-
+            Gets or sets die Nutzung der Heizungs-, Lüftungs- und Klimaanlagen
+            in einem E-Auto verbraucht Energie.Daher kann eine übermäßige
+            Nutzung der Klimaanlage die Reichweite verringern.
+          format: float
+        regenerativeBraking:
+          type: number
+          description: >-
+            Gets or sets es steigert die Effizienz von Elektroautos, wenn die
+            kinetische Energie beim Bremsen in elektrische Energie umgewandelt
+            wird und so die Fahrzeugbatterie wieder auflädt und den
+            Energieverbrauch senkt.
+          format: float
+      additionalProperties: false
+      description: "Faktoren, die den Verbrauch von Elektroautos beeinflussen\r\nhttps://www.cardino.de/blog-posts/berechnung-des-verbrauchs-ihres-elektroautos?0c368a56_page=2."
+    Nemobil.API.Contracts.VehicleSchedule.V1.Schedule:
+      type: object
+      properties:
+        startTime:
+          type: string
+          description: Startzeit des Bereichs.
+          format: date-time
+        endTime:
+          type: string
+          description: Endzeit des Bereich.
+          format: date-time
+      additionalProperties: false
+      description: Zeitbereich.
+    Nemobil.API.Contracts.VehicleSchedule.V1.VehicleSchedulePlan:
+      required:
+        - vehicleSchedule
+      type: object
+      properties:
+        vehicleSchedule:
+          $ref: >-
+            #/components/schemas/Nemobil.API.Contracts.VehicleSchedule.V1.Data.CabSchedule
+        schedulePlan:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nemobil.API.Contracts.Schedule.V1.CabStop'
+          description: Gets or sets fahrplan im Zeitbereich.
+          nullable: true
+      additionalProperties: false
+      description: Plan for a vehicle schedule.
+  securitySchemes:
+    Keycloak:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://idp.reisewitz.io/realms/nemobil/protocol/openid-connect/auth
+          tokenUrl: >-
+            https://idp.reisewitz.io/realms/nemobil/protocol/openid-connect/token
+          scopes:
+            scope: Funktionalität
+security:
+  - Keycloak: []
