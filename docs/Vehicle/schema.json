@@ -521,7 +521,8 @@
       "type" : "array",
       "description" : "Property. The vehicles acceleration in the dimensions x,y,(z)",
       "items" : {
-        "type" : "float"
+        "type" : "number",
+        "format" : "float"
       }
     },
     "deviation" : {
@@ -556,9 +557,9 @@
     },
     "toBeChainedVehicles" : {
       "type" : "array",
-      "description" : "RelationshipList. List of vehicles to be chained to the vehicle",
+      "description" : "Property. List of vehicles to be chained to the vehicle",
       "items" : {
-        "$ref" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Vehicle/schema.json"
+        "type" : "string"
       }
     },
     "suppliedPower" : {
@@ -590,8 +591,9 @@
             "example" : "Engine"
           },
           "temperature" : {
-            "type" : "float",
+            "type" : "number",
             "description" : "Property. Temperature value",
+            "format" : "float",
             "example" : 90.0
           }
         },
@@ -654,6 +656,6 @@
   "$schemaVersion" : "v0",
   "title" : "Vehicle",
   "$id" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Vehicle/schema.json",
-  "modelTags" : "",
-  "$schema" : "http://json-schema.org/schema#"
+  "$schema" : "http://json-schema.org/schema#",
+  "modelTags" : ""
 }

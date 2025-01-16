@@ -6,12 +6,12 @@
       "description" : "Property. Proposal ID"
     },
     "request" : {
-      "$ref" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/TripRequest/schema.json",
-      "description" : "Relationship. "
+      "type" : "string",
+      "description" : "Property. The request that resulted in this proposal"
     },
     "user" : {
-      "$ref" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/User/schema.json",
-      "description" : "Relationship. "
+      "type" : "string",
+      "description" : "Property. The customer that issued the request"
     },
     "pickupLocation" : {
       "description" : "GeoProperty. Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon. Should be a reference to location",
@@ -489,6 +489,6 @@
   "$schemaVersion" : "v0",
   "title" : "TripProposal",
   "$id" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/TripProposal/schema.json",
-  "modelTags" : "",
-  "$schema" : "http://json-schema.org/schema#"
+  "$schema" : "http://json-schema.org/schema#",
+  "modelTags" : ""
 }

@@ -14,6 +14,6 @@
   "$schemaVersion" : "v0",
   "title" : "User",
   "$id" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/User/schema.json",
-  "modelTags" : "",
-  "$schema" : "http://json-schema.org/schema#"
+  "$schema" : "http://json-schema.org/schema#",
+  "modelTags" : ""
 }

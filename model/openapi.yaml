@@ -22,11 +22,11 @@ components:
           description: Unique identifier of the trip
           example: urn:ngsi-ld:Trip:16ea1c5c-5aa6-11e3-8244-4b82063ca31c
         user:
-          $ref: '#/components/schemas/User'
+          type: string
           description: User that booked the trip
           example: urn:ngsi-ld:User:11ea1c5c-5aa6-11e3-8244-4b82063ca31c
         vehicle:
-          $ref: '#/components/schemas/Vehicle'
+          type: string
           description: Vehicle used to fulfill the trip
           example: urn:ngsi-ld:Vehicle:21ea1c5c-5aa6-11e3-8244-4b82063ca31c
         pickupLocation:
@@ -135,7 +135,7 @@ components:
       additionalProperties: false
       description: "Trip data\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleOperation/doc/spec.md"
       example:
-        userGuid: urn:ngsi-ld:User:11ea1c5c-5aa6-11e3-8244-4b82063ca31c
+        user: urn:ngsi-ld:User:11ea1c5c-5aa6-11e3-8244-4b82063ca31c
         vehicle: urn:ngsi-ld:Vehicle:21ea1c5c-5aa6-11e3-8244-4b82063ca31c
         pickupLocation:
           type: "Point"
@@ -165,7 +165,7 @@ components:
           description: Request ID
           example: urn:ngsi-ld:TripRequest:16ea1c5c-5aa6-11e3-8244-4b82063ca31c
         user:
-          $ref: '#/components/schemas/User'
+          type: string
           description: User that booked the trip
         startLocation:
           $ref: '#/components/schemas/Place'
@@ -213,7 +213,7 @@ components:
           $ref: '#/components/schemas/CustomerPreferences'
           description: User preferences regarding time tolerances and car pooling
         vehicle:
-          $ref: '#/components/schemas/Vehicle'
+          type: string
           description: Specific vehicle to be requested
           nullable: true
         priority:
@@ -284,10 +284,10 @@ components:
           description: Proposal ID
           example: urn:ngsi-ld:TripProposal:16ea1c5c-5aa6-11e3-8244-4b82063ca31c
         request:
-          $ref: '#/components/schemas/TripRequest'
+          type: string
           description: The request that resulted in this proposal
         user:
-          $ref: '#/components/schemas/User'
+          type: string
           description: The customer that issued the request
         pickupLocation:
           $ref: '#/components/schemas/Place'
@@ -436,7 +436,8 @@ components:
           type: array
           description: The vehicles acceleration in the dimensions x,y,(z)
           items:
-            type: float
+            type: number
+            format: float
           example: [
             1.0,
             0.0
@@ -475,7 +476,7 @@ components:
           type: array
           description: List of vehicles to be chained to the vehicle
           items:
-            $ref: '#/components/schemas/Vehicle'
+            type: string
           example:
             - urn:ngsi-ld:Vehicle:11ea1c5c-5aa6-11e3-8244-4b82063ca31c
         suppliedPower:
@@ -584,8 +585,9 @@ components:
           description: Name of the sensor
           example: Engine
         temperature:
-          type: float
+          type: number
           description: Temperature value
+          format: float
           example: 90.0
       additionalProperties: false
       description: Temperature sensor representation. To be replaced by proper Device model
