@@ -48,5 +48,6 @@
   "massFlowHydrogen" : 100.0,
   "stateADStack" : "Idle",
   "stateCoupling" : "Free",
-  "passengerInformation" : "Welcome"
+  "passengerInformation" : "Welcome",
+  "type" : "Vehicle"
 }

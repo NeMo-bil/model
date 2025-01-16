@@ -1,6 +1,5 @@
 {
   "user" : "urn:ngsi-ld:User:11ea1c5c-5aa6-11e3-8244-4b82063ca31c",
-  "type" : "Trip",
   "vehicle" : "urn:ngsi-ld:Vehicle:21ea1c5c-5aa6-11e3-8244-4b82063ca31c",
   "pickupLocation" : {
     "type" : "Point",
@@ -34,5 +33,6 @@
   "payment" : "Permitted",
   "expectedEnergyRequired" : 10.0,
   "expectedDrivingTime" : 15.0,
-  "expectedDistance" : 100.0
+  "expectedDistance" : 100.0,
+  "type" : "Trip"
 }

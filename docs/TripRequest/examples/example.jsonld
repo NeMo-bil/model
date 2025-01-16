@@ -24,5 +24,6 @@
   "requestedAdults" : 1,
   "requestedChilds" : 1,
   "luggage" : 1,
-  "priority" : 1
+  "priority" : 1,
+  "type" : "TripRequest"
 }

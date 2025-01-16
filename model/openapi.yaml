@@ -439,7 +439,7 @@ components:
           example: 30.0
         speed:
           type: number
-          description: "Current speed"
+          description: Current speed of the vehicle
           format: float
           example: 10.0
         acceleration:

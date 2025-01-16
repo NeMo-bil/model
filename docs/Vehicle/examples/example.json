@@ -8,7 +8,6 @@
     "coordinates" : [ 1.2, 3.4 ]
   },
   "id" : "urn:ngsi-ld:Vehicle:11ea1c5c-5aa6-11e3-8244-4b82063ca31c",
-  "type" : "Vehicle",
   "shortId" : 1,
   "licensePlate" : "PB-NEMO 1",
   "nextStopArrival" : "2025-02-02T10:18:16Z",
@@ -49,5 +48,6 @@
   "massFlowHydrogen" : 100.0,
   "stateADStack" : "Idle",
   "stateCoupling" : "Free",
-  "passengerInformation" : "Welcome"
+  "passengerInformation" : "Welcome",
+  "type" : "Vehicle"
 }

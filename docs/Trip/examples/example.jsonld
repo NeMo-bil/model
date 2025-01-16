@@ -33,5 +33,6 @@
   "payment" : "Permitted",
   "expectedEnergyRequired" : 10.0,
   "expectedDrivingTime" : 15.0,
-  "expectedDistance" : 100.0
+  "expectedDistance" : 100.0,
+  "type" : "Trip"
 }
