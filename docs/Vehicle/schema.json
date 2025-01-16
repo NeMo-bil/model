@@ -229,9 +229,6 @@
           "type" : "GeoProperty"
         }
       } ],
-      "x-ngsi" : {
-        "type" : "GeoProperty"
-      },
       "x-one-of-name" : "Place"
     },
     "licensePlate" : {
@@ -458,9 +455,6 @@
           "type" : "GeoProperty"
         }
       } ],
-      "x-ngsi" : {
-        "type" : "GeoProperty"
-      },
       "x-one-of-name" : "Place"
     },
     "nextStopArrival" : {
@@ -470,7 +464,7 @@
     },
     "vehicleScheduleGuid" : {
       "type" : "string",
-      "description" : "Property. ID of the Vehicle Schedule Entry"
+      "description" : "Relationship. ID of the Vehicle Schedule Entry"
     },
     "stateOfSchedule" : {
       "type" : "string",
@@ -557,7 +551,7 @@
     },
     "toBeChainedVehicles" : {
       "type" : "array",
-      "description" : "Property. List of vehicles to be chained to the vehicle",
+      "description" : "Relationship. List of vehicles to be chained to the vehicle",
       "items" : {
         "type" : "string"
       }
@@ -656,6 +650,6 @@
   "$schemaVersion" : "v0",
   "title" : "Vehicle",
   "$id" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Vehicle/schema.json",
-  "$schema" : "http://json-schema.org/schema#",
-  "modelTags" : ""
+  "modelTags" : "",
+  "$schema" : "http://json-schema.org/schema#"
 }

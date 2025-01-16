@@ -233,9 +233,6 @@
           "type" : "GeoProperty"
         }
       } ],
-      "x-ngsi" : {
-        "type" : "GeoProperty"
-      },
       "x-one-of-name" : "Place"
     },
     "dropoffLocation" : {
@@ -458,9 +455,6 @@
           "type" : "GeoProperty"
         }
       } ],
-      "x-ngsi" : {
-        "type" : "GeoProperty"
-      },
       "x-one-of-name" : "Place"
     },
     "pickupTime" : {
@@ -489,6 +483,6 @@
   "$schemaVersion" : "v0",
   "title" : "TripProposal",
   "$id" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/TripProposal/schema.json",
-  "$schema" : "http://json-schema.org/schema#",
-  "modelTags" : ""
+  "modelTags" : "",
+  "$schema" : "http://json-schema.org/schema#"
 }

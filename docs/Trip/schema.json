@@ -7,11 +7,11 @@
     },
     "user" : {
       "type" : "string",
-      "description" : "Property. User that booked the trip"
+      "description" : "Relationship. User that booked the trip"
     },
     "vehicle" : {
       "type" : "string",
-      "description" : "Property. Vehicle used to fulfill the trip"
+      "description" : "Relationship. Vehicle used to fulfill the trip"
     },
     "pickupLocation" : {
       "description" : "GeoProperty. Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon. Should be a reference to location",
@@ -233,9 +233,6 @@
           "type" : "GeoProperty"
         }
       } ],
-      "x-ngsi" : {
-        "type" : "GeoProperty"
-      },
       "x-one-of-name" : "Place"
     },
     "dropoffLocation" : {
@@ -458,9 +455,6 @@
           "type" : "GeoProperty"
         }
       } ],
-      "x-ngsi" : {
-        "type" : "GeoProperty"
-      },
       "x-one-of-name" : "Place"
     },
     "pickupTime" : {
@@ -573,6 +567,6 @@
   "$schemaVersion" : "v0",
   "title" : "Trip",
   "$id" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Trip/schema.json",
-  "$schema" : "http://json-schema.org/schema#",
-  "modelTags" : ""
+  "modelTags" : "",
+  "$schema" : "http://json-schema.org/schema#"
 }

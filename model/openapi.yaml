@@ -25,10 +25,14 @@ components:
           type: string
           description: User that booked the trip
           example: urn:ngsi-ld:User:11ea1c5c-5aa6-11e3-8244-4b82063ca31c
+          x-ngsi:
+            type: Relationship
         vehicle:
           type: string
           description: Vehicle used to fulfill the trip
           example: urn:ngsi-ld:Vehicle:21ea1c5c-5aa6-11e3-8244-4b82063ca31c
+          x-ngsi:
+            type: Relationship
         pickupLocation:
           $ref: '#/components/schemas/Place'
           description: Location from where the transport was started
@@ -167,6 +171,8 @@ components:
         user:
           type: string
           description: User that booked the trip
+          x-ngsi:
+            type: Relationship
         startLocation:
           $ref: '#/components/schemas/Place'
           description: Location where the user would like to be picked up
@@ -216,6 +222,8 @@ components:
           type: string
           description: Specific vehicle to be requested
           nullable: true
+          x-ngsi:
+            type: Relationship
         priority:
           type: integer
           description: Priority of the request. Higher values represent more important requests
@@ -380,6 +388,8 @@ components:
           type: string
           description: ID of the Vehicle Schedule Entry
           example: urn:ngsi-ld:VehicleSchedule:11ea1c5c-5aa6-11e3-8244-4b82063ca31c
+          x-ngsi:
+            type: Relationship
         stateOfSchedule:
           enum:
             - Running
@@ -479,6 +489,8 @@ components:
             type: string
           example:
             - urn:ngsi-ld:Vehicle:11ea1c5c-5aa6-11e3-8244-4b82063ca31c
+          x-ngsi:
+            type: Relationship
         suppliedPower:
           type: number
           description: Current power being provided by the vehicle to others
