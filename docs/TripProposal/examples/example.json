@@ -10,6 +10,7 @@
     "coordinates" : [ 1.2, 3.4 ]
   },
   "id" : "urn:ngsi-ld:TripProposal:16ea1c5c-5aa6-11e3-8244-4b82063ca31c",
+  "type" : "TripProposal",
   "pickupTime" : "2025-02-02T10:18:16Z",
   "targetTime" : "2025-02-02T10:18:16Z",
   "costs" : 1.5,

@@ -15,6 +15,7 @@
     "toleratedDelayAfter" : 1
   },
   "id" : "urn:ngsi-ld:TripRequest:16ea1c5c-5aa6-11e3-8244-4b82063ca31c",
+  "type" : "TripRequest",
   "targetTime" : "2025-02-02T10:18:16Z",
   "pickupTime" : "2025-02-02T10:18:16Z",
   "skills" : [ {
