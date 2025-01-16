@@ -508,7 +508,7 @@
     },
     "speed" : {
       "type" : "number",
-      "description" : "Property. Current speed",
+      "description" : "Property. Current speed of the vehicle",
       "format" : "float"
     },
     "acceleration" : {
@@ -650,6 +650,6 @@
   "$schemaVersion" : "1.0.0",
   "title" : "Vehicle",
   "$id" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Vehicle/schema.json",
-  "modelTags" : "",
-  "$schema" : "http://json-schema.org/schema#"
+  "$schema" : "http://json-schema.org/schema#",
+  "modelTags" : ""
 }
