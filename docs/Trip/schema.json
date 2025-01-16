@@ -491,7 +491,7 @@
     },
     "skills" : {
       "type" : "array",
-      "description" : "RelationshipList. Required vehicle features. eg wheelchair capabilities",
+      "description" : "Relationship. Required vehicle features. eg wheelchair capabilities",
       "nullable" : true,
       "items" : {
         "$ref" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Skill/schema.json"
@@ -564,7 +564,7 @@
   },
   "additionalProperties" : false,
   "description" : "Trip data\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleOperation/doc/spec.md",
-  "$schemaVersion" : "v0",
+  "$schemaVersion" : "1.0.0",
   "title" : "Trip",
   "$id" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Trip/schema.json",
   "modelTags" : "",

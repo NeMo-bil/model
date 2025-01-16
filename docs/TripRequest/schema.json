@@ -467,7 +467,7 @@
     },
     "skills" : {
       "type" : "array",
-      "description" : "RelationshipList. Required vehicle features. eg wheelchair capabilities",
+      "description" : "Relationship. Required vehicle features. eg wheelchair capabilities",
       "nullable" : true,
       "items" : {
         "$ref" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Skill/schema.json"
@@ -525,7 +525,7 @@
   },
   "additionalProperties" : false,
   "description" : "Request parameters for a trip\r\nhttps://github.com/moia-oss/alonso-mora/blob/master/core/src/main/java/org/matsim/alonso_mora/algorithm/DefaultAlonsoMoraRequest.java",
-  "$schemaVersion" : "v0",
+  "$schemaVersion" : "1.0.0",
   "title" : "TripRequest",
   "$id" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/TripRequest/schema.json",
   "modelTags" : "",

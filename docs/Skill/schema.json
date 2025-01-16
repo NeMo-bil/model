@@ -14,7 +14,7 @@
   },
   "additionalProperties" : false,
   "description" : "Skills and features, which can be fulfilled by vehicles",
-  "$schemaVersion" : "v0",
+  "$schemaVersion" : "1.0.0",
   "title" : "Skill",
   "$id" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Skill/schema.json",
   "modelTags" : "",

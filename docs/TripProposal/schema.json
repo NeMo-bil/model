@@ -480,7 +480,7 @@
   },
   "additionalProperties" : false,
   "description" : "Proposal for a trip",
-  "$schemaVersion" : "v0",
+  "$schemaVersion" : "1.0.0",
   "title" : "TripProposal",
   "$id" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/TripProposal/schema.json",
   "modelTags" : "",

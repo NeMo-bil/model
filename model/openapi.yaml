@@ -2,7 +2,7 @@ openapi: 3.0.1
 info:
   title: NeMoBil Datamodel
   description: Reduced data model to be used in the NeMoBil project
-  version: v0
+  version: 1.0.0
 paths:
   /test:
     get:
@@ -469,7 +469,7 @@ components:
           example: 100.0
         mileageFromOdometer:
           type: integer
-          description: "Current mileage"
+          description: Current mileage as measured by the vehicle
           format: int32
           example: 1000
         chainedVehicles:

@@ -11,7 +11,7 @@
     }
   },
   "description" : "Information about the customer",
-  "$schemaVersion" : "v0",
+  "$schemaVersion" : "1.0.0",
   "title" : "User",
   "$id" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/User/schema.json",
   "modelTags" : "",

@@ -536,7 +536,7 @@
     },
     "mileageFromOdometer" : {
       "type" : "integer",
-      "description" : "Property. Current mileage",
+      "description" : "Property. Current mileage as measured by the vehicle",
       "format" : "int32"
     },
     "chainedVehicles" : {
@@ -568,7 +568,7 @@
     },
     "features" : {
       "type" : "array",
-      "description" : "RelationshipList. List of special features that the vehicle supplies",
+      "description" : "Relationship. List of special features that the vehicle supplies",
       "items" : {
         "$ref" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Skill/schema.json"
       }
@@ -647,7 +647,7 @@
   },
   "additionalProperties" : false,
   "description" : "Properties and metrics of a vehicle\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleStatus/doc/spec.md",
-  "$schemaVersion" : "v0",
+  "$schemaVersion" : "1.0.0",
   "title" : "Vehicle",
   "$id" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Vehicle/schema.json",
   "modelTags" : "",
