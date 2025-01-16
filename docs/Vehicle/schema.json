@@ -1,9 +1,15 @@
 {
+  "required" : [ "id", "type" ],
   "type" : "object",
   "properties" : {
     "id" : {
       "type" : "string",
       "description" : "Property. Unique identifier of the entity"
+    },
+    "type" : {
+      "type" : "string",
+      "description" : "Property. NGSI Entity type. It has to be Vehicle",
+      "enum" : [ "Vehicle" ]
     },
     "shortId" : {
       "type" : "integer",

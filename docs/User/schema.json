@@ -1,9 +1,15 @@
 {
+  "required" : [ "id", "type" ],
   "type" : "object",
   "properties" : {
     "id" : {
       "type" : "string",
       "description" : "Property. User ID"
+    },
+    "type" : {
+      "type" : "string",
+      "description" : "Property. NGSI Entity type. It has to be User",
+      "enum" : [ "User" ]
     },
     "surname" : {
       "type" : "string",
@@ -14,6 +20,6 @@
   "$schemaVersion" : "1.0.0",
   "title" : "User",
   "$id" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/User/schema.json",
-  "modelTags" : "",
-  "$schema" : "http://json-schema.org/schema#"
+  "$schema" : "http://json-schema.org/schema#",
+  "modelTags" : ""
 }

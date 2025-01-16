@@ -21,6 +21,12 @@ components:
           type: string
           description: Unique identifier of the trip
           example: urn:ngsi-ld:Trip:16ea1c5c-5aa6-11e3-8244-4b82063ca31c
+        type:
+          type: string
+          description: NGSI Entity type. It has to be Trip
+          enum:
+            - Trip
+          example: Trip
         user:
           type: string
           description: User that booked the trip
@@ -138,6 +144,9 @@ components:
           example: 100.0
       additionalProperties: false
       description: "Trip data\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleOperation/doc/spec.md"
+      required:
+        - id
+        - type
       example:
         user: urn:ngsi-ld:User:11ea1c5c-5aa6-11e3-8244-4b82063ca31c
         vehicle: urn:ngsi-ld:Vehicle:21ea1c5c-5aa6-11e3-8244-4b82063ca31c
@@ -168,6 +177,12 @@ components:
           type: string
           description: Request ID
           example: urn:ngsi-ld:TripRequest:16ea1c5c-5aa6-11e3-8244-4b82063ca31c
+        type:
+          type: string
+          description: NGSI Entity type. It has to be TripRequest
+          enum:
+            - TripRequest
+          example: TripRequest
         user:
           type: string
           description: User that booked the trip
@@ -231,6 +246,9 @@ components:
           example: 1
       additionalProperties: false
       description: "Request parameters for a trip\r\nhttps://github.com/moia-oss/alonso-mora/blob/master/core/src/main/java/org/matsim/alonso_mora/algorithm/DefaultAlonsoMoraRequest.java"
+      required:
+        - id
+        - type
       example:
         user: urn:ngsi-ld:User:11ea1c5c-5aa6-11e3-8244-4b82063ca31c
         vehicle: urn:ngsi-ld:Vehicle:21ea1c5c-5aa6-11e3-8244-4b82063ca31c
@@ -279,10 +297,19 @@ components:
           type: string
           description: User ID
           example: urn:ngsi-ld:User:16ea1c5c-5aa6-11e3-8244-4b82063ca31c
+        type:
+          type: string
+          description: NGSI Entity type. It has to be User
+          enum:
+            - User
+          example: User
         surname:
           type: string
           description: User surname
           example: Meier
+      required:
+        - id
+        - type
 
     TripProposal:
       type: object
@@ -325,6 +352,9 @@ components:
           example: 2025-02-02T10:18:16Z
       additionalProperties: false
       description: Proposal for a trip
+      required:
+        - id
+        - type
       example:
         user: urn:ngsi-ld:User:11ea1c5c-5aa6-11e3-8244-4b82063ca31c
         request: urn:ngsi-ld:TripRequest:21ea1c5c-5aa6-11e3-8244-4b82063ca31c
@@ -349,6 +379,12 @@ components:
           description: Identifier of the skill
           format: int32
           example: 1
+        type:
+          type: string
+          description: NGSI Entity type. It has to be Skill
+          enum:
+            - Skill
+          example: Skill
         name:
           type: string
           description: Name of the skill
@@ -356,6 +392,9 @@ components:
           example: Wheelchair
       additionalProperties: false
       description: Skills and features, which can be fulfilled by vehicles
+      required:
+        - id
+        - type
 
     Vehicle:
       type: object
@@ -365,6 +404,12 @@ components:
           type: string
           description: Unique identifier of the entity
           example: urn:ngsi-ld:Vehicle:11ea1c5c-5aa6-11e3-8244-4b82063ca31c
+        type:
+          type: string
+          description: NGSI Entity type. It has to be Vehicle
+          enum:
+            - Vehicle
+          example: Vehicle
         shortId:
           type: integer
           description: Identifier to be used in vehicle to vehicle communication.
@@ -574,6 +619,9 @@ components:
           description: Information to be displayed in the vehicle display
           example: "Welcome"
       additionalProperties: false
+      required:
+        - id
+        - type
       example:
         location:
           type: "Point"

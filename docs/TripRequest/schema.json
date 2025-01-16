@@ -1,9 +1,15 @@
 {
+  "required" : [ "id", "type" ],
   "type" : "object",
   "properties" : {
     "id" : {
       "type" : "string",
       "description" : "Property. Request ID"
+    },
+    "type" : {
+      "type" : "string",
+      "description" : "Property. NGSI Entity type. It has to be TripRequest",
+      "enum" : [ "TripRequest" ]
     },
     "user" : {
       "type" : "string",
@@ -528,6 +534,6 @@
   "$schemaVersion" : "1.0.0",
   "title" : "TripRequest",
   "$id" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/TripRequest/schema.json",
-  "modelTags" : "",
-  "$schema" : "http://json-schema.org/schema#"
+  "$schema" : "http://json-schema.org/schema#",
+  "modelTags" : ""
 }
