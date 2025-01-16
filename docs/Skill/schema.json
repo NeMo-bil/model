@@ -1,0 +1,22 @@
+{
+  "type" : "object",
+  "properties" : {
+    "id" : {
+      "type" : "integer",
+      "description" : "Property. Identifier of the skill",
+      "format" : "int32"
+    },
+    "name" : {
+      "type" : "string",
+      "description" : "Property. Name of the skill",
+      "nullable" : true
+    }
+  },
+  "additionalProperties" : false,
+  "description" : "Skills and features, which can be fulfilled by vehicles",
+  "$schemaVersion" : "v0",
+  "title" : "Skill",
+  "$id" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Skill/schema.json",
+  "modelTags" : "",
+  "$schema" : "http://json-schema.org/schema#"
+}

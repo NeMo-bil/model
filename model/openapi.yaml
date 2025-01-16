@@ -19,50 +19,86 @@ components:
       properties:
         id:
           type: string
-          description: Kennung der Fahrt
+          description: Unique identifier of the trip
+          example: urn:ngsi-ld:Trip:16ea1c5c-5aa6-11e3-8244-4b82063ca31c
         user:
           $ref: '#/components/schemas/User'
-          description: Anfragender User
+          description: User that booked the trip
+          example: urn:ngsi-ld:User:11ea1c5c-5aa6-11e3-8244-4b82063ca31c
         vehicle:
           $ref: '#/components/schemas/Vehicle'
+          description: Vehicle used to fulfill the trip
+          example: urn:ngsi-ld:Vehicle:21ea1c5c-5aa6-11e3-8244-4b82063ca31c
         pickupLocation:
           $ref: '#/components/schemas/Place'
+          description: Location from where the transport was started
+          example:
+            type: "Point"
+            coordinates: [
+              1.2,
+              3.4
+            ]
         dropoffLocation:
           $ref: '#/components/schemas/Place'
+          description: Location where the transport ended
+          example:
+            type: "Point"
+            coordinates: [
+              1.2,
+              3.4
+            ]
         pickupTime:
           type: string
-          description: "Geplante Abholzeit\r\nToleranz - Range => Interval"
+          description: Planned time of user pickup
           format: date-time
+          example: 2025-02-02T10:18:16Z
         targetTime:
           type: string
-          description: "Erwartete Ankunftszeit\r\nToleranz - Range => Interval"
+          description: Planned time of user dropoff
           format: date-time
+          example: 2025-02-02T10:18:16Z
         costs:
           type: number
-          description: Kosten für die Fahrt
+          description: Cost of the trip
           format: float
+          example: 1.5
         carpoolInformation:
-          $ref: '#/components/schemas/NemobilAPI.Model.CarpoolInformation'
+          $ref: '#/components/schemas/CarpoolInformation'
+          description: Information regarding carpooling for this trip
+          example:
+            passengersOnBoard: true
+            passengerBoarding: true
         skills:
           type: array
           items:
-            $ref: '#/components/schemas/NemobilAPI.Model.Skill'
-          description: 'Besonderheiten z.B: Kinderwagen, Rollstuhl, sonst. Einschränkungen'
+            $ref: '#/components/schemas/Skill'
+          description: Required vehicle features. eg wheelchair capabilities
           nullable: true
+          example:
+            - id: 1
+              name: WheelChair
         requestedAdults:
           type: integer
-          description: Wie viele Erwachsene sollen transportiert werden
+          description: Amount of adults to be transported
           format: int32
+          example: 1
         requestedChilds:
           type: integer
-          description: Wie viele Kinder sollen transportiert werden
+          description: Amount of children to be transported
           format: int32
+          example: 1
         luggage:
           type: integer
-          description: Gepäck
+          description: Amount of large luggage pieces to be transported
           format: int32
+          example: 1
         personalPreferences:
-          $ref: '#/components/schemas/NemobilAPI.Contracts.RideRequest.CustomerPreferences'
+          $ref: '#/components/schemas/CustomerPreferences'
+          description: User preferences regarding time tolerances and car pooling
+          example:
+            allowCarpooling: false
+            toleratedDelayBefore: 1
+            toleratedDelayAfter: 1
         status:
           enum:
             - Unplanned
@@ -71,31 +107,55 @@ components:
             - Canceled
             - Rejected
             - Performed
-          type: String
-          description: Status der Fahrt
+          type: string
+          description: Status of the trip
+          example: Started
         payment:
           type: string
           description: payment information of the trip
           enum:
             - Permitted
             - Denied
+          example: Permitted
         expectedEnergyRequired:
           type: number
-          description: Geschätzte Energie für die Strecke
+          description: Expected energy consumption of the trip
           format: float
+          example: 10.0
         expectedDrivingTime:
           type: number
-          description: Geschätzte Fahrzeit für die Strecke
+          description: Expected driving time of the trip
           format: float
+          example: 15.0
         expectedDistance:
           type: number
-          description: Geschätzte Distanz für die Strecke
+          description: Expected distance of the trip
           format: float
+          example: 100.0
       additionalProperties: false
-      description: "Daten eines Trips\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleOperation/doc/spec.md"
+      description: "Trip data\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleOperation/doc/spec.md"
       example:
-        id: someId
-        userGuid: someUser
+        userGuid: urn:ngsi-ld:User:11ea1c5c-5aa6-11e3-8244-4b82063ca31c
+        vehicle: urn:ngsi-ld:Vehicle:21ea1c5c-5aa6-11e3-8244-4b82063ca31c
+        pickupLocation:
+          type: "Point"
+          coordinates: [
+            1.2,
+            3.4
+          ]
+        dropoffLocation:
+          type: "Point"
+          coordinates: [
+            1.2,
+            3.4
+          ]
+        carpoolInformation:
+          passengersOnBoard: true
+          passengerBoarding: true
+        personalPreferences:
+          allowCarpooling: false
+          toleratedDelayBefore: 1
+          toleratedDelayAfter: 1
 
     TripRequest:
       type: object
@@ -103,52 +163,478 @@ components:
         id:
           type: string
           description: Request ID
+          example: urn:ngsi-ld:TripRequest:16ea1c5c-5aa6-11e3-8244-4b82063ca31c
         user:
           $ref: '#/components/schemas/User'
-          description: Anfragender User
+          description: User that booked the trip
         startLocation:
-          $ref: 'https://fiware.github.io/tutorials.NGSI-LD/models/ngsi-ld.yaml#/location'
+          $ref: '#/components/schemas/Place'
+          description: Location where the user would like to be picked up
         targetLocation:
           $ref: '#/components/schemas/Place'
+          description: Location where the user would like to be dropped off
         targetTime:
           type: string
-          description: "<br>Gewünschte Ankunftszeit \r\n<br>(Target - Toleranz davor)"
+          description: Requested time of user drop off
           format: date-time
           nullable: true
+          example: 2025-02-02T10:18:16Z
         pickupTime:
           type: string
-          description: "<br>Gewünschte Abholzeit\r\n<br>(Pickup + Toleranz danach)"
+          description: Requested time of user pickup
           format: date-time
           nullable: true
+          example: 2025-02-02T10:18:16Z
         skills:
           type: array
           items:
-            $ref: '#/components/schemas/NemobilAPI.Model.Skill'
-          description: 'Besonderheiten z.B: Kinderwagen, Rollstuhl, sonst. Einschränkungen'
+            $ref: '#/components/schemas/Skill'
+          description: Required vehicle features. eg wheelchair capabilities
           nullable: true
+          example:
+            - id: 1
+              name: WheelChair
         requestedAdults:
           type: integer
-          description: Wie viele Erwachsene sollen transportiert werden
+          description: Amount of adults to be transported
           format: int32
+          example: 1
         requestedChilds:
           type: integer
-          description: Wie viele Kinder sollen transportiert werden
+          description: Amount of children to be transported
           format: int32
+          example: 1
         luggage:
           type: integer
-          description: Gepäck
+          description: Amount of large luggage pieces to be transported
           format: int32
+          example: 1
         personalPreferences:
-          $ref: '#/components/schemas/NemobilAPI.Contracts.RideRequest.CustomerPreferences'
+          $ref: '#/components/schemas/CustomerPreferences'
+          description: User preferences regarding time tolerances and car pooling
         vehicle:
           $ref: '#/components/schemas/Vehicle'
+          description: Specific vehicle to be requested
           nullable: true
         priority:
           type: integer
           description: Priority of the request. Higher values represent more important requests
           format: int32
+          example: 1
       additionalProperties: false
-      description: "<br>Parameter für eine Fahrtanfrage\r\n<br>https://github.com/moia-oss/alonso-mora/blob/master/core/src/main/java/org/matsim/alonso_mora/algorithm/DefaultAlonsoMoraRequest.java"
+      description: "Request parameters for a trip\r\nhttps://github.com/moia-oss/alonso-mora/blob/master/core/src/main/java/org/matsim/alonso_mora/algorithm/DefaultAlonsoMoraRequest.java"
+      example:
+        user: urn:ngsi-ld:User:11ea1c5c-5aa6-11e3-8244-4b82063ca31c
+        vehicle: urn:ngsi-ld:Vehicle:21ea1c5c-5aa6-11e3-8244-4b82063ca31c
+        startLocation:
+          type: "Point"
+          coordinates: [
+            1.2,
+            3.4
+          ]
+        targetLocation:
+          type: "Point"
+          coordinates: [
+            1.2,
+            3.4
+          ]
+        personalPreferences:
+          allowCarpooling: false
+          toleratedDelayBefore: 1
+          toleratedDelayAfter: 1
+
+    CustomerPreferences:
+      type: object
+      properties:
+        allowCarpooling:
+          type: boolean
+          description: User allows car pooling on the trip
+          example: true
+        toleratedDelayBefore:
+          type: integer
+          description: Amount of allowed difference in the pickup time
+          format: int32
+          example: 5
+        toleratedDelayAfter:
+          type: integer
+          description: Amount of allowed difference in the drop off time
+          format: int32
+          example: 5
+      additionalProperties: false
+      description: Customer preferences when booking a trip
+
+    User:
+      type: object
+      description: Information about the customer
+      properties:
+        id:
+          type: string
+          description: User ID
+          example: urn:ngsi-ld:User:16ea1c5c-5aa6-11e3-8244-4b82063ca31c
+        surname:
+          type: string
+          description: User surname
+          example: Meier
+
+    TripProposal:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Proposal ID
+          example: urn:ngsi-ld:TripProposal:16ea1c5c-5aa6-11e3-8244-4b82063ca31c
+        request:
+          $ref: '#/components/schemas/TripRequest'
+          description: The request that resulted in this proposal
+        user:
+          $ref: '#/components/schemas/User'
+          description: The customer that issued the request
+        pickupLocation:
+          $ref: '#/components/schemas/Place'
+          description: Location from where the transport was started
+        dropoffLocation:
+          $ref: '#/components/schemas/Place'
+          description: Location where the transport ended
+        pickupTime:
+          type: string
+          description: Planned time of user pickup
+          format: date-time
+          example: 2025-02-02T10:18:16Z
+        targetTime:
+          type: string
+          description: Planned time of user dropoff
+          format: date-time
+          example: 2025-02-02T10:18:16Z
+        costs:
+          type: number
+          description: Estimated cost of the trip
+          format: float
+          example: 1.5
+        proposalReleaseTime:
+          type: string
+          description: Time when the proposal is invalidated
+          format: date-time
+          example: 2025-02-02T10:18:16Z
+      additionalProperties: false
+      description: Proposal for a trip
+      example:
+        user: urn:ngsi-ld:User:11ea1c5c-5aa6-11e3-8244-4b82063ca31c
+        request: urn:ngsi-ld:TripRequest:21ea1c5c-5aa6-11e3-8244-4b82063ca31c
+        pickupLocation:
+          type: "Point"
+          coordinates: [
+            1.2,
+            3.4
+          ]
+        dropoffLocation:
+          type: "Point"
+          coordinates: [
+            1.2,
+            3.4
+          ]
+
+    Skill:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Identifier of the skill
+          format: int32
+          example: 1
+        name:
+          type: string
+          description: Name of the skill
+          nullable: true
+          example: Wheelchair
+      additionalProperties: false
+      description: Skills and features, which can be fulfilled by vehicles
+
+    Vehicle:
+      type: object
+      description: "Properties and metrics of a vehicle\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleStatus/doc/spec.md"
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the entity
+          example: urn:ngsi-ld:Vehicle:11ea1c5c-5aa6-11e3-8244-4b82063ca31c
+        shortId:
+          type: integer
+          description: Identifier to be used in vehicle to vehicle communication.
+          example: 1
+        location:
+          $ref: '#/components/schemas/Place'
+          description: Current location of the vehicle
+        licensePlate:
+          type: string
+          description: License plate of the vehicle
+          example: "PB-NEMO 1"
+        nextStopLocation:
+          $ref: '#/components/schemas/Place'
+          description: Next stop of the vehicle
+        nextStopArrival:
+          type: string
+          description: Planned time of arrival at next stop
+          format: date-time
+          example: 2025-02-02T10:18:16Z
+        vehicleScheduleGuid:
+          type: string
+          description: ID of the Vehicle Schedule Entry
+          example: urn:ngsi-ld:VehicleSchedule:11ea1c5c-5aa6-11e3-8244-4b82063ca31c
+        stateOfSchedule:
+          enum:
+            - Running
+            - StartSchedule
+            - EndSchedule
+          type: string
+          description: "State of Schedule"
+          example: Running
+        batteryLevel:
+          type: number
+          description: Current level of the battery
+          format: float
+          example: 50.0
+        fuelLevel:
+          type: number
+          description: Current level of the fuel tank
+          format: float
+          example: 50.0
+        remainingRange:
+          type: number
+          description: Remaining range in respect with the current consumption rate
+          format: float
+          example: 250.0
+        consumption:
+          type: number
+          description: Current consumption rate
+          format: float
+          example: 1000.0
+        consumedEnergy:
+          type: number
+          description: Ongoing counter representing the energy consumed by the vehicle
+          format: float
+          example: 1000.0
+        state:
+          type: string
+          enum:
+            - Idle
+            - Konvoi
+            - Accident
+            - TrafficJam
+          description: General state of the vehicle
+          example: Idle
+        bearing:
+          type: number
+          description: Current heading of the vehicle relative to north
+          format: float
+          example: 30.0
+        speed:
+          type: number
+          description: "Current speed"
+          format: float
+          example: 10.0
+        acceleration:
+          type: array
+          description: The vehicles acceleration in the dimensions x,y,(z)
+          items:
+            type: float
+          example: [
+            1.0,
+            0.0
+          ]
+        deviation:
+          type: number
+          description: Deviation of the time plan. Positive value represents time to spare
+          format: float
+          example: 10.0
+        chargingPower:
+          type: number
+          description: Current power being charged into the vehicle
+          format: float
+          example: 100.0
+        chargedEnergy:
+          type: number
+          description: Ongoing counter representing the energy charged into the vehicle
+          format: float
+          example: 100.0
+        mileageFromOdometer:
+          type: integer
+          description: "Current mileage"
+          format: int32
+          example: 1000
+        chainedVehicles:
+          type: integer
+          description: Amount of vehicles currently chained to this vehicle
+          format: int32
+          example: 1
+        chainedPosition:
+          type: integer
+          description: Position inside the convoy of chained vehicles
+          format: int32
+          example: 0
+        toBeChainedVehicles:
+          type: array
+          description: List of vehicles to be chained to the vehicle
+          items:
+            $ref: '#/components/schemas/Vehicle'
+          example:
+            - urn:ngsi-ld:Vehicle:11ea1c5c-5aa6-11e3-8244-4b82063ca31c
+        suppliedPower:
+          type: number
+          description: Current power being provided by the vehicle to others
+          format: float
+          example: 100.0
+        suppliedEnergy:
+          type: number
+          description: Ongoing counter representing the energy provided by the vehicle to others
+          format: float
+          example: 100.0
+        features:
+          type: array
+          description: List of special features that the vehicle supplies
+          items:
+            $ref: '#/components/schemas/Skill'
+          example:
+            - id: 1
+              name: WheelChair
+        sensors:
+          type: array
+          description: List of temperature sensors with the current value. To be replaced by devices linked by a relationship list.
+          items:
+            $ref: '#/components/schemas/TemperatureSensor'
+          example:
+            - name: Engine
+              temperature: 90.0
+        batteryCurrent:
+          type: number
+          description: Flow of current from battery to inverter. Positive value for discharging, negative for charging the battery.
+          format: float
+          example: 100.0
+        inverterCurrent:
+          type: number
+          description: Flow of current from inverter to machine
+          format: float
+          example: 100.0
+        batteryVoltage:
+          type: number
+          description: Voltage of the battery
+          format: float
+          example: 100.0
+        batteryPower:
+          type: number
+          description: Power flow from battery to inverter. Positive value for discharging, negative for charging the battery.
+          format: float
+          example: 100.0
+        pressureHydrogen:
+          type: number
+          description: Pressure in the hydrogen system
+          format: float
+          example: 100.0
+        concentrationHydrogen:
+          type: number
+          description: Concentration of hydrogen in the vehicle
+          format: float
+          example: 1.0
+        massFlowHydrogen:
+          type: number
+          description: Mass flow of hydrogen into the fuel cell
+          format: float
+          example: 100.0
+        stateADStack:
+          type: string
+          description: State as reported by the vehicles autonomous driving system
+          enum:
+            - Idle
+            - OnRoute
+            - StopReached
+            - Error
+          example: Idle
+        stateCoupling:
+          type: string
+          description: State of the coupling/chaining
+          enum:
+            - Free
+            - Chaining
+            - Chained
+          example: Free
+        passengerInformation:
+          type: string
+          description: Information to be displayed in the vehicle display
+          example: "Welcome"
+      additionalProperties: false
+      example:
+        location:
+          type: "Point"
+          coordinates: [
+            1.2,
+            3.4
+          ]
+        nextStopLocation:
+          type: "Point"
+          coordinates: [
+            1.2,
+            3.4
+          ]
+
+
+    TemperatureSensor:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the sensor
+          example: Engine
+        temperature:
+          type: float
+          description: Temperature value
+          example: 90.0
+      additionalProperties: false
+      description: Temperature sensor representation. To be replaced by proper Device model
+    CarpoolInformation:
+      type: object
+      properties:
+        passengersOnBoard:
+          type: boolean
+          description: Additional car pool users in vehicle
+          example: true
+        passengerBoarding:
+          type: boolean
+          description: Pickup of additional car pool users expected
+          example: true
+      additionalProperties: false
+      description: Information about current carpooling state
+
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the entity
+        "@type":
+          type: string
+          description: Type Notification
+          enum:
+            - Notification
+        subscriptionId:
+          type: string
+          description: Unique identifier of the subscription
+        notifiedAt:
+          type: string
+          description: "Time of notification"
+          format: date-time
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/NotificationPayload'
+    NotificationPayload:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the entity
+        "@type":
+          type: string
+          description: Type Payload
+      additionalProperties: true
     Place:
       description: 'Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon. Should be a reference to location'
       oneOf:
@@ -314,234 +800,3 @@ components:
             type: GeoProperty
       x-ngsi:
         type: GeoProperty
-
-    NemobilAPI.Contracts.RideRequest.CustomerPreferences:
-      type: object
-      properties:
-        allowCarpooling:
-          type: boolean
-          description: Der Kunde erlaubt Mitfahrer bei seiner Fahrt
-        toleratedDelayBefore:
-          type: integer
-          description: Der Kunde erlaubt folgende Verzögerung auf seinem Weg
-          format: int32
-        toleratedDelayAfter:
-          type: integer
-          description: Der Kunde erlaubt folgende Verzögerung auf seinem Weg
-          format: int32
-      additionalProperties: false
-      description: Wünsche des Kunden bei der Anfrage
-    User:
-      type: object
-      properties:
-        id:
-          type: string
-          description: User ID
-          format: uuid
-        surname:
-          type: string
-          description: User surname
-    TripProposal:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Proposal ID
-        request:
-          $ref: '#/components/schemas/TripRequest'
-        user:
-          $ref: '#/components/schemas/User'
-        pickupLocation:
-          $ref: '#/components/schemas/Place'
-        dropoffLocation:
-          $ref: '#/components/schemas/Place'
-        pickupTime:
-          type: string
-          description: "Geplante Abholzeit\r\nToleranz - Range => Interval"
-          format: date-time
-        targetTime:
-          type: string
-          description: "Erwartete Ankunftszeit\r\nToleranz - Range => Interval"
-          format: date-time
-        costs:
-          type: number
-          description: Erwartete Kosten für die Fahrt
-          format: float
-        proposalReleaseTime:
-          type: string
-          description: Bis wann wird der Proposal freigehalten
-          format: date-time
-      additionalProperties: false
-      description: Vorschlag für eine Fahrtanfrage
-
-
-    Skill:
-      type: object
-      properties:
-        skillId:
-          type: integer
-          description: Id des Skills
-          format: int32
-        skillName:
-          type: string
-          description: Name des Skills
-          nullable: true
-      additionalProperties: false
-      description: Skills, die Cabs von Nemobil erfüllen können
-
-    Vehicle:
-      type: object
-      description: "Sensor-Werte eines Fahrzeugs\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleStatus/doc/spec.md"
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the entity
-        location:
-          $ref: '#/components/schemas/Place'
-        licensePlate:
-          type: string
-          description: License plate of the vehicle
-        nextStopLocation:
-          $ref: '#/components/schemas/Place'
-        nextStopArrival:
-          type: string
-          description: "Planned time of arrivial at next stop"
-          format: date-time
-        vehicleScheduleGuid:
-          type: string
-          description: ID des Vehicle Schedule Entry
-        stateOfSchedule:
-          enum:
-            - Running
-            - StartSchedule
-            - EndSchedule
-          type: String
-          description: "State of Schedule\r\nAnmeldung, Abmeldung oder laufend der Schicht"
-        batteryLevel:
-          type: number
-          description: "Der aktuelle Prozentsatz der verbleibenden Batterie im Falle eines Elektrofahrzeugs\r\nAngabe in Prozent"
-          format: float
-        remainingRange:
-          type: number
-          description: Aktuelle Restreichweite
-          format: float
-        consumption:
-          type: number
-          description: Aktueller Energieverbrauch
-          format: float
-        state:
-          type: array
-          items:
-            $ref: '#/components/schemas/VehicleState'
-          description: "Stati des Fahrzeuges"
-        bearing:
-          type: number
-          description: "Current heading of the vehicle relative to north"
-          format: float
-        speed:
-          type: number
-          description: "Current speed"
-          format: float
-        deviation:
-          type: number
-          description: "+ => Besser als Vorgesehen\r\n- => Im Verzug"
-          format: float
-        chargingPower:
-          type: number
-          description: Aktuelle Ladeleistungs
-          format: float
-        chargedPower:
-          type: number
-          description: Aktuell geladene Energie (Nur wenn das Fahrzeug aktuell geladen wird)
-          format: float
-        mileageFromOdometer:
-          type: integer
-          description: "Aktueller Kilometerstand\r\nDie Gesamtentfernung, die das Flottenfahrzeug gemäß dem eingebauten Kilometerzähler in Kilometern (unitCode KMT) oder Meilen (unitCode SMI) zurückgelegt hat. Siehe auch Schema.org Vehicle/ mileageFromOdometer. Das Element timestamp hält fest, wann der Kilometerstand gemessen wurde"
-          format: int32
-        chainedVehicles:
-          type: integer
-          description: "Wie viele Cabs fahre ich gerade\r\nNur PRO"
-          format: int32
-        chainedPosition:
-          type: integer
-          description: "Position inside the convoy"
-          format: int32
-        powerSupply:
-          type: integer
-          description: "Wie viele Energie geben ich gerade an zu ladene Cabs weiter?\r\nNur PRO"
-          format: int32
-        feature:
-          type: array
-          description: Besonderheiten die dieses Fahrzeug unterstützt
-          items:
-            $ref: '#/components/schemas/NemobilAPI.Model.Skill'
-      additionalProperties: false
-
-    NemobilAPI.Model.CarpoolInformation:
-      type: object
-      properties:
-        passengersOnBoard:
-          type: boolean
-          description: Sind bereits Mitfahrer im Cab
-        passengerBoarding:
-          type: boolean
-          description: Steigt während der Fahrt jemand hinzu
-      additionalProperties: false
-      description: Informationen über Carpooling
-    NemobilAPI.Model.Skill:
-      type: object
-      properties:
-        skillId:
-          type: integer
-          description: Id des Skills
-          format: int32
-        skillName:
-          type: string
-          description: Name des Skills
-          nullable: true
-      additionalProperties: false
-      description: Skills, die Cabs von Nemobil erfüllen können
-    VehicleState:
-      type: string
-      enum:
-        - DoorsOpened
-        - Idle
-        - WaintingForCustomer
-        - Konvoi
-        - CustomerTransport
-        - Charging
-        - Accident
-        - TrafficJam
-      description: "Status des Fahrzeugs\r\nEine Beschreibung des aktuellen Status des Fahrzeugs"
-    Notification:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the entity
-        "@type":
-          type: string
-          description: Type Notification
-          enum:
-            - Notification
-        subscriptionId:
-          type: string
-          description: Unique identifier of the subscription
-        notifiedAt:
-          type: string
-          description: "Time of notification"
-          format: date-time
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/NotificationPayload'
-    NotificationPayload:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier of the entity
-        "@type":
-          type: string
-          description: Type Payload
-      additionalProperties: true

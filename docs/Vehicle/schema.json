@@ -3,566 +3,657 @@
   "properties" : {
     "id" : {
       "type" : "string",
-      "description" : "Unique identifier of the entity"
+      "description" : "Property. Unique identifier of the entity"
+    },
+    "shortId" : {
+      "type" : "integer",
+      "description" : "Property. Identifier to be used in vehicle to vehicle communication."
     },
     "location" : {
-      "properties" : {
-        "description" : "Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon. Should be a reference to location",
-        "oneOf" : [ {
-          "properties" : {
-            "title" : "GeoJSON Point",
-            "required" : [ "coordinates", "type" ],
-            "type" : "object",
-            "properties" : {
-              "bbox" : {
-                "minItems" : 4,
-                "type" : "array",
-                "items" : {
-                  "type" : "number"
-                }
-              },
-              "coordinates" : {
-                "minItems" : 2,
-                "type" : "array",
-                "items" : {
-                  "type" : "number"
-                }
-              },
-              "type" : {
-                "type" : "string",
-                "enum" : [ "Point" ]
-              }
+      "description" : "GeoProperty. Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon. Should be a reference to location",
+      "oneOf" : [ {
+        "title" : "GeoJSON Point",
+        "required" : [ "coordinates", "type" ],
+        "type" : "object",
+        "properties" : {
+          "bbox" : {
+            "minItems" : 4,
+            "type" : "array",
+            "items" : {
+              "type" : "number"
             },
-            "description" : "Geojson reference to the item. Point",
-            "x-ngsi" : {
-              "type" : "GeoProperty"
-            }
-          }
-        }, {
-          "properties" : {
-            "title" : "GeoJSON LineString",
-            "required" : [ "coordinates", "type" ],
-            "type" : "object",
-            "properties" : {
-              "bbox" : {
-                "minItems" : 4,
-                "type" : "array",
-                "items" : {
-                  "type" : "number"
-                }
-              },
-              "coordinates" : {
-                "minItems" : 2,
-                "type" : "array",
-                "items" : {
-                  "minItems" : 2,
-                  "type" : "array",
-                  "items" : {
-                    "type" : "number"
-                  }
-                }
-              },
-              "type" : {
-                "type" : "string",
-                "enum" : [ "LineString" ]
-              }
+            "description" : "Property. "
+          },
+          "coordinates" : {
+            "minItems" : 2,
+            "type" : "array",
+            "items" : {
+              "type" : "number"
             },
-            "description" : "Geojson reference to the item. LineString",
-            "x-ngsi" : {
-              "type" : "GeoProperty"
-            }
+            "description" : "Property. "
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "Point" ],
+            "description" : "Property. "
           }
-        }, {
-          "properties" : {
-            "title" : "GeoJSON Polygon",
-            "required" : [ "coordinates", "type" ],
-            "type" : "object",
-            "properties" : {
-              "bbox" : {
-                "minItems" : 4,
-                "type" : "array",
-                "items" : {
-                  "type" : "number"
-                }
-              },
-              "coordinates" : {
-                "type" : "array",
-                "items" : {
-                  "minItems" : 4,
-                  "type" : "array",
-                  "items" : {
-                    "minItems" : 2,
-                    "type" : "array",
-                    "items" : {
-                      "type" : "number"
-                    }
-                  }
-                }
-              },
-              "type" : {
-                "type" : "string",
-                "enum" : [ "Polygon" ]
-              }
-            },
-            "description" : "Geojson reference to the item. Polygon",
-            "x-ngsi" : {
-              "type" : "GeoProperty"
-            }
-          }
-        }, {
-          "properties" : {
-            "title" : "GeoJSON MultiPoint",
-            "required" : [ "coordinates", "type" ],
-            "type" : "object",
-            "properties" : {
-              "bbox" : {
-                "minItems" : 4,
-                "type" : "array",
-                "items" : {
-                  "type" : "number"
-                }
-              },
-              "coordinates" : {
-                "type" : "array",
-                "items" : {
-                  "minItems" : 2,
-                  "type" : "array",
-                  "items" : {
-                    "type" : "number"
-                  }
-                }
-              },
-              "type" : {
-                "type" : "string",
-                "enum" : [ "MultiPoint" ]
-              }
-            },
-            "description" : "Geojson reference to the item. MultiPoint",
-            "x-ngsi" : {
-              "type" : "GeoProperty"
-            }
-          }
-        }, {
-          "properties" : {
-            "title" : "GeoJSON MultiLineString",
-            "required" : [ "coordinates", "type" ],
-            "type" : "object",
-            "properties" : {
-              "bbox" : {
-                "minItems" : 4,
-                "type" : "array",
-                "items" : {
-                  "type" : "number"
-                }
-              },
-              "coordinates" : {
-                "type" : "array",
-                "items" : {
-                  "minItems" : 2,
-                  "type" : "array",
-                  "items" : {
-                    "minItems" : 2,
-                    "type" : "array",
-                    "items" : {
-                      "type" : "number"
-                    }
-                  }
-                }
-              },
-              "type" : {
-                "type" : "string",
-                "enum" : [ "MultiLineString" ]
-              }
-            },
-            "description" : "Geojson reference to the item. MultiLineString",
-            "x-ngsi" : {
-              "type" : "GeoProperty"
-            }
-          }
-        }, {
-          "properties" : {
-            "title" : "GeoJSON MultiPolygon",
-            "required" : [ "coordinates", "type" ],
-            "type" : "object",
-            "properties" : {
-              "bbox" : {
-                "minItems" : 4,
-                "type" : "array",
-                "items" : {
-                  "type" : "number"
-                }
-              },
-              "coordinates" : {
-                "type" : "array",
-                "items" : {
-                  "type" : "array",
-                  "items" : {
-                    "minItems" : 4,
-                    "type" : "array",
-                    "items" : {
-                      "minItems" : 2,
-                      "type" : "array",
-                      "items" : {
-                        "type" : "number"
-                      }
-                    }
-                  }
-                }
-              },
-              "type" : {
-                "type" : "string",
-                "enum" : [ "MultiPolygon" ]
-              }
-            },
-            "description" : "Geojson reference to the item. MultiLineString",
-            "x-ngsi" : {
-              "type" : "GeoProperty"
-            }
-          }
-        } ],
+        },
+        "description" : "Geojson reference to the item. Point",
         "x-ngsi" : {
           "type" : "GeoProperty"
+        }
+      }, {
+        "title" : "GeoJSON LineString",
+        "required" : [ "coordinates", "type" ],
+        "type" : "object",
+        "properties" : {
+          "bbox" : {
+            "minItems" : 4,
+            "type" : "array",
+            "items" : {
+              "type" : "number"
+            },
+            "description" : "Property. "
+          },
+          "coordinates" : {
+            "minItems" : 2,
+            "type" : "array",
+            "items" : {
+              "minItems" : 2,
+              "type" : "array",
+              "items" : {
+                "type" : "number"
+              }
+            },
+            "description" : "Property. "
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "LineString" ],
+            "description" : "Property. "
+          }
         },
-        "x-one-of-name" : "Place"
-      }
+        "description" : "Geojson reference to the item. LineString",
+        "x-ngsi" : {
+          "type" : "GeoProperty"
+        }
+      }, {
+        "title" : "GeoJSON Polygon",
+        "required" : [ "coordinates", "type" ],
+        "type" : "object",
+        "properties" : {
+          "bbox" : {
+            "minItems" : 4,
+            "type" : "array",
+            "items" : {
+              "type" : "number"
+            },
+            "description" : "Property. "
+          },
+          "coordinates" : {
+            "type" : "array",
+            "items" : {
+              "minItems" : 4,
+              "type" : "array",
+              "items" : {
+                "minItems" : 2,
+                "type" : "array",
+                "items" : {
+                  "type" : "number"
+                }
+              }
+            },
+            "description" : "Property. "
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "Polygon" ],
+            "description" : "Property. "
+          }
+        },
+        "description" : "Geojson reference to the item. Polygon",
+        "x-ngsi" : {
+          "type" : "GeoProperty"
+        }
+      }, {
+        "title" : "GeoJSON MultiPoint",
+        "required" : [ "coordinates", "type" ],
+        "type" : "object",
+        "properties" : {
+          "bbox" : {
+            "minItems" : 4,
+            "type" : "array",
+            "items" : {
+              "type" : "number"
+            },
+            "description" : "Property. "
+          },
+          "coordinates" : {
+            "type" : "array",
+            "items" : {
+              "minItems" : 2,
+              "type" : "array",
+              "items" : {
+                "type" : "number"
+              }
+            },
+            "description" : "Property. "
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "MultiPoint" ],
+            "description" : "Property. "
+          }
+        },
+        "description" : "Geojson reference to the item. MultiPoint",
+        "x-ngsi" : {
+          "type" : "GeoProperty"
+        }
+      }, {
+        "title" : "GeoJSON MultiLineString",
+        "required" : [ "coordinates", "type" ],
+        "type" : "object",
+        "properties" : {
+          "bbox" : {
+            "minItems" : 4,
+            "type" : "array",
+            "items" : {
+              "type" : "number"
+            },
+            "description" : "Property. "
+          },
+          "coordinates" : {
+            "type" : "array",
+            "items" : {
+              "minItems" : 2,
+              "type" : "array",
+              "items" : {
+                "minItems" : 2,
+                "type" : "array",
+                "items" : {
+                  "type" : "number"
+                }
+              }
+            },
+            "description" : "Property. "
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "MultiLineString" ],
+            "description" : "Property. "
+          }
+        },
+        "description" : "Geojson reference to the item. MultiLineString",
+        "x-ngsi" : {
+          "type" : "GeoProperty"
+        }
+      }, {
+        "title" : "GeoJSON MultiPolygon",
+        "required" : [ "coordinates", "type" ],
+        "type" : "object",
+        "properties" : {
+          "bbox" : {
+            "minItems" : 4,
+            "type" : "array",
+            "items" : {
+              "type" : "number"
+            },
+            "description" : "Property. "
+          },
+          "coordinates" : {
+            "type" : "array",
+            "items" : {
+              "type" : "array",
+              "items" : {
+                "minItems" : 4,
+                "type" : "array",
+                "items" : {
+                  "minItems" : 2,
+                  "type" : "array",
+                  "items" : {
+                    "type" : "number"
+                  }
+                }
+              }
+            },
+            "description" : "Property. "
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "MultiPolygon" ],
+            "description" : "Property. "
+          }
+        },
+        "description" : "Geojson reference to the item. MultiLineString",
+        "x-ngsi" : {
+          "type" : "GeoProperty"
+        }
+      } ],
+      "x-ngsi" : {
+        "type" : "GeoProperty"
+      },
+      "x-one-of-name" : "Place"
     },
     "licensePlate" : {
       "type" : "string",
-      "description" : "License plate of the vehicle"
+      "description" : "Property. License plate of the vehicle"
     },
     "nextStopLocation" : {
-      "properties" : {
-        "description" : "Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon. Should be a reference to location",
-        "oneOf" : [ {
-          "properties" : {
-            "title" : "GeoJSON Point",
-            "required" : [ "coordinates", "type" ],
-            "type" : "object",
-            "properties" : {
-              "bbox" : {
-                "minItems" : 4,
-                "type" : "array",
-                "items" : {
-                  "type" : "number"
-                }
-              },
-              "coordinates" : {
-                "minItems" : 2,
-                "type" : "array",
-                "items" : {
-                  "type" : "number"
-                }
-              },
-              "type" : {
-                "type" : "string",
-                "enum" : [ "Point" ]
-              }
+      "description" : "GeoProperty. Geojson reference to the item. It can be Point, LineString, Polygon, MultiPoint, MultiLineString or MultiPolygon. Should be a reference to location",
+      "oneOf" : [ {
+        "title" : "GeoJSON Point",
+        "required" : [ "coordinates", "type" ],
+        "type" : "object",
+        "properties" : {
+          "bbox" : {
+            "minItems" : 4,
+            "type" : "array",
+            "items" : {
+              "type" : "number"
             },
-            "description" : "Geojson reference to the item. Point",
-            "x-ngsi" : {
-              "type" : "GeoProperty"
-            }
-          }
-        }, {
-          "properties" : {
-            "title" : "GeoJSON LineString",
-            "required" : [ "coordinates", "type" ],
-            "type" : "object",
-            "properties" : {
-              "bbox" : {
-                "minItems" : 4,
-                "type" : "array",
-                "items" : {
-                  "type" : "number"
-                }
-              },
-              "coordinates" : {
-                "minItems" : 2,
-                "type" : "array",
-                "items" : {
-                  "minItems" : 2,
-                  "type" : "array",
-                  "items" : {
-                    "type" : "number"
-                  }
-                }
-              },
-              "type" : {
-                "type" : "string",
-                "enum" : [ "LineString" ]
-              }
+            "description" : "Property. "
+          },
+          "coordinates" : {
+            "minItems" : 2,
+            "type" : "array",
+            "items" : {
+              "type" : "number"
             },
-            "description" : "Geojson reference to the item. LineString",
-            "x-ngsi" : {
-              "type" : "GeoProperty"
-            }
+            "description" : "Property. "
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "Point" ],
+            "description" : "Property. "
           }
-        }, {
-          "properties" : {
-            "title" : "GeoJSON Polygon",
-            "required" : [ "coordinates", "type" ],
-            "type" : "object",
-            "properties" : {
-              "bbox" : {
-                "minItems" : 4,
-                "type" : "array",
-                "items" : {
-                  "type" : "number"
-                }
-              },
-              "coordinates" : {
-                "type" : "array",
-                "items" : {
-                  "minItems" : 4,
-                  "type" : "array",
-                  "items" : {
-                    "minItems" : 2,
-                    "type" : "array",
-                    "items" : {
-                      "type" : "number"
-                    }
-                  }
-                }
-              },
-              "type" : {
-                "type" : "string",
-                "enum" : [ "Polygon" ]
-              }
-            },
-            "description" : "Geojson reference to the item. Polygon",
-            "x-ngsi" : {
-              "type" : "GeoProperty"
-            }
-          }
-        }, {
-          "properties" : {
-            "title" : "GeoJSON MultiPoint",
-            "required" : [ "coordinates", "type" ],
-            "type" : "object",
-            "properties" : {
-              "bbox" : {
-                "minItems" : 4,
-                "type" : "array",
-                "items" : {
-                  "type" : "number"
-                }
-              },
-              "coordinates" : {
-                "type" : "array",
-                "items" : {
-                  "minItems" : 2,
-                  "type" : "array",
-                  "items" : {
-                    "type" : "number"
-                  }
-                }
-              },
-              "type" : {
-                "type" : "string",
-                "enum" : [ "MultiPoint" ]
-              }
-            },
-            "description" : "Geojson reference to the item. MultiPoint",
-            "x-ngsi" : {
-              "type" : "GeoProperty"
-            }
-          }
-        }, {
-          "properties" : {
-            "title" : "GeoJSON MultiLineString",
-            "required" : [ "coordinates", "type" ],
-            "type" : "object",
-            "properties" : {
-              "bbox" : {
-                "minItems" : 4,
-                "type" : "array",
-                "items" : {
-                  "type" : "number"
-                }
-              },
-              "coordinates" : {
-                "type" : "array",
-                "items" : {
-                  "minItems" : 2,
-                  "type" : "array",
-                  "items" : {
-                    "minItems" : 2,
-                    "type" : "array",
-                    "items" : {
-                      "type" : "number"
-                    }
-                  }
-                }
-              },
-              "type" : {
-                "type" : "string",
-                "enum" : [ "MultiLineString" ]
-              }
-            },
-            "description" : "Geojson reference to the item. MultiLineString",
-            "x-ngsi" : {
-              "type" : "GeoProperty"
-            }
-          }
-        }, {
-          "properties" : {
-            "title" : "GeoJSON MultiPolygon",
-            "required" : [ "coordinates", "type" ],
-            "type" : "object",
-            "properties" : {
-              "bbox" : {
-                "minItems" : 4,
-                "type" : "array",
-                "items" : {
-                  "type" : "number"
-                }
-              },
-              "coordinates" : {
-                "type" : "array",
-                "items" : {
-                  "type" : "array",
-                  "items" : {
-                    "minItems" : 4,
-                    "type" : "array",
-                    "items" : {
-                      "minItems" : 2,
-                      "type" : "array",
-                      "items" : {
-                        "type" : "number"
-                      }
-                    }
-                  }
-                }
-              },
-              "type" : {
-                "type" : "string",
-                "enum" : [ "MultiPolygon" ]
-              }
-            },
-            "description" : "Geojson reference to the item. MultiLineString",
-            "x-ngsi" : {
-              "type" : "GeoProperty"
-            }
-          }
-        } ],
+        },
+        "description" : "Geojson reference to the item. Point",
         "x-ngsi" : {
           "type" : "GeoProperty"
+        }
+      }, {
+        "title" : "GeoJSON LineString",
+        "required" : [ "coordinates", "type" ],
+        "type" : "object",
+        "properties" : {
+          "bbox" : {
+            "minItems" : 4,
+            "type" : "array",
+            "items" : {
+              "type" : "number"
+            },
+            "description" : "Property. "
+          },
+          "coordinates" : {
+            "minItems" : 2,
+            "type" : "array",
+            "items" : {
+              "minItems" : 2,
+              "type" : "array",
+              "items" : {
+                "type" : "number"
+              }
+            },
+            "description" : "Property. "
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "LineString" ],
+            "description" : "Property. "
+          }
         },
-        "x-one-of-name" : "Place"
-      }
+        "description" : "Geojson reference to the item. LineString",
+        "x-ngsi" : {
+          "type" : "GeoProperty"
+        }
+      }, {
+        "title" : "GeoJSON Polygon",
+        "required" : [ "coordinates", "type" ],
+        "type" : "object",
+        "properties" : {
+          "bbox" : {
+            "minItems" : 4,
+            "type" : "array",
+            "items" : {
+              "type" : "number"
+            },
+            "description" : "Property. "
+          },
+          "coordinates" : {
+            "type" : "array",
+            "items" : {
+              "minItems" : 4,
+              "type" : "array",
+              "items" : {
+                "minItems" : 2,
+                "type" : "array",
+                "items" : {
+                  "type" : "number"
+                }
+              }
+            },
+            "description" : "Property. "
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "Polygon" ],
+            "description" : "Property. "
+          }
+        },
+        "description" : "Geojson reference to the item. Polygon",
+        "x-ngsi" : {
+          "type" : "GeoProperty"
+        }
+      }, {
+        "title" : "GeoJSON MultiPoint",
+        "required" : [ "coordinates", "type" ],
+        "type" : "object",
+        "properties" : {
+          "bbox" : {
+            "minItems" : 4,
+            "type" : "array",
+            "items" : {
+              "type" : "number"
+            },
+            "description" : "Property. "
+          },
+          "coordinates" : {
+            "type" : "array",
+            "items" : {
+              "minItems" : 2,
+              "type" : "array",
+              "items" : {
+                "type" : "number"
+              }
+            },
+            "description" : "Property. "
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "MultiPoint" ],
+            "description" : "Property. "
+          }
+        },
+        "description" : "Geojson reference to the item. MultiPoint",
+        "x-ngsi" : {
+          "type" : "GeoProperty"
+        }
+      }, {
+        "title" : "GeoJSON MultiLineString",
+        "required" : [ "coordinates", "type" ],
+        "type" : "object",
+        "properties" : {
+          "bbox" : {
+            "minItems" : 4,
+            "type" : "array",
+            "items" : {
+              "type" : "number"
+            },
+            "description" : "Property. "
+          },
+          "coordinates" : {
+            "type" : "array",
+            "items" : {
+              "minItems" : 2,
+              "type" : "array",
+              "items" : {
+                "minItems" : 2,
+                "type" : "array",
+                "items" : {
+                  "type" : "number"
+                }
+              }
+            },
+            "description" : "Property. "
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "MultiLineString" ],
+            "description" : "Property. "
+          }
+        },
+        "description" : "Geojson reference to the item. MultiLineString",
+        "x-ngsi" : {
+          "type" : "GeoProperty"
+        }
+      }, {
+        "title" : "GeoJSON MultiPolygon",
+        "required" : [ "coordinates", "type" ],
+        "type" : "object",
+        "properties" : {
+          "bbox" : {
+            "minItems" : 4,
+            "type" : "array",
+            "items" : {
+              "type" : "number"
+            },
+            "description" : "Property. "
+          },
+          "coordinates" : {
+            "type" : "array",
+            "items" : {
+              "type" : "array",
+              "items" : {
+                "minItems" : 4,
+                "type" : "array",
+                "items" : {
+                  "minItems" : 2,
+                  "type" : "array",
+                  "items" : {
+                    "type" : "number"
+                  }
+                }
+              }
+            },
+            "description" : "Property. "
+          },
+          "type" : {
+            "type" : "string",
+            "enum" : [ "MultiPolygon" ],
+            "description" : "Property. "
+          }
+        },
+        "description" : "Geojson reference to the item. MultiLineString",
+        "x-ngsi" : {
+          "type" : "GeoProperty"
+        }
+      } ],
+      "x-ngsi" : {
+        "type" : "GeoProperty"
+      },
+      "x-one-of-name" : "Place"
     },
     "nextStopArrival" : {
       "type" : "string",
-      "description" : "Planned time of arrivial at next stop",
+      "description" : "Property. Planned time of arrival at next stop",
       "format" : "date-time"
     },
     "vehicleScheduleGuid" : {
       "type" : "string",
-      "description" : "ID des Vehicle Schedule Entry"
+      "description" : "Property. ID of the Vehicle Schedule Entry"
     },
     "stateOfSchedule" : {
-      "type" : "String",
-      "description" : "State of Schedule\r\nAnmeldung, Abmeldung oder laufend der Schicht",
+      "type" : "string",
+      "description" : "Property. State of Schedule",
       "enum" : [ "Running", "StartSchedule", "EndSchedule" ]
     },
     "batteryLevel" : {
       "type" : "number",
-      "description" : "Der aktuelle Prozentsatz der verbleibenden Batterie im Falle eines Elektrofahrzeugs\r\nAngabe in Prozent",
+      "description" : "Property. Current level of the battery",
+      "format" : "float"
+    },
+    "fuelLevel" : {
+      "type" : "number",
+      "description" : "Property. Current level of the fuel tank",
       "format" : "float"
     },
     "remainingRange" : {
       "type" : "number",
-      "description" : "Aktuelle Restreichweite",
+      "description" : "Property. Remaining range in respect with the current consumption rate",
       "format" : "float"
     },
     "consumption" : {
       "type" : "number",
-      "description" : "Aktueller Energieverbrauch",
+      "description" : "Property. Current consumption rate",
+      "format" : "float"
+    },
+    "consumedEnergy" : {
+      "type" : "number",
+      "description" : "Property. Ongoing counter representing the energy consumed by the vehicle",
       "format" : "float"
     },
     "state" : {
-      "type" : "array",
-      "description" : "Stati des Fahrzeuges",
-      "items" : {
-        "type" : "string",
-        "description" : "Status des Fahrzeugs\r\nEine Beschreibung des aktuellen Status des Fahrzeugs",
-        "enum" : [ "DoorsOpened", "Idle", "WaintingForCustomer", "Konvoi", "CustomerTransport", "Charging", "Accident", "TrafficJam" ]
-      }
+      "type" : "string",
+      "description" : "Property. General state of the vehicle",
+      "enum" : [ "Idle", "Konvoi", "Accident", "TrafficJam" ]
     },
     "bearing" : {
       "type" : "number",
-      "description" : "Current heading of the vehicle relative to north",
+      "description" : "Property. Current heading of the vehicle relative to north",
       "format" : "float"
     },
     "speed" : {
       "type" : "number",
-      "description" : "Current speed",
+      "description" : "Property. Current speed",
       "format" : "float"
+    },
+    "acceleration" : {
+      "type" : "array",
+      "description" : "Property. The vehicles acceleration in the dimensions x,y,(z)",
+      "items" : {
+        "type" : "float"
+      }
     },
     "deviation" : {
       "type" : "number",
-      "description" : "+ => Besser als Vorgesehen\r\n- => Im Verzug",
+      "description" : "Property. Deviation of the time plan. Positive value represents time to spare",
       "format" : "float"
     },
     "chargingPower" : {
       "type" : "number",
-      "description" : "Aktuelle Ladeleistungs",
+      "description" : "Property. Current power being charged into the vehicle",
       "format" : "float"
     },
-    "chargedPower" : {
+    "chargedEnergy" : {
       "type" : "number",
-      "description" : "Aktuell geladene Energie (Nur wenn das Fahrzeug aktuell geladen wird)",
+      "description" : "Property. Ongoing counter representing the energy charged into the vehicle",
       "format" : "float"
     },
     "mileageFromOdometer" : {
       "type" : "integer",
-      "description" : "Aktueller Kilometerstand\r\nDie Gesamtentfernung, die das Flottenfahrzeug gemäß dem eingebauten Kilometerzähler in Kilometern (unitCode KMT) oder Meilen (unitCode SMI) zurückgelegt hat. Siehe auch Schema.org Vehicle/ mileageFromOdometer. Das Element timestamp hält fest, wann der Kilometerstand gemessen wurde",
+      "description" : "Property. Current mileage",
       "format" : "int32"
     },
     "chainedVehicles" : {
       "type" : "integer",
-      "description" : "Wie viele Cabs fahre ich gerade\r\nNur PRO",
+      "description" : "Property. Amount of vehicles currently chained to this vehicle",
       "format" : "int32"
     },
     "chainedPosition" : {
       "type" : "integer",
-      "description" : "Position inside the convoy",
+      "description" : "Property. Position inside the convoy of chained vehicles",
       "format" : "int32"
     },
-    "powerSupply" : {
-      "type" : "integer",
-      "description" : "Wie viele Energie geben ich gerade an zu ladene Cabs weiter?\r\nNur PRO",
-      "format" : "int32"
-    },
-    "feature" : {
+    "toBeChainedVehicles" : {
       "type" : "array",
-      "description" : "Besonderheiten die dieses Fahrzeug unterstützt",
+      "description" : "RelationshipList. List of vehicles to be chained to the vehicle",
       "items" : {
-        "properties" : {
-          "type" : "object",
-          "properties" : {
-            "skillId" : {
-              "type" : "integer",
-              "description" : "Id des Skills",
-              "format" : "int32"
-            },
-            "skillName" : {
-              "type" : "string",
-              "description" : "Name des Skills",
-              "nullable" : true
-            }
-          },
-          "additionalProperties" : false,
-          "description" : "Skills, die Cabs von Nemobil erfüllen können"
-        }
+        "$ref" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Vehicle/schema.json"
       }
+    },
+    "suppliedPower" : {
+      "type" : "number",
+      "description" : "Property. Current power being provided by the vehicle to others",
+      "format" : "float"
+    },
+    "suppliedEnergy" : {
+      "type" : "number",
+      "description" : "Property. Ongoing counter representing the energy provided by the vehicle to others",
+      "format" : "float"
+    },
+    "features" : {
+      "type" : "array",
+      "description" : "RelationshipList. List of special features that the vehicle supplies",
+      "items" : {
+        "$ref" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Skill/schema.json"
+      }
+    },
+    "sensors" : {
+      "type" : "array",
+      "description" : "Property. List of temperature sensors with the current value. To be replaced by devices linked by a relationship list.",
+      "items" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Property. Name of the sensor",
+            "example" : "Engine"
+          },
+          "temperature" : {
+            "type" : "float",
+            "description" : "Property. Temperature value",
+            "example" : 90.0
+          }
+        },
+        "additionalProperties" : false,
+        "description" : "Temperature sensor representation. To be replaced by proper Device model"
+      }
+    },
+    "batteryCurrent" : {
+      "type" : "number",
+      "description" : "Property. Flow of current from battery to inverter. Positive value for discharging, negative for charging the battery.",
+      "format" : "float"
+    },
+    "inverterCurrent" : {
+      "type" : "number",
+      "description" : "Property. Flow of current from inverter to machine",
+      "format" : "float"
+    },
+    "batteryVoltage" : {
+      "type" : "number",
+      "description" : "Property. Voltage of the battery",
+      "format" : "float"
+    },
+    "batteryPower" : {
+      "type" : "number",
+      "description" : "Property. Power flow from battery to inverter. Positive value for discharging, negative for charging the battery.",
+      "format" : "float"
+    },
+    "pressureHydrogen" : {
+      "type" : "number",
+      "description" : "Property. Pressure in the hydrogen system",
+      "format" : "float"
+    },
+    "concentrationHydrogen" : {
+      "type" : "number",
+      "description" : "Property. Concentration of hydrogen in the vehicle",
+      "format" : "float"
+    },
+    "massFlowHydrogen" : {
+      "type" : "number",
+      "description" : "Property. Mass flow of hydrogen into the fuel cell",
+      "format" : "float"
+    },
+    "stateADStack" : {
+      "type" : "string",
+      "description" : "Property. State as reported by the vehicles autonomous driving system",
+      "enum" : [ "Idle", "OnRoute", "StopReached", "Error" ]
+    },
+    "stateCoupling" : {
+      "type" : "string",
+      "description" : "Property. State of the coupling/chaining",
+      "enum" : [ "Free", "Chaining", "Chained" ]
+    },
+    "passengerInformation" : {
+      "type" : "string",
+      "description" : "Property. Information to be displayed in the vehicle display"
     }
   },
   "additionalProperties" : false,
-  "description" : "Sensor-Werte eines Fahrzeugs\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleStatus/doc/spec.md",
+  "description" : "Properties and metrics of a vehicle\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleStatus/doc/spec.md",
   "$schemaVersion" : "v0",
   "title" : "Vehicle",
   "$id" : "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Vehicle/schema.json",
-  "$schema" : "http://json-schema.org/schema#",
-  "modelTags" : ""
+  "modelTags" : "",
+  "$schema" : "http://json-schema.org/schema#"
 }
