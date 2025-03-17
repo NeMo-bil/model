@@ -1,0 +1,15 @@
+{
+  "id" : {
+    "type" : "Text",
+    "value" : "urn:ngsi-ld:HydrogenTank:11ea1c5c-5aa6-11e3-8244-4b32063ca31c"
+  },
+  "type" : "HydrogenTank",
+  "temperature" : {
+    "type" : "Number",
+    "value" : 30.0
+  },
+  "pressure" : {
+    "type" : "Number",
+    "value" : 30.0
+  }
+}

@@ -562,6 +562,13 @@ components:
           example:
             - name: Engine
               temperature: 90.0
+        hydrogenTanks:
+          type: array
+          description: List of hydrogen tanks installed in the vehicle. To be replaced by devices linked by a relationship list.
+          items:
+            type: string
+          example:
+            - urn:ngsi-ld:HydrogenTank:11ea1c5c-5aa6-11e3-8244-4b32063ca31c
         batteryCurrent:
           type: number
           description: Flow of current from battery to inverter. Positive value for discharging, negative for charging the battery.
@@ -636,7 +643,34 @@ components:
             3.4
           ]
 
-
+    HydrogenTank:
+      description: Hydrogen Tank representation
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of the tank
+          example: urn:ngsi-ld:HydrogenTank:11ea1c5c-5aa6-11e3-8244-4b32063ca31c
+        type:
+          type: string
+          description: NGSI Entity type. It has to be HydrogenTank
+          enum:
+            - HydrogenTank
+          example: HydrogenTank
+        temperature:
+          type: number
+          description: Temperature of the tank
+          format: float
+          example: 30.0
+          x-ngsi:
+            unitCode: K
+        pressure:
+          type: number
+          description: Pressure of the tank
+          format: float
+          example: 30.0
+          x-ngsi:
+            unitCode: MPa
     TemperatureSensor:
       type: object
       properties:

@@ -18,6 +18,7 @@
   "fuelLevel" : 50.0,
   "remainingRange" : 250.0,
   "consumption" : 1000.0,
+  "hydrogenTanks" : [ "urn:ngsi-ld:HydrogenTank:11ea1c5c-5aa6-11e3-8244-4b32063ca31c" ],
   "consumedEnergy" : 1000.0,
   "state" : "Idle",
   "bearing" : 30.0,

@@ -138,6 +138,10 @@
       }
     ]
   },
+  "hydrogenTanks" : {
+    "type" : "StructuredValue",
+    "value" : [ "urn:ngsi-ld:HydrogenTank:11ea1c5c-5aa6-11e3-8244-4b32063ca31c" ]
+  },
   "batteryCurrent": {
     "type": "Number",
     "value": 100.0

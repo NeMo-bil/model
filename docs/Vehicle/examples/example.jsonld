@@ -40,6 +40,7 @@
     "name" : "Engine",
     "temperature" : 90.0
   } ],
+  "hydrogenTanks" : [ "urn:ngsi-ld:HydrogenTank:11ea1c5c-5aa6-11e3-8244-4b32063ca31c" ],
   "batteryCurrent" : 100.0,
   "inverterCurrent" : 100.0,
   "batteryVoltage" : 100.0,
