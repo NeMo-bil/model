@@ -625,6 +625,13 @@ components:
           type: string
           description: Information to be displayed in the vehicle display
           example: "Welcome"
+        doorLock:
+          type: string
+          description: State of the vehicles door locks
+          enum:
+            - Locked
+            - Unlocked
+          example: Locked
       additionalProperties: false
       required:
         - id
