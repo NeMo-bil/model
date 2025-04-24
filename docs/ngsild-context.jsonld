@@ -1,0 +1,20 @@
+{
+  "@context": {
+    "ngsi-ld": "https://uri.etsi.org/ngsi-ld/",
+    "geojson": "https://purl.org/geojson/vocab#",
+    "Point": "geojson:Point",
+    "GeoProperty": "ngsi-ld:GeoProperty",
+    "TripRequest": "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/TripRequest/schema.json",
+    "startLocation": "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/TripRequest/schema.json#startLocation",
+    "targetLocation": "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/TripRequest/schema.json#targetLocation",
+    "Trip": "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Trip/schema.json",
+    "pickupLocation": "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Trip/schema.json#pickupLocation",
+    "dropoffLocation": "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Trip/schema.json#dropoffLocation",
+    "Vehicle": "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Vehicle/schema.json",
+    "nextStopLocation": "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Vehicle/schema.json#nextStopLocation",
+    "speed": "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Vehicle/schema.json#speed",
+    "bearing": "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Vehicle/schema.json#bearing",
+    "consumption": "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Vehicle/schema.json#consumption",
+    "batteryLevel": "https://raw.githubusercontent.com/NeMo-bil/model/refs/heads/Vehicle/docs/Vehicle/schema.json#batteryLevel"
+  }
+}
