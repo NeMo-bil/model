@@ -396,6 +396,53 @@ components:
         - id
         - type
 
+    Cab:
+      type: object
+      description: Vehice of type Cab
+      allOf:
+        - $ref: '#/components/schemas/Vehicle'
+        - properties:
+            passengerInformation:
+              type: string
+              description: Information to be displayed in the vehicle display
+              example: "Welcome"
+            doorLock:
+              type: string
+              description: State of the vehicles door locks
+              enum:
+                - Locked
+                - Unlocked
+              example: Locked
+    Pro:
+      type: object
+      description: Vehice of type Pro
+      allOf:
+        - $ref: '#/components/schemas/Vehicle'
+        - properties:
+            pressureHydrogen:
+              type: number
+              description: Pressure in the hydrogen system
+              format: float
+              example: 100.0
+            concentrationHydrogen:
+              type: number
+              description: Concentration of hydrogen in the vehicle
+              format: float
+              example: 1.0
+            massFlowHydrogen:
+              type: number
+              description: Mass flow of hydrogen into the fuel cell
+              format: float
+              example: 100.0
+          hydrogenTanks:
+            type: array
+            description: List of hydrogen tanks installed in the vehicle. To be replaced by devices linked by a relationship list.
+            items:
+              type: string
+            example:
+              - urn:ngsi-ld:HydrogenTank:11ea1c5c-5aa6-11e3-8244-4b32063ca31c
+
+
     Vehicle:
       type: object
       description: "Properties and metrics of a vehicle\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleStatus/doc/spec.md"
@@ -406,9 +453,11 @@ components:
           example: urn:ngsi-ld:Vehicle:11ea1c5c-5aa6-11e3-8244-4b82063ca31c
         type:
           type: string
-          description: NGSI Entity type. It has to be Vehicle
+          description: NGSI Entity type. It has to be Vehicle or overridden by a subtype
           enum:
             - Vehicle
+            - Cab
+            - Pro
           example: Vehicle
         shortId:
           type: integer
@@ -562,13 +611,6 @@ components:
           example:
             - name: Engine
               temperature: 90.0
-        hydrogenTanks:
-          type: array
-          description: List of hydrogen tanks installed in the vehicle. To be replaced by devices linked by a relationship list.
-          items:
-            type: string
-          example:
-            - urn:ngsi-ld:HydrogenTank:11ea1c5c-5aa6-11e3-8244-4b32063ca31c
         batteryCurrent:
           type: number
           description: Flow of current from battery to inverter. Positive value for discharging, negative for charging the battery.
@@ -589,21 +631,6 @@ components:
           description: Power flow from battery to inverter. Positive value for discharging, negative for charging the battery.
           format: float
           example: 100.0
-        pressureHydrogen:
-          type: number
-          description: Pressure in the hydrogen system
-          format: float
-          example: 100.0
-        concentrationHydrogen:
-          type: number
-          description: Concentration of hydrogen in the vehicle
-          format: float
-          example: 1.0
-        massFlowHydrogen:
-          type: number
-          description: Mass flow of hydrogen into the fuel cell
-          format: float
-          example: 100.0
         stateADStack:
           type: string
           description: State as reported by the vehicles autonomous driving system
@@ -621,18 +648,6 @@ components:
             - Chaining
             - Chained
           example: Free
-        passengerInformation:
-          type: string
-          description: Information to be displayed in the vehicle display
-          example: "Welcome"
-        doorLock:
-          type: string
-          description: State of the vehicles door locks
-          enum:
-            - Locked
-            - Unlocked
-          example: Locked
-      additionalProperties: false
       required:
         - id
         - type
