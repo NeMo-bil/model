@@ -1,0 +1,6071 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "NemOptimize Service",
+    "description": "An ASP.NET Core Web API for plan nemobil",
+    "termsOfService": "https://reisewitz.com",
+    "contact": {
+      "name": "Reisewitz",
+      "url": "https://reisewitz.com"
+    },
+    "license": {
+      "name": "Reisewitz License",
+      "url": "https://reisewitz.com"
+    },
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "https://localhost:44317/"
+    }
+  ],
+  "paths": {
+    "/apikeys/v1": {
+      "get": {
+        "tags": [
+          "ApiKey"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "ApiKey"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateApiKeyRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateApiKeyRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateApiKeyRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/apikeys/v1/{id}": {
+      "get": {
+        "tags": [
+          "ApiKey"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "ApiKey"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/apikeys/v1/{id}/active": {
+      "patch": {
+        "tags": [
+          "ApiKey"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetApiKeyActiveRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetApiKeyActiveRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetApiKeyActiveRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/auth/v1/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/basedatas/v1/chaininglocation": {
+      "post": {
+        "tags": [
+          "BaseData"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChainingLocation"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChainingLocation"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChainingLocation"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/basedatas/v1/parking": {
+      "post": {
+        "tags": [
+          "BaseData"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParkingLocation"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParkingLocation"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParkingLocation"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/basedatas/v1/accesspoint": {
+      "post": {
+        "tags": [
+          "BaseData"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccessPoint"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccessPoint"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccessPoint"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/basedatas/v1/accesspoint/{key}": {
+      "get": {
+        "tags": [
+          "BaseData"
+        ],
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "BaseData"
+        ],
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/basedatas/v1/accesspoints": {
+      "get": {
+        "tags": [
+          "BaseData"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccessPoint2"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccessPoint2"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AccessPoint2"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/basedatas/v1/vehicletype-setting": {
+      "post": {
+        "tags": [
+          "BaseData"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VehicleTypeSetting"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VehicleTypeSetting"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VehicleTypeSetting"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/basedatas/v1/vehicletype-settings": {
+      "get": {
+        "tags": [
+          "BaseData"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VehicleTypeSetting"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VehicleTypeSetting"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VehicleTypeSetting"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/basedatas/v1/operationarea": {
+      "post": {
+        "tags": [
+          "BaseData"
+        ],
+        "parameters": [
+          {
+            "name": "Guid",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "LocationBorder",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Location"
+              }
+            }
+          },
+          {
+            "name": "GuiltyRange.StartTime",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "GuiltyRange.EndTime",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "Operator",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/basedatas/v1/operationarea/{value}": {
+      "put": {
+        "tags": [
+          "BaseData"
+        ],
+        "parameters": [
+          {
+            "name": "Guid",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "LocationBorder",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Location"
+              }
+            }
+          },
+          {
+            "name": "GuiltyRange.StartTime",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "GuiltyRange.EndTime",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "Operator",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "value",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/basedatas/v1/operationarea/{key}": {
+      "delete": {
+        "tags": [
+          "BaseData"
+        ],
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "BaseData"
+        ],
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/basedatas/v1/configuration": {
+      "post": {
+        "tags": [
+          "BaseData"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanningConfiguration"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanningConfiguration"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlanningConfiguration"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/broker/v1/subscriptions": {
+      "get": {
+        "tags": [
+          "Broker"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Subscription"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Subscription"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Subscription"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/broker/v1/trip/{tripGuid}": {
+      "get": {
+        "tags": [
+          "Broker"
+        ],
+        "parameters": [
+          {
+            "name": "tripGuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TripDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TripDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TripDto"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/broker/v1/trip_proposals/{tripRequestGuid}": {
+      "get": {
+        "tags": [
+          "Broker"
+        ],
+        "parameters": [
+          {
+            "name": "tripRequestGuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TripProposalDto"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TripProposalDto"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TripProposalDto"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/chargings/v1/chargingpoint/{chargingPointGuid}": {
+      "get": {
+        "tags": [
+          "Charging"
+        ],
+        "parameters": [
+          {
+            "name": "chargingPointGuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargingPoint"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargingPoint"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargingPoint"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Charging"
+        ],
+        "parameters": [
+          {
+            "name": "chargingPointGuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/chargings/v1/chargingpoints": {
+      "get": {
+        "tags": [
+          "Charging"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChargingPoint"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChargingPoint"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChargingPoint"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/chargings/v1/chargingpoint": {
+      "post": {
+        "tags": [
+          "Charging"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargingPoint"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargingPoint"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargingPoint"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/chargings/v1/charging/complete/{session}": {
+      "put": {
+        "tags": [
+          "Charging"
+        ],
+        "parameters": [
+          {
+            "name": "session",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/chargings/v1/charging/price/{chargingPoint}": {
+      "post": {
+        "tags": [
+          "Charging"
+        ],
+        "parameters": [
+          {
+            "name": "chargingPoint",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PricingInfo"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PricingInfo"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PricingInfo"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/chargings/v1/chargingpoint-assingment": {
+      "post": {
+        "tags": [
+          "Charging"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateChargingAssignmentParameter"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateChargingAssignmentParameter"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateChargingAssignmentParameter"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/chargings/v1/chargingpoint-assingment/{chargingPointAssignmentGuid}": {
+      "delete": {
+        "tags": [
+          "Charging"
+        ],
+        "parameters": [
+          {
+            "name": "chargingPointAssignmentGuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/chargings/v1/chargingpoint-assignment/{chargingPointAssignmentGuid}": {
+      "get": {
+        "tags": [
+          "Charging"
+        ],
+        "parameters": [
+          {
+            "name": "chargingPointAssignmentGuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargingPointAssignment"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargingPointAssignment"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargingPointAssignment"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/chargings/v1/chargingpoint-assignments": {
+      "get": {
+        "tags": [
+          "Charging"
+        ],
+        "parameters": [
+          {
+            "name": "chargingPointGuid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChargingPointAssignment"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChargingPointAssignment"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChargingPointAssignment"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/debug/v1/proposals": {
+      "get": {
+        "tags": [
+          "Debug"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/debug/v1/testLogging": {
+      "post": {
+        "tags": [
+          "Debug"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/debug/v1/ping/{url}": {
+      "get": {
+        "tags": [
+          "Debug"
+        ],
+        "parameters": [
+          {
+            "name": "url",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/debug/v1/serialize-data": {
+      "get": {
+        "tags": [
+          "Debug"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/forecasts/v1": {
+      "get": {
+        "tags": [
+          "Forecast"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Forecast"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/forecasts/v1/{id}": {
+      "get": {
+        "tags": [
+          "Forecast"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Forecast"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Forecast"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/locations/v1/nearest": {
+      "post": {
+        "tags": [
+          "Locations"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Location"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Location"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Location"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Location"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Location"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Location"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/locations/v1/route": {
+      "post": {
+        "tags": [
+          "Locations"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetRouteRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetRouteRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetRouteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RouteResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RouteResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RouteResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/notifications/v1/notify": {
+      "post": {
+        "tags": [
+          "Notification"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Notification"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Notification"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Notification"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/reports/v1/trips": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Trip"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Trip"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Trip"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/reports/v1/trip/{guid}": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "parameters": [
+          {
+            "name": "guid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Trip"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Trip"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Trip"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/reports/v1/triphistory/{guid}": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "parameters": [
+          {
+            "name": "guid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TripHistory"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TripHistory"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TripHistory"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/reports/v1/report": {
+      "post": {
+        "tags": [
+          "Report"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TourReportParameter"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TourReportParameter"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TourReportParameter"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TourReportResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TourReportResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TourReportResult"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/reports/v1/scheduleplan": {
+      "post": {
+        "tags": [
+          "Report"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetSchedulePlanParameter"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetSchedulePlanParameter"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetSchedulePlanParameter"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VehicleSchedulePlanResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VehicleSchedulePlanResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VehicleSchedulePlanResult"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/schedules/v1/cabs": {
+      "get": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "GetCabs",
+        "description": "Get cabs",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanningCab"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/schedules/v1/pros": {
+      "get": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "GetPros",
+        "description": "Get pros",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlanningPro"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/schedules/v1/cabs/{cabGuid}/stops/{stopKey}/status": {
+      "put": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "UpdateCabStopStatus",
+        "description": "Update the execution status of a cab stop",
+        "parameters": [
+          {
+            "name": "cabGuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "stopKey",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCabStopStatusRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCabStopStatusRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCabStopStatusRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/sensors/v1/vehicle-update": {
+      "post": {
+        "tags": [
+          "Sensor"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VehicleStatus"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VehicleStatus"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VehicleStatus"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/sensors/v1/chargingpoint-update": {
+      "post": {
+        "tags": [
+          "Sensor"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargingPointStatus"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargingPointStatus"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargingPointStatus"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/sensors/v1/interrupt": {
+      "post": {
+        "tags": [
+          "Sensor"
+        ],
+        "parameters": [
+          {
+            "name": "vehicleGuid",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/simulations/v1/change-time": {
+      "post": {
+        "tags": [
+          "Simulations"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string",
+                "format": "date-time"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "string",
+                "format": "date-time"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/simulations/v1/simulationTime": {
+      "get": {
+        "tags": [
+          "Simulations"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/simulations/v1/vehicle-breakdown": {
+      "post": {
+        "tags": [
+          "Simulations"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string",
+                "format": "uuid"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "string",
+                "format": "uuid"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/simulations/v1/traffic-jam": {
+      "post": {
+        "tags": [
+          "Simulations"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrafficData"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrafficData"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrafficData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/simulations/v1/optimize-fleet": {
+      "post": {
+        "tags": [
+          "Simulations"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/simulations/v1/reset": {
+      "get": {
+        "tags": [
+          "Simulations"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/simulations/v1/init-simulation-basedata": {
+      "post": {
+        "tags": [
+          "Simulations"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimulationBaseData"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimulationBaseData"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimulationBaseData"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/simulations/v1/simulate": {
+      "post": {
+        "tags": [
+          "Simulations"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimulationRunParameter"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimulationRunParameter"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimulationRunParameter"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/simulations/v1/status/{simulationGuid}": {
+      "get": {
+        "tags": [
+          "Simulations"
+        ],
+        "parameters": [
+          {
+            "name": "simulationGuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/simulations/v1/result/{simulationGuid}": {
+      "get": {
+        "tags": [
+          "Simulations"
+        ],
+        "parameters": [
+          {
+            "name": "simulationGuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/simulations/v1/cancel/{simulationGuid}": {
+      "get": {
+        "tags": [
+          "Simulations"
+        ],
+        "parameters": [
+          {
+            "name": "simulationGuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/trips/v1/status/{guid}": {
+      "get": {
+        "tags": [
+          "Trip"
+        ],
+        "parameters": [
+          {
+            "name": "guid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TripStatusResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TripStatusResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TripStatusResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/trips/v1/request": {
+      "post": {
+        "tags": [
+          "Trip"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TripRequestParameter"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TripRequestParameter"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TripRequestParameter"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TripRequestResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TripRequestResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TripRequestResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/trips/v1/booking": {
+      "post": {
+        "tags": [
+          "Trip"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookTripParameter"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookTripParameter"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BookTripParameter"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookTripResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookTripResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookTripResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/trips/v1/cancel/{guid}": {
+      "put": {
+        "tags": [
+          "Trip"
+        ],
+        "parameters": [
+          {
+            "name": "guid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/trips/v1/success/{guid}": {
+      "put": {
+        "tags": [
+          "Trip"
+        ],
+        "parameters": [
+          {
+            "name": "guid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/trips/v1/start/{guid}": {
+      "put": {
+        "tags": [
+          "Trip"
+        ],
+        "parameters": [
+          {
+            "name": "guid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/vehicleschedules/v1/cabs": {
+      "get": {
+        "tags": [
+          "VehicleSchedule"
+        ],
+        "summary": "GetCabs",
+        "description": "Get cabs",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CabSchedule"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/vehicleschedules/v1/pros": {
+      "get": {
+        "tags": [
+          "VehicleSchedule"
+        ],
+        "summary": "GetPros",
+        "description": "Get pros",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProSchedule"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/vehicleschedules/v1/cab/{cabGuid}": {
+      "get": {
+        "tags": [
+          "VehicleSchedule"
+        ],
+        "summary": "GetCab",
+        "description": "Get cab",
+        "parameters": [
+          {
+            "name": "cabGuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CabSchedule"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "VehicleSchedule"
+        ],
+        "summary": "UpdateCab",
+        "description": "Update Cab",
+        "parameters": [
+          {
+            "name": "cabGuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CabSchedule"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CabSchedule"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CabSchedule"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/IActionResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IActionResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IActionResult"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "VehicleSchedule"
+        ],
+        "summary": "DeleteCab",
+        "description": "Delete Cab",
+        "parameters": [
+          {
+            "name": "cabGuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/IActionResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IActionResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IActionResult"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/vehicleschedules/v1/pro/{proGuid}": {
+      "get": {
+        "tags": [
+          "VehicleSchedule"
+        ],
+        "summary": "GetPro",
+        "description": "Get pro",
+        "parameters": [
+          {
+            "name": "proGuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProSchedule"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "VehicleSchedule"
+        ],
+        "summary": "UpdatePro",
+        "description": "Update Pro",
+        "parameters": [
+          {
+            "name": "proGuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProSchedule"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProSchedule"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProSchedule"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/IActionResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IActionResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IActionResult"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "VehicleSchedule"
+        ],
+        "summary": "DeletePro",
+        "description": "Delete Pro",
+        "parameters": [
+          {
+            "name": "proGuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/IActionResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IActionResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IActionResult"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/vehicleschedules/v1/cab": {
+      "post": {
+        "tags": [
+          "VehicleSchedule"
+        ],
+        "description": "Create cab",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CabSchedule"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CabSchedule"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CabSchedule"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/vehicleschedules/v1/pro": {
+      "post": {
+        "tags": [
+          "VehicleSchedule"
+        ],
+        "description": "Create pro",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProSchedule"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProSchedule"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProSchedule"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/weatherforecasts/v1": {
+      "post": {
+        "tags": [
+          "WeatherForecast"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeatherForecast"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeatherForecast"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeatherForecast"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/weatherforecasts/v1/{guid}": {
+      "put": {
+        "tags": [
+          "WeatherForecast"
+        ],
+        "parameters": [
+          {
+            "name": "guid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeatherForecast"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeatherForecast"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WeatherForecast"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": [ ],
+            "oauth2": [ ]
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AccessPoint": {
+        "required": [
+          "guid",
+          "location"
+        ],
+        "type": "object",
+        "properties": {
+          "guid": {
+            "type": "string"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "area": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Location"
+            },
+            "nullable": true
+          },
+          "barrierFreeAccess": {
+            "type": "boolean"
+          },
+          "maxStoppingTime": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "AccessPoint2": {
+        "required": [
+          "guid"
+        ],
+        "type": "object",
+        "properties": {
+          "guid": {
+            "type": "string"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location2"
+          },
+          "area": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Location2"
+            },
+            "nullable": true
+          },
+          "barrierFreeAccess": {
+            "type": "boolean"
+          },
+          "maxStoppingTime": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "BookTripParameter": {
+        "required": [
+          "transactionGuid",
+          "userGuid",
+          "proposalKey",
+          "source"
+        ],
+        "type": "object",
+        "properties": {
+          "transactionGuid": {
+            "type": "string"
+          },
+          "userGuid": {
+            "type": "string"
+          },
+          "proposalKey": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string"
+          }
+        }
+      },
+      "BookTripResponse": {
+        "type": "object",
+        "properties": {
+          "successful": {
+            "type": "boolean"
+          },
+          "statusCode": {
+            "enum": [
+              "Successful",
+              "ProposalNotFound",
+              "ProposalNotMatching",
+              "CabNotFound",
+              "ParameterInvalid",
+              "TripNotFound",
+              "TripNotCreated",
+              "ProposalInvalid"
+            ]
+          },
+          "createdTripGuid": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "CabSchedule": {
+        "required": [
+          "id",
+          "schedule",
+          "label",
+          "licensePlate",
+          "powerConsumption",
+          "totalEnergyCapacity",
+          "initialEnergyCapacity",
+          "initialLocation",
+          "operatingCompany",
+          "vehicleType"
+        ],
+        "type": "object",
+        "properties": {
+          "hasRamp": {
+            "type": "boolean"
+          },
+          "seats": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "childSeats": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "luggage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "chargingCurve": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          "maxSpeedAutonomous": {
+            "type": "number",
+            "format": "float"
+          },
+          "id": {
+            "type": "string"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/Schedule"
+          },
+          "label": {
+            "maxLength": 150,
+            "type": "string"
+          },
+          "licensePlate": {
+            "maxLength": 15,
+            "type": "string"
+          },
+          "powerConsumption": {
+            "$ref": "#/components/schemas/PowerConsumptionParameter"
+          },
+          "flatratEnergyConsumption": {
+            "type": "number",
+            "format": "float"
+          },
+          "risk": {
+            "type": "number",
+            "format": "float"
+          },
+          "totalEnergyCapacity": {
+            "type": "number",
+            "format": "float"
+          },
+          "initialEnergyCapacity": {
+            "type": "number",
+            "format": "float"
+          },
+          "initialLocation": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "maxSpeed": {
+            "type": "number",
+            "format": "float"
+          },
+          "regenerativePower": {
+            "type": "number",
+            "format": "float"
+          },
+          "operatingCompany": {
+            "type": "string"
+          },
+          "maximumRegenerativePower": {
+            "type": "number",
+            "format": "float"
+          },
+          "defaultEnergyConsuptionPerM": {
+            "type": "number",
+            "format": "float"
+          },
+          "vehicleType": {
+            "type": "string"
+          },
+          "stateOfSchedule": {
+            "enum": [
+              "Planned",
+              "Active",
+              "Started",
+              "Completed"
+            ]
+          }
+        }
+      },
+      "CabStop": {
+        "required": [
+          "vehicleSchedule",
+          "tripGuid",
+          "userGuid",
+          "stopType",
+          "consumedEnergy",
+          "chargedEnergy",
+          "remainingEnergy",
+          "key",
+          "location",
+          "latestStartDrivingToStop",
+          "arrival",
+          "departure",
+          "duration",
+          "drivingTime",
+          "distance"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer"
+          },
+          "vehicleSchedule": {
+            "type": "string"
+          },
+          "tripGuid": {
+            "type": "string"
+          },
+          "userGuid": {
+            "type": "string"
+          },
+          "stopType": {
+            "enum": [
+              "Pickup",
+              "Dropoff",
+              "Relocation",
+              "Charging",
+              "Parking",
+              "BusinessTrip",
+              "Maintenance",
+              "Absence",
+              "Depot",
+              "Chaining",
+              "Unchaining"
+            ]
+          },
+          "consumedEnergy": {
+            "type": "number",
+            "format": "float"
+          },
+          "chargedEnergy": {
+            "type": "number",
+            "format": "float"
+          },
+          "remainingEnergy": {
+            "type": "number",
+            "format": "float"
+          },
+          "currentQuantities": {
+            "type": "number",
+            "format": "float"
+          },
+          "appointment": {
+            "$ref": "#/components/schemas/Interval2"
+          },
+          "guidChainRouteSegment": {
+            "type": "string",
+            "nullable": true
+          },
+          "key": {
+            "type": "string"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "latestStartDrivingToStop": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "arrival": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departure": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "drivingTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "distance": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "CarpoolInformation": {
+        "type": "object",
+        "properties": {
+          "passengersOnBoard": {
+            "type": "boolean"
+          },
+          "passengerBoarding": {
+            "type": "boolean"
+          }
+        },
+        "nullable": true
+      },
+      "ChainingLocation": {
+        "required": [
+          "guid",
+          "locationStart",
+          "locationEnd",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "guid": {
+            "type": "string"
+          },
+          "locationStart": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "locationEnd": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "type": {
+            "enum": [
+              "NotAllowed",
+              "Chain",
+              "Unchain",
+              "ChainAndUnchain"
+            ]
+          },
+          "additionalTime": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ChainingStop": {
+        "required": [
+          "key",
+          "location",
+          "latestStartDrivingToStop",
+          "arrival",
+          "departure",
+          "duration",
+          "drivingTime",
+          "distance"
+        ],
+        "type": "object",
+        "properties": {
+          "vehicleSchedule": {
+            "type": "string"
+          },
+          "chainedCabs": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "key": {
+            "type": "string"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "latestStartDrivingToStop": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "arrival": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departure": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "drivingTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "distance": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ChainRouteDto": {
+        "required": [
+          "guid",
+          "startLocation",
+          "endLocation"
+        ],
+        "type": "object",
+        "properties": {
+          "guid": {
+            "type": "string"
+          },
+          "startLocation": {
+            "type": "string"
+          },
+          "intermediateChainingLocations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IntermediateChainingLocation"
+            }
+          },
+          "endLocation": {
+            "type": "string"
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "distance": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "ChainRouteSchedule": {
+        "required": [
+          "guid",
+          "chainRoute",
+          "proSchedule"
+        ],
+        "type": "object",
+        "properties": {
+          "guid": {
+            "type": "string"
+          },
+          "chainRoute": {
+            "type": "string"
+          },
+          "proSchedule": {
+            "type": "string"
+          },
+          "departure": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "arrival": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "ChargingOperator": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "chargingOperatorGuid": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "defaultPrice": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "ChargingPoint": {
+        "required": [
+          "guid",
+          "location"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "Electric",
+              "Hydrogen",
+              "AC",
+              "DC"
+            ]
+          },
+          "state": {
+            "enum": [
+              "Free",
+              "InUse",
+              "Maintenance"
+            ]
+          },
+          "maximumPowerSupply": {
+            "type": "number",
+            "format": "float"
+          },
+          "maximumRegenerativePower": {
+            "type": "number",
+            "format": "float"
+          },
+          "openingHours": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OpeningTimeEntry"
+            }
+          },
+          "operators": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChargingOperator"
+            }
+          },
+          "voltage": {
+            "type": "number",
+            "format": "float"
+          },
+          "amperage": {
+            "type": "number",
+            "format": "float"
+          },
+          "owner": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "guid": {
+            "type": "string"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "maximumStoppingTime": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "ChargingPointAssignment": {
+        "required": [
+          "chargingPoint"
+        ],
+        "type": "object",
+        "properties": {
+          "chargingPoint": {
+            "$ref": "#/components/schemas/ChargingPoint"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "state": {
+            "enum": [
+              "None",
+              "Active",
+              "Planned",
+              "Completed"
+            ]
+          },
+          "chargedEnergy": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "ChargingPointStatus": {
+        "type": "object",
+        "properties": {
+          "chargingPointGuid": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "state": {
+            "enum": [
+              "Free",
+              "InUse",
+              "Maintenance"
+            ]
+          }
+        }
+      },
+      "CreateApiKeyRequest": {
+        "required": [
+          "name",
+          "scopes"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "scopes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "CreateChargingAssignmentParameter": {
+        "required": [
+          "chargingPointGuid",
+          "vehicleGuid",
+          "startTime",
+          "endTime"
+        ],
+        "type": "object",
+        "properties": {
+          "chargingPointGuid": {
+            "type": "string"
+          },
+          "vehicleGuid": {
+            "type": "string"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "CustomerPreferences": {
+        "type": "object",
+        "properties": {
+          "allowCarpooling": {
+            "type": "boolean"
+          },
+          "toleratedDelayBefore": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "toleratedDelayAfter": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "nullable": true
+      },
+      "DrivingState": {
+        "type": "object",
+        "properties": {
+          "bearing": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "speed": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Endpoint": {
+        "type": "object",
+        "properties": {
+          "uri": {
+            "type": "string"
+          },
+          "accept": {
+            "type": "string"
+          }
+        }
+      },
+      "Entity": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "GeoProperty": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "$ref": "#/components/schemas/GeoValue"
+          },
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "GeoValue": {
+        "type": "object",
+        "properties": {
+          "coordinates": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "GetRouteRequest": {
+        "required": [
+          "start",
+          "end",
+          "time",
+          "vehicleType"
+        ],
+        "type": "object",
+        "properties": {
+          "start": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "end": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "vehicleType": {
+            "type": "string"
+          }
+        }
+      },
+      "GetSchedulePlanParameter": {
+        "required": [
+          "vehicleGuids",
+          "timeRange"
+        ],
+        "type": "object",
+        "properties": {
+          "vehicleGuids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "timeRange": {
+            "$ref": "#/components/schemas/Interval"
+          }
+        }
+      },
+      "IActionResult": {
+        "type": "object"
+      },
+      "IntermediateChainingLocation": {
+        "required": [
+          "chainingLocation"
+        ],
+        "type": "object",
+        "properties": {
+          "chainingLocation": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "NotAllowed",
+              "Chain",
+              "Unchain",
+              "ChainAndUnchain"
+            ]
+          },
+          "offsetArrival": {
+            "pattern": "^-?(\\d+\\.)?\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,7})?$",
+            "type": "string"
+          },
+          "offsetDeparture": {
+            "pattern": "^-?(\\d+\\.)?\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,7})?$",
+            "type": "string"
+          }
+        }
+      },
+      "Interval": {
+        "type": "object",
+        "properties": {
+          "startTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Interval2": {
+        "type": "object",
+        "properties": {
+          "startTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "nullable": true
+      },
+      "Location": {
+        "required": [
+          "longitude",
+          "latitude"
+        ],
+        "type": "object",
+        "properties": {
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "Location2": {
+        "type": "object",
+        "properties": {
+          "locationHashCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "Location3": {
+        "required": [
+          "longitude",
+          "latitude"
+        ],
+        "type": "object",
+        "properties": {
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "nullable": true
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "clientId": {
+            "type": "string"
+          },
+          "clientSecret": {
+            "type": "string"
+          },
+          "scope": {
+            "type": "string"
+          }
+        }
+      },
+      "Notification": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "subscriptionId": {
+            "type": "string"
+          },
+          "notifiedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "data": {
+            "type": "array"
+          }
+        }
+      },
+      "NotificationSub": {
+        "type": "object",
+        "properties": {
+          "attributes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "format": {
+            "type": "string"
+          },
+          "endpoint": {
+            "$ref": "#/components/schemas/Endpoint"
+          },
+          "status": {
+            "type": "string"
+          },
+          "timesSent": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "lastNotification": {
+            "type": "string"
+          },
+          "lastFailure": {
+            "type": "string"
+          }
+        }
+      },
+      "OpeningTimeEntry": {
+        "required": [
+          "weekDays",
+          "min",
+          "max"
+        ],
+        "type": "object",
+        "properties": {
+          "weekDays": {
+            "type": "string"
+          },
+          "min": {
+            "pattern": "^-?(\\d+\\.)?\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,7})?$",
+            "type": "string"
+          },
+          "max": {
+            "pattern": "^-?(\\d+\\.)?\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,7})?$",
+            "type": "string"
+          }
+        }
+      },
+      "OperationArea": {
+        "required": [
+          "locationBorder",
+          "guiltyRange"
+        ],
+        "type": "object",
+        "properties": {
+          "guid": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationBorder": {
+            "type": "array",
+            "items": { }
+          },
+          "guiltyRange": {
+            "$ref": "#/components/schemas/Interval"
+          },
+          "operator": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "ParkingLocation": {
+        "required": [
+          "guid",
+          "location"
+        ],
+        "type": "object",
+        "properties": {
+          "guid": {
+            "type": "string"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "maximumStoppingTime": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "PlanningCab": {
+        "required": [
+          "currentLocation"
+        ],
+        "type": "object",
+        "properties": {
+          "vehicle": {
+            "$ref": "#/components/schemas/CabSchedule"
+          },
+          "currentLocation": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "estimatedTimeAtStop": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "estimatedEnergyAtStop": {
+            "type": "number",
+            "format": "float"
+          },
+          "tripStops": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CabStop"
+            }
+          },
+          "archivedStops": {
+            "type": "array",
+            "items": { }
+          }
+        }
+      },
+      "PlanningConfiguration": {
+        "type": "object",
+        "properties": {
+          "toleranceDrivingTime": {
+            "type": "number",
+            "format": "float"
+          },
+          "toleranceCapacity": {
+            "type": "number",
+            "format": "float"
+          },
+          "chainTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "boardingTimeSeconds": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "alightingTimeSeconds": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "chargingPlugInTimeSeconds": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "chargingPlugOutTimeSeconds": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "proposalTimer": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "proposalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "planningHorizon": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "chargingStartThreshhold": {
+            "type": "number",
+            "format": "float"
+          },
+          "chargingEndThreshhold": {
+            "type": "number",
+            "format": "float"
+          },
+          "useProThreshhold": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mode": {
+            "enum": [
+              "Insert",
+              "InsertOpt",
+              "InsertOptRelocate"
+            ]
+          },
+          "mapStartAndOnMap": {
+            "type": "boolean"
+          },
+          "analyzeMode": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PlanningPro": {
+        "required": [
+          "currentLocation"
+        ],
+        "type": "object",
+        "properties": {
+          "vehicle": {
+            "$ref": "#/components/schemas/ProSchedule"
+          },
+          "currentLocation": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "chainingStops": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChainingStop"
+            }
+          }
+        }
+      },
+      "PowerConsumptionParameter": {
+        "type": "object",
+        "properties": {
+          "speed": {
+            "type": "number",
+            "format": "float"
+          },
+          "wind": {
+            "type": "number",
+            "format": "float"
+          },
+          "loadCapacity": {
+            "type": "number",
+            "format": "float"
+          },
+          "tireTraction": {
+            "type": "number",
+            "format": "float"
+          },
+          "weatherConditions": {
+            "type": "number",
+            "format": "float"
+          },
+          "climatronic": {
+            "type": "number",
+            "format": "float"
+          },
+          "regenerativeBraking": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "PricingInfo": {
+        "required": [
+          "costPerInterval"
+        ],
+        "type": "object",
+        "properties": {
+          "operator": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "costPerInterval": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "PropertyOfint": { },
+      "PropertyOfstring": { },
+      "ProSchedule": {
+        "required": [
+          "id",
+          "schedule",
+          "label",
+          "licensePlate",
+          "powerConsumption",
+          "totalEnergyCapacity",
+          "initialEnergyCapacity",
+          "initialLocation",
+          "operatingCompany",
+          "vehicleType"
+        ],
+        "type": "object",
+        "properties": {
+          "maxCabChain": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "additionalEnergyConsumptionPerCab": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          "maxCabChargingPower": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "id": {
+            "type": "string"
+          },
+          "schedule": {
+            "$ref": "#/components/schemas/Schedule"
+          },
+          "label": {
+            "maxLength": 150,
+            "type": "string"
+          },
+          "licensePlate": {
+            "maxLength": 15,
+            "type": "string"
+          },
+          "powerConsumption": {
+            "$ref": "#/components/schemas/PowerConsumptionParameter"
+          },
+          "flatratEnergyConsumption": {
+            "type": "number",
+            "format": "float"
+          },
+          "risk": {
+            "type": "number",
+            "format": "float"
+          },
+          "totalEnergyCapacity": {
+            "type": "number",
+            "format": "float"
+          },
+          "initialEnergyCapacity": {
+            "type": "number",
+            "format": "float"
+          },
+          "initialLocation": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "maxSpeed": {
+            "type": "number",
+            "format": "float"
+          },
+          "regenerativePower": {
+            "type": "number",
+            "format": "float"
+          },
+          "operatingCompany": {
+            "type": "string"
+          },
+          "maximumRegenerativePower": {
+            "type": "number",
+            "format": "float"
+          },
+          "defaultEnergyConsuptionPerM": {
+            "type": "number",
+            "format": "float"
+          },
+          "vehicleType": {
+            "type": "string"
+          },
+          "stateOfSchedule": {
+            "enum": [
+              "Planned",
+              "Active",
+              "Started",
+              "Completed"
+            ]
+          }
+        }
+      },
+      "RouteResponse": {
+        "required": [
+          "distance",
+          "drivingTime",
+          "energyConsumption"
+        ],
+        "type": "object",
+        "properties": {
+          "distance": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "drivingTime": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "energyConsumption": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Schedule": {
+        "type": "object",
+        "properties": {
+          "startTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "SetApiKeyActiveRequest": {
+        "type": "object",
+        "properties": {
+          "isActive": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SimulationBaseData": {
+        "required": [
+          "simulationInitTime",
+          "planningConfiguration"
+        ],
+        "type": "object",
+        "properties": {
+          "cabSchedules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CabSchedule"
+            }
+          },
+          "proSchedules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProSchedule"
+            }
+          },
+          "chargingPoints": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChargingPoint"
+            }
+          },
+          "chainingLocations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChainingLocation"
+            }
+          },
+          "chainRoutes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChainRouteDto"
+            }
+          },
+          "chainRouteSchedules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChainRouteSchedule"
+            }
+          },
+          "accessPoints": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccessPoint"
+            }
+          },
+          "parkingLocations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ParkingLocation"
+            }
+          },
+          "operationAreas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OperationArea"
+            }
+          },
+          "simulationInitTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "planningConfiguration": {
+            "$ref": "#/components/schemas/PlanningConfiguration"
+          }
+        }
+      },
+      "SimulationRunParameter": {
+        "type": "object",
+        "properties": {
+          "simulationSteps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SimulationStep"
+            }
+          },
+          "createInitialReport": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SimulationStep": {
+        "required": [
+          "requestParameter"
+        ],
+        "type": "object",
+        "properties": {
+          "requestParameter": {
+            "$ref": "#/components/schemas/TripRequestParameter"
+          },
+          "simulatedTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "bookProposal": {
+            "type": "boolean"
+          },
+          "createReport": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Subscription": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "notificationTrigger": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "entities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Entity"
+            }
+          },
+          "watchedAttributes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "q": {
+            "type": "string"
+          },
+          "notification": {
+            "$ref": "#/components/schemas/NotificationSub"
+          },
+          "@context": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "TourReportParameter": {
+        "required": [
+          "timeRange"
+        ],
+        "type": "object",
+        "properties": {
+          "timeRange": {
+            "$ref": "#/components/schemas/Interval"
+          },
+          "operator": {
+            "type": "string"
+          },
+          "vehicleScheduleGuids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "TourReportResult": {
+        "required": [
+          "vehicleGuid",
+          "timeInterval"
+        ],
+        "type": "object",
+        "properties": {
+          "vehicleGuid": {
+            "type": "string"
+          },
+          "timeInterval": {
+            "$ref": "#/components/schemas/Interval"
+          },
+          "drivingTime": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "drivingDistance": {
+            "type": "number",
+            "format": "double"
+          },
+          "idleTime": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "trips": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Trip"
+            }
+          },
+          "energyConsumption": {
+            "type": "number",
+            "format": "double"
+          },
+          "energyCharged": {
+            "type": "number",
+            "format": "double"
+          },
+          "revenue": {
+            "type": "number",
+            "format": "double"
+          },
+          "costs": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "TrafficData": {
+        "type": "object",
+        "properties": {
+          "affectedVehicleGuids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "drivingTimeMultiplier": {
+            "type": "number",
+            "format": "double"
+          },
+          "estimatedDuration": {
+            "pattern": "^-?(\\d+\\.)?\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,7})?$",
+            "type": "string"
+          },
+          "effectiveFrom": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Trip": {
+        "required": [
+          "tripGuid",
+          "userGuid",
+          "cabStartLocation",
+          "cabDropoffLocation"
+        ],
+        "type": "object",
+        "properties": {
+          "tripGuid": {
+            "type": "string"
+          },
+          "userGuid": {
+            "type": "string"
+          },
+          "creationTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "vehicleLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "cabStartLocation": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "cabDropoffLocation": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "estimatedPickupTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "estimatedDropoffTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "costs": {
+            "type": "number",
+            "format": "float"
+          },
+          "carpoolInformation": {
+            "$ref": "#/components/schemas/CarpoolInformation"
+          },
+          "rampNeeded": {
+            "type": "boolean"
+          },
+          "requestedAdults": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "requestedChilds": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "luggage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxCabs": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "personalPreferences": {
+            "$ref": "#/components/schemas/CustomerPreferences"
+          },
+          "status": {
+            "enum": [
+              "Unplanned",
+              "Planned",
+              "Started",
+              "Completed",
+              "Canceled"
+            ]
+          },
+          "cabArrival": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "customerCheckin": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "customerCheckout": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modificationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expectedEnergyRequired": {
+            "type": "number",
+            "format": "float"
+          },
+          "expectedDrivingTime": {
+            "type": "number",
+            "format": "float"
+          },
+          "expectedDistance": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      },
+      "TripDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "pickupTime": {
+            "$ref": "#/components/schemas/PropertyOfstring"
+          },
+          "pickupLocation": {
+            "$ref": "#/components/schemas/GeoProperty"
+          },
+          "dropoffLocation": {
+            "$ref": "#/components/schemas/GeoProperty"
+          },
+          "requestedAdults": {
+            "$ref": "#/components/schemas/PropertyOfint"
+          },
+          "user": {
+            "$ref": "#/components/schemas/PropertyOfstring"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PropertyOfstring"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "TripHistory": {
+        "type": "object",
+        "properties": {
+          "tripGuid": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "history": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TripHistoryEntry"
+            },
+            "nullable": true
+          }
+        }
+      },
+      "TripHistoryEntry": {
+        "required": [
+          "reason"
+        ],
+        "type": "object",
+        "properties": {
+          "guid": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "tripGuid": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "modificationTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "TripProposalDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "request": {
+            "$ref": "#/components/schemas/PropertyOfstring"
+          },
+          "pickupTime": {
+            "$ref": "#/components/schemas/PropertyOfstring"
+          },
+          "cabPickupLocation": {
+            "$ref": "#/components/schemas/GeoProperty"
+          },
+          "cabDropoffLocation": {
+            "$ref": "#/components/schemas/GeoProperty"
+          },
+          "proposalReleaseTime": {
+            "$ref": "#/components/schemas/PropertyOfstring"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "TripRequestParameter": {
+        "required": [
+          "userGuid",
+          "currentLocation",
+          "targetLocation"
+        ],
+        "type": "object",
+        "properties": {
+          "userGuid": {
+            "type": "string"
+          },
+          "currentLocation": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "targetLocation": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "targetTime": {
+            "$ref": "#/components/schemas/Interval2"
+          },
+          "pickupTime": {
+            "$ref": "#/components/schemas/Interval2"
+          },
+          "needRamp": {
+            "type": "boolean"
+          },
+          "requestedAdults": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "requestedChilds": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "luggage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxCabs": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "personalPreferences": {
+            "$ref": "#/components/schemas/CustomerPreferences"
+          },
+          "transactionGuid": {
+            "type": "string",
+            "nullable": true
+          },
+          "priority": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vehicleGuid": {
+            "type": "string"
+          }
+        }
+      },
+      "TripRequestProposal": {
+        "required": [
+          "guid",
+          "cabStartLocation",
+          "cabTargetLocation",
+          "requestedStartLocation",
+          "requestedTargetLocation"
+        ],
+        "type": "object",
+        "properties": {
+          "guid": {
+            "type": "string"
+          },
+          "vehicleLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "cabStartLocation": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "cabTargetLocation": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "requestedStartLocation": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "requestedTargetLocation": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "pickupTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dropoffTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "costs": {
+            "type": "number",
+            "format": "float"
+          },
+          "carpoolInformation": {
+            "$ref": "#/components/schemas/CarpoolInformation"
+          },
+          "proposalReleaseTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "TripRequestResponse": {
+        "required": [
+          "bookingTransaction",
+          "userGuid"
+        ],
+        "type": "object",
+        "properties": {
+          "bookingTransaction": {
+            "type": "string"
+          },
+          "userGuid": {
+            "type": "string"
+          },
+          "successful": {
+            "type": "boolean"
+          },
+          "possibleStartLocation": {
+            "$ref": "#/components/schemas/Location3"
+          },
+          "possibleTargetLocation": {
+            "$ref": "#/components/schemas/Location3"
+          },
+          "earliestPossibleStart": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "proposals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TripRequestProposal"
+            },
+            "nullable": true
+          }
+        }
+      },
+      "TripStatusResponse": {
+        "type": "object",
+        "properties": {
+          "costs": {
+            "type": "number",
+            "format": "float"
+          },
+          "carpoolInformation": {
+            "$ref": "#/components/schemas/CarpoolInformation"
+          },
+          "rampNeeded": {
+            "type": "boolean"
+          },
+          "requestedAdults": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "requestedChilds": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "luggage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "enum": [
+              "Unplanned",
+              "Planned",
+              "Started",
+              "Completed",
+              "Canceled"
+            ]
+          },
+          "pickupTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dropoffTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "pickupTimeMin": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "pickupTimeMax": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dropoffTimeMin": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dropoffTimeMax": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "UpdateCabStopStatusRequest": {
+        "required": [
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer"
+          }
+        }
+      },
+      "VehicleSchedulePlan": {
+        "required": [
+          "vehicleSchedule"
+        ],
+        "type": "object",
+        "properties": {
+          "vehicleSchedule": {
+            "$ref": "#/components/schemas/CabSchedule"
+          },
+          "schedulePlan": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CabStop"
+            }
+          }
+        }
+      },
+      "VehicleSchedulePlanResult": {
+        "required": [
+          "vehicleSchedulePlans"
+        ],
+        "type": "object",
+        "properties": {
+          "vehicleSchedulePlans": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VehicleSchedulePlan"
+            }
+          }
+        }
+      },
+      "VehicleStatus": {
+        "required": [
+          "location"
+        ],
+        "type": "object",
+        "properties": {
+          "guid": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "vehicleScheduleGuid": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "stateOfSchedule": {
+            "enum": [
+              "Planned",
+              "Active",
+              "Started",
+              "Completed"
+            ]
+          },
+          "batteryLevel": {
+            "type": "number",
+            "format": "float"
+          },
+          "remainingRange": {
+            "type": "number",
+            "format": "float"
+          },
+          "consumption": {
+            "type": "number",
+            "format": "float"
+          },
+          "energyConsumptionSinceLastStop": {
+            "type": "number",
+            "format": "float"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "state": {
+            "type": "string"
+          },
+          "drivingState": {
+            "$ref": "#/components/schemas/DrivingState"
+          },
+          "deviation": {
+            "type": "number",
+            "format": "float"
+          },
+          "chargingPower": {
+            "type": "number",
+            "format": "float"
+          },
+          "chargedPower": {
+            "type": "number",
+            "format": "float"
+          },
+          "tireAirPressure": {
+            "type": "number",
+            "format": "float"
+          },
+          "mileageFromOdometer": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "load": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "weight": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "chainedVehicles": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "powerSupply": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "temperatureIndoor": {
+            "type": "number",
+            "format": "float"
+          },
+          "temperatureOutside": {
+            "type": "number",
+            "format": "float"
+          },
+          "dateCreated": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "VehicleTypeSetting": {
+        "required": [
+          "key",
+          "bezeichnung",
+          "reisewitzRouteServiceUrl"
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "bezeichnung": {
+            "type": "string"
+          },
+          "reisewitzRouteServiceUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "WeatherForecast": {
+        "type": "object",
+        "properties": {
+          "forecastGuid": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dateCreated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "temperature": {
+            "type": "number",
+            "format": "float"
+          },
+          "region": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Location"
+            }
+          },
+          "areaServed": {
+            "type": "array",
+            "items": { }
+          },
+          "gustSpeed": {
+            "type": "number",
+            "format": "float"
+          },
+          "wetStreet": {
+            "type": "boolean"
+          },
+          "snowHeight": {
+            "type": "number",
+            "format": "float"
+          },
+          "validFrom": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "validTo": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "windDirection": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "windSpeed": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "oauth2": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://idp.reisewitz.io/realms/nemobil/protocol/openid-connect/auth",
+            "tokenUrl": "https://idp.reisewitz.io/realms/nemobil/protocol/openid-connect/token",
+            "scopes": {
+              "simulation": "Simulations-Funktionalität",
+              "administration": "Admin-Funktionalität",
+              "broker": "Broker-Funktionalität"
+            }
+          },
+          "clientCredentials": {
+            "authorizationUrl": "https://idp.reisewitz.io/realms/nemobil/protocol/openid-connect/auth",
+            "tokenUrl": "https://idp.reisewitz.io/realms/nemobil/protocol/openid-connect/token",
+            "scopes": { }
+          }
+        }
+      },
+      "ApiKey": {
+        "type": "apiKey",
+        "description": "Bitte geben Sie Ihren API-Key im Header ein.",
+        "name": "X-API-KEY",
+        "in": "header"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ApiKey"
+    },
+    {
+      "name": "Auth"
+    },
+    {
+      "name": "BaseData"
+    },
+    {
+      "name": "Broker"
+    },
+    {
+      "name": "Charging"
+    },
+    {
+      "name": "Debug"
+    },
+    {
+      "name": "Forecast"
+    },
+    {
+      "name": "Locations"
+    },
+    {
+      "name": "Notification"
+    },
+    {
+      "name": "Report"
+    },
+    {
+      "name": "Schedule"
+    },
+    {
+      "name": "Sensor"
+    },
+    {
+      "name": "Simulations"
+    },
+    {
+      "name": "Trip"
+    },
+    {
+      "name": "VehicleSchedule"
+    },
+    {
+      "name": "WeatherForecast"
+    }
+  ]
+}
