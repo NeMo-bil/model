@@ -11,402 +11,152 @@ info:
     url: https://reisewitz.com
   version: v0
 paths:
-  /BaseData/chargingPoint:
-    post:
-      tags:
-        - BaseData
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Model.Charging.ChargingPoint'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Model.Charging.ChargingPoint'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Model.Charging.ChargingPoint'
-      responses:
-        '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                type: string
-            application/json:
-              schema:
-                type: string
-            text/json:
-              schema:
-                type: string
-  /BaseData/chaininglocation:
-    post:
-      tags:
-        - BaseData
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Model.ChainingLocation'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Model.ChainingLocation'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Model.ChainingLocation'
-      responses:
-        '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                type: string
-            application/json:
-              schema:
-                type: string
-            text/json:
-              schema:
-                type: string
-  /BaseData/parking:
-    post:
-      tags:
-        - BaseData
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.BaseData.Data.ParkingLocation'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.BaseData.Data.ParkingLocation'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.BaseData.Data.ParkingLocation'
-      responses:
-        '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                type: string
-            application/json:
-              schema:
-                type: string
-            text/json:
-              schema:
-                type: string
-  /BaseData/operationArea:
-    post:
-      tags:
-        - BaseData
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.BaseData.Data.OperationArea'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.BaseData.Data.OperationArea'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.BaseData.Data.OperationArea'
-      responses:
-        '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                type: string
-            application/json:
-              schema:
-                type: string
-            text/json:
-              schema:
-                type: string
-  /BaseData/config:
-    post:
-      tags:
-        - BaseData
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Model.PlanningConfiguration'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Model.PlanningConfiguration'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Model.PlanningConfiguration'
-      responses:
-        '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                type: string
-            application/json:
-              schema:
-                type: string
-            text/json:
-              schema:
-                type: string
-  /Charging:
+  /apikeys/v1:
     get:
       tags:
-        - Charging
+      - ApiKey
       responses:
         '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                type: array
-                items:
-                  type: string
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: string
-            text/json:
-              schema:
-                type: array
-                items:
-                  type: string
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
     post:
       tags:
-        - Charging
+      - ApiKey
       requestBody:
         content:
           application/json:
             schema:
-              type: string
+              $ref: '#/components/schemas/CreateApiKeyRequest'
           text/json:
             schema:
-              type: string
+              $ref: '#/components/schemas/CreateApiKeyRequest'
           application/*+json:
             schema:
-              type: string
+              $ref: '#/components/schemas/CreateApiKeyRequest'
+        required: true
       responses:
         '200':
-          description: Success
-  /Charging/{id}:
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /apikeys/v1/{id}:
     get:
       tags:
-        - Charging
+      - ApiKey
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
       responses:
         '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                type: string
-            application/json:
-              schema:
-                type: string
-            text/json:
-              schema:
-                type: string
-    put:
-      tags:
-        - Charging
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: string
-          text/json:
-            schema:
-              type: string
-          application/*+json:
-            schema:
-              type: string
-      responses:
-        '200':
-          description: Success
-  /Charging/charging/complete/{guid}:
-    put:
-      tags:
-        - Charging
-      parameters:
-        - name: guid
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: string
-          text/json:
-            schema:
-              type: string
-          application/*+json:
-            schema:
-              type: string
-      responses:
-        '200':
-          description: Success
-  /Charging/charging/price/{chargingPoint}:
-    post:
-      tags:
-        - Charging
-      summary: Neue Preisdaten von den Ladeanbietern
-      parameters:
-        - name: chargingPoint
-          in: path
-          description: ''
-          required: true
-          schema:
-            type: string
-            format: uuid
-      requestBody:
-        description: ''
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Model.Charging.PricingInfo'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Model.Charging.PricingInfo'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Model.Charging.PricingInfo'
-      responses:
-        '200':
-          description: Success
-  /api/Forecast:
-    get:
-      tags:
-        - Forecast
-      responses:
-        '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                type: array
-                items:
-                  type: string
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: string
-            text/json:
-              schema:
-                type: array
-                items:
-                  type: string
-    post:
-      tags:
-        - Forecast
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: string
-          text/json:
-            schema:
-              type: string
-          application/*+json:
-            schema:
-              type: string
-      responses:
-        '200':
-          description: Success
-  /api/Forecast/{id}:
-    get:
-      tags:
-        - Forecast
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      responses:
-        '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                type: string
-            application/json:
-              schema:
-                type: string
-            text/json:
-              schema:
-                type: string
-    put:
-      tags:
-        - Forecast
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: string
-          text/json:
-            schema:
-              type: string
-          application/*+json:
-            schema:
-              type: string
-      responses:
-        '200':
-          description: Success
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
     delete:
       tags:
-        - Forecast
+      - ApiKey
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
       responses:
         '200':
-          description: Success
-  /Location/location/{id}:
-    get:
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /apikeys/v1/{id}/active:
+    patch:
       tags:
-        - Location
+      - ApiKey
       parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetApiKeyActiveRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/SetApiKeyActiveRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/SetApiKeyActiveRequest'
+        required: true
       responses:
         '200':
-          description: Success
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /auth/v1/login:
+    post:
+      tags:
+      - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /basedatas/v1/chaininglocation:
+    post:
+      tags:
+      - BaseData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChainingLocation'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ChainingLocation'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ChainingLocation'
+        required: true
+      responses:
+        '200':
+          description: OK
           content:
             text/plain:
               schema:
@@ -417,363 +167,478 @@ paths:
             text/json:
               schema:
                 type: string
-  /Location/nodeid/{id}:
-    get:
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /basedatas/v1/parking:
+    post:
       tags:
-        - Location
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int32
+      - BaseData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ParkingLocation'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ParkingLocation'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ParkingLocation'
+        required: true
       responses:
         '200':
-          description: Success
+          description: OK
           content:
-            text/plain:
-              schema:
-                type: string
             application/json:
               schema:
                 type: string
-            text/json:
-              schema:
-                type: string
-  /Location:
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /basedatas/v1/accesspoint:
     post:
       tags:
-        - Location
+      - BaseData
       requestBody:
         content:
           application/json:
             schema:
-              type: string
+              $ref: '#/components/schemas/AccessPoint'
           text/json:
             schema:
-              type: string
+              $ref: '#/components/schemas/AccessPoint'
           application/*+json:
             schema:
-              type: string
+              $ref: '#/components/schemas/AccessPoint'
+        required: true
       responses:
         '200':
-          description: Success
-  /Report/tours:
-    get:
-      tags:
-        - Report
-      summary: Abfrage von mehreren Touren
-      responses:
-        '200':
-          description: Success
+          description: OK
           content:
-            text/plain:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/NemobilAPI.Model.Trip'
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/NemobilAPI.Model.Trip'
-            text/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/NemobilAPI.Model.Trip'
-  /Report/tour/{id}:
+                type: boolean
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /basedatas/v1/accesspoint/{key}:
     get:
       tags:
-        - Report
-      summary: "Abfrage einer Tour\r\nInformationen vom Planungs-Service abfragen"
+      - BaseData
       parameters:
-        - name: guid
-          in: query
-          description: ''
-          schema:
-            type: string
-            format: uuid
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                $ref: '#/components/schemas/NemobilAPI.Model.Trip'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NemobilAPI.Model.Trip'
-            text/json:
-              schema:
-                $ref: '#/components/schemas/NemobilAPI.Model.Trip'
-  /Report/tourhistory/{id}:
-    get:
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+    delete:
       tags:
-        - Report
-      summary: "Abfrage der Historie einer Tour\r\nMit Zeitfilter? auf Trip-Guid"
+      - BaseData
       parameters:
-        - name: guid
-          in: query
-          description: ''
-          schema:
-            type: string
-            format: uuid
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                $ref: '#/components/schemas/NemobilAPI.Model.TripHistory'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NemobilAPI.Model.TripHistory'
-            text/json:
-              schema:
-                $ref: '#/components/schemas/NemobilAPI.Model.TripHistory'
-  /Report/report:
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /basedatas/v1/accesspoints:
     get:
       tags:
-        - Report
+      - BaseData
       responses:
         '200':
-          description: Success
+          description: OK
           content:
             text/plain:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/NemobilAPI.Contracts.TourReportResult'
+                  $ref: '#/components/schemas/AccessPoint2'
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/NemobilAPI.Contracts.TourReportResult'
+                  $ref: '#/components/schemas/AccessPoint2'
             text/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/NemobilAPI.Contracts.TourReportResult'
-  /Sensor/vehicleUpdate:
+                  $ref: '#/components/schemas/AccessPoint2'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /basedatas/v1/vehicletype-setting:
     post:
       tags:
-        - Sensor
-      summary: Daten der Fahrzeuge werden hier dem System mitgeteilt
+      - BaseData
       requestBody:
-        description: ''
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.SonsorData.Data.VehicleStatus'
+              $ref: '#/components/schemas/VehicleTypeSetting'
           text/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.SonsorData.Data.VehicleStatus'
+              $ref: '#/components/schemas/VehicleTypeSetting'
           application/*+json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.SonsorData.Data.VehicleStatus'
+              $ref: '#/components/schemas/VehicleTypeSetting'
+        required: true
       responses:
         '200':
-          description: Success
-  /Sensor/chargingPointUpdate:
-    post:
-      tags:
-        - Sensor
-      summary: Updates von den Ladesäulen
-      requestBody:
-        description: ''
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.SonsorData.Data.ChargingPointStatus'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.SonsorData.Data.ChargingPointStatus'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.SonsorData.Data.ChargingPointStatus'
-      responses:
-        '200':
-          description: Success
-  /Sensor/interrupt:
-    post:
-      tags:
-        - Sensor
-      summary: "<br>Melden einer Störung oder Unterbrechung/Notstop/-aus\r\n<br>\r\n            Fahrzeug meldet eine Störung des Systems?\r\n            Im Fahrzeug wurde der Not-Aus betätigt?\r\n            Meldung von Staus?\r\n            "
-      responses:
-        '200':
-          description: Success
-  /Simulation/changeTime:
-    post:
-      tags:
-        - Simulation
-      summary: Ändern der aktuellen Zeit
-      requestBody:
-        description: ''
-        content:
-          application/json:
-            schema:
-              type: string
-              format: date-time
-          text/json:
-            schema:
-              type: string
-              format: date-time
-          application/*+json:
-            schema:
-              type: string
-              format: date-time
-      responses:
-        '200':
-          description: Success
-  /Simulation/changeTimeTickRate:
-    post:
-      tags:
-        - Simulation
-      summary: Veränderung der Tick-Rate
-      requestBody:
-        description: ''
-        content:
-          application/json:
-            schema:
-              type: number
-              format: float
-          text/json:
-            schema:
-              type: number
-              format: float
-          application/*+json:
-            schema:
-              type: number
-              format: float
-      responses:
-        '200':
-          description: Success
-  /Simulation/vehicleBreakdown:
-    post:
-      tags:
-        - Simulation
-      summary: Fahrzeug Ausfall simulieren
-      requestBody:
-        description: vehicle to beakdown
-        content:
-          application/json:
-            schema:
-              type: string
-              format: uuid
-          text/json:
-            schema:
-              type: string
-              format: uuid
-          application/*+json:
-            schema:
-              type: string
-              format: uuid
-      responses:
-        '200':
-          description: Success
-  /Simulation/trafficJam:
-    post:
-      tags:
-        - Simulation
-      summary: Stau simulieren
-      requestBody:
-        description: traffic jam data
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.Forecast.TrafficData'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.Forecast.TrafficData'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.Forecast.TrafficData'
-      responses:
-        '200':
-          description: Success
-  /Trip/status/{guid}:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /basedatas/v1/vehicletype-settings:
     get:
       tags:
-        - Trip
-      summary: Aktuelle Informationen/Status der aktuellen Buchung
+      - BaseData
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VehicleTypeSetting'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VehicleTypeSetting'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VehicleTypeSetting'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /basedatas/v1/operationarea:
+    post:
+      tags:
+      - BaseData
       parameters:
-        - name: guid
-          in: path
-          description: ''
-          required: true
-          schema:
-            type: string
-            format: uuid
+      - name: Guid
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: LocationBorder
+        in: query
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+      - name: GuiltyRange.StartTime
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: GuiltyRange.EndTime
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: Operator
+        in: query
+        schema:
+          type: string
+          format: uuid
       responses:
         '200':
-          description: Success
+          description: OK
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/NemobilAPI.Contracts.Trip.TripStatusResponse'
+                type: boolean
             application/json:
               schema:
-                $ref: '#/components/schemas/NemobilAPI.Contracts.Trip.TripStatusResponse'
+                type: boolean
             text/json:
               schema:
-                $ref: '#/components/schemas/NemobilAPI.Contracts.Trip.TripStatusResponse'
-  /Trip:
-    post:
-      tags:
-        - Trip
-      summary: Es wird eine neue Buchungsanfrage erstellt
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.RideRequest.TripRequestParameter'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.RideRequest.TripRequestParameter'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.RideRequest.TripRequestParameter'
-      responses:
-        '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                $ref: '#/components/schemas/NemobilAPI.Contracts.RideRequest.TripRequestResponse'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/NemobilAPI.Contracts.RideRequest.TripRequestResponse'
-            text/json:
-              schema:
-                $ref: '#/components/schemas/NemobilAPI.Contracts.RideRequest.TripRequestResponse'
-  /Trip/cancel/{guid}:
+                type: boolean
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /basedatas/v1/operationarea/{value}:
     put:
       tags:
-        - Trip
-      summary: Kunde storniert seine Fahrt
+      - BaseData
       parameters:
-        - name: guid
-          in: path
-          description: ''
-          required: true
-          schema:
-            type: string
-            format: uuid
+      - name: Guid
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: LocationBorder
+        in: query
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+      - name: GuiltyRange.StartTime
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: GuiltyRange.EndTime
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: Operator
+        in: query
+        schema:
+          type: string
+          format: uuid
+      - name: value
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
-          description: Success
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /basedatas/v1/operationarea/{key}:
+    delete:
+      tags:
+      - BaseData
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+    get:
+      tags:
+      - BaseData
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /basedatas/v1/configuration:
+    post:
+      tags:
+      - BaseData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlanningConfiguration'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PlanningConfiguration'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/PlanningConfiguration'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /broker/v1/subscriptions:
+    get:
+      tags:
+      - Broker
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subscription'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subscription'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subscription'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /broker/v1/trip/{tripGuid}:
+    get:
+      tags:
+      - Broker
+      parameters:
+      - name: tripGuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/TripDto'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TripDto'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TripDto'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /broker/v1/trip_proposals/{tripRequestGuid}:
+    get:
+      tags:
+      - Broker
+      parameters:
+      - name: tripRequestGuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TripProposalDto'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TripProposalDto'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TripProposalDto'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /chargings/v1/chargingpoint/{chargingPointGuid}:
+    get:
+      tags:
+      - Charging
+      parameters:
+      - name: chargingPointGuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ChargingPoint'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargingPoint'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ChargingPoint'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+    delete:
+      tags:
+      - Charging
+      parameters:
+      - name: chargingPointGuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
           content:
             text/plain:
               schema:
@@ -784,990 +649,2187 @@ paths:
             text/json:
               schema:
                 type: boolean
-  /Trip/success/{guid}:
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /chargings/v1/chargingpoints:
+    get:
+      tags:
+      - Charging
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChargingPoint'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChargingPoint'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChargingPoint'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /chargings/v1/chargingpoint:
+    post:
+      tags:
+      - Charging
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChargingPoint'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ChargingPoint'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ChargingPoint'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /chargings/v1/charging/complete/{session}:
     put:
       tags:
-        - Trip
-      summary: Fahrgast ist am Ziel angekommen
+      - Charging
       parameters:
-        - name: guid
-          in: path
-          description: ''
-          required: true
-          schema:
-            type: string
-            format: uuid
+      - name: session
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+          text/json:
+            schema:
+              type: string
+          application/*+json:
+            schema:
+              type: string
+        required: true
       responses:
         '200':
-          description: Success
-  /VehicleSchedule/cabs:
-    get:
-      tags:
-        - VehicleSchedule
-      summary: Gibt alle Cab Fahrpläne im System aus
-      responses:
-        '200':
-          description: Success
+          description: OK
           content:
             text/plain:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
+                type: boolean
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
+                type: boolean
             text/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
-  /VehicleSchedule/pros:
-    get:
+                type: boolean
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /chargings/v1/charging/price/{chargingPoint}:
+    post:
       tags:
-        - VehicleSchedule
-      summary: Gibt alle Pro Fahrpläne im System aus
-      responses:
-        '200':
-          description: Success
-          content:
-            text/plain:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule'
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule'
-            text/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule'
-  /VehicleSchedule/cab/{cabGuid}:
-    get:
-      tags:
-        - VehicleSchedule
-      summary: Gibt das Cap zu der passenden cabGuid aus
-      description: Returns a single cab
+      - Charging
       parameters:
-        - name: cabGuid
-          in: path
-          description: ID of cab to return
-          required: true
-          schema:
-            type: string
-            format: uuid
+      - name: chargingPoint
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PricingInfo'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/PricingInfo'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/PricingInfo'
+        required: true
       responses:
         '200':
-          description: Successful found
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /chargings/v1/chargingpoint-assingment:
+    post:
+      tags:
+      - Charging
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateChargingAssignmentParameter'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreateChargingAssignmentParameter'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CreateChargingAssignmentParameter'
+        required: true
+      responses:
+        '200':
+          description: OK
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
+                type: string
             application/json:
               schema:
-                $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
+                type: string
             text/json:
               schema:
-                $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
+                type: string
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /chargings/v1/chargingpoint-assingment/{chargingPointAssignmentGuid}:
+    delete:
+      tags:
+      - Charging
+      parameters:
+      - name: chargingPointAssignmentGuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /chargings/v1/chargingpoint-assignment/{chargingPointAssignmentGuid}:
+    get:
+      tags:
+      - Charging
+      parameters:
+      - name: chargingPointAssignmentGuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ChargingPointAssignment'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargingPointAssignment'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ChargingPointAssignment'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /chargings/v1/chargingpoint-assignments:
+    get:
+      tags:
+      - Charging
+      parameters:
+      - name: chargingPointGuid
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChargingPointAssignment'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChargingPointAssignment'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ChargingPointAssignment'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /debug/v1/proposals:
+    get:
+      tags:
+      - Debug
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /debug/v1/testLogging:
+    post:
+      tags:
+      - Debug
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+          text/json:
+            schema:
+              type: string
+          application/*+json:
+            schema:
+              type: string
+        required: true
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /debug/v1/ping/{url}:
+    get:
+      tags:
+      - Debug
+      parameters:
+      - name: url
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /debug/v1/serialize-data:
+    get:
+      tags:
+      - Debug
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /forecasts/v1:
+    get:
+      tags:
+      - Forecast
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  type: string
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+            text/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+    post:
+      tags:
+      - Forecast
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+          text/json:
+            schema:
+              type: string
+          application/*+json:
+            schema:
+              type: string
+        required: true
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /forecasts/v1/{id}:
+    get:
+      tags:
+      - Forecast
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+            application/json:
+              schema:
+                type: string
+            text/json:
+              schema:
+                type: string
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+    put:
+      tags:
+      - Forecast
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+          text/json:
+            schema:
+              type: string
+          application/*+json:
+            schema:
+              type: string
+        required: true
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+    delete:
+      tags:
+      - Forecast
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /locations/v1/nearest:
+    post:
+      tags:
+      - Locations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Location'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Location'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /locations/v1/route:
+    post:
+      tags:
+      - Locations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRouteRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GetRouteRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/GetRouteRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/RouteResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RouteResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/RouteResponse'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /notifications/v1/notify:
+    post:
+      tags:
+      - Notification
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Notification'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/Notification'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/Notification'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /reports/v1/trips:
+    get:
+      tags:
+      - Report
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trip'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trip'
+            text/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Trip'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /reports/v1/trip/{guid}:
+    get:
+      tags:
+      - Report
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/Trip'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Trip'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/Trip'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /reports/v1/triphistory/{guid}:
+    get:
+      tags:
+      - Report
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/TripHistory'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TripHistory'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TripHistory'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /reports/v1/report:
+    post:
+      tags:
+      - Report
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TourReportParameter'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/TourReportParameter'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/TourReportParameter'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/TourReportResult'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TourReportResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TourReportResult'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /reports/v1/scheduleplan:
+    post:
+      tags:
+      - Report
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetSchedulePlanParameter'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/GetSchedulePlanParameter'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/GetSchedulePlanParameter'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/VehicleSchedulePlanResult'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VehicleSchedulePlanResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/VehicleSchedulePlanResult'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /schedules/v1/cabs:
+    get:
+      tags:
+      - Schedule
+      summary: GetCabs
+      description: Get cabs
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlanningCab'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /schedules/v1/pros:
+    get:
+      tags:
+      - Schedule
+      summary: GetPros
+      description: Get pros
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlanningPro'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /schedules/v1/cabs/{cabGuid}/stops/{stopKey}/status:
+    put:
+      tags:
+      - Schedule
+      summary: UpdateCabStopStatus
+      description: Update the execution status of a cab stop
+      parameters:
+      - name: cabGuid
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: stopKey
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCabStopStatusRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCabStopStatusRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UpdateCabStopStatusRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
         '400':
-          description: Invalid ID supplied
-        '404':
-          description: Cab not found
-    put:
-      tags:
-        - VehicleSchedule
-      summary: Aktualisiert einen Cab-Schedule Eintrag
-      parameters:
-        - name: cabGuid
-          in: path
-          description: ''
-          required: true
-          schema:
-            type: string
-            format: uuid
-      requestBody:
-        description: ''
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
-      responses:
-        '200':
-          description: Successful found
+          description: Bad Request
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.IActionResult'
+                $ref: '#/components/schemas/ProblemDetails'
             application/json:
               schema:
-                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.IActionResult'
+                $ref: '#/components/schemas/ProblemDetails'
             text/json:
               schema:
-                $ref: '#/components/schemas/Microsoft.AspNetCore.Mvc.IActionResult'
-        '400':
-          description: Invalid ID supplied
+                $ref: '#/components/schemas/ProblemDetails'
         '404':
-          description: Cab not found
-    delete:
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /sensors/v1/vehicle-update:
+    post:
       tags:
-        - VehicleSchedule
-      summary: Löscht den Cab-Schedule Eintrag
-      parameters:
-        - name: cabGuid
-          in: path
-          description: ''
-          required: true
-          schema:
-            type: string
-            format: uuid
+      - Sensor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VehicleStatus'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/VehicleStatus'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/VehicleStatus'
+        required: true
       responses:
         '200':
-          description: Success
-  /VehicleSchedule/pro/{proGuid}:
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /sensors/v1/chargingpoint-update:
+    post:
+      tags:
+      - Sensor
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChargingPointStatus'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ChargingPointStatus'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ChargingPointStatus'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /sensors/v1/interrupt:
+    post:
+      tags:
+      - Sensor
+      parameters:
+      - name: vehicleGuid
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /simulations/v1/change-time:
+    post:
+      tags:
+      - Simulations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+              format: date-time
+          text/json:
+            schema:
+              type: string
+              format: date-time
+          application/*+json:
+            schema:
+              type: string
+              format: date-time
+        required: true
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /simulations/v1/simulationTime:
     get:
       tags:
-        - VehicleSchedule
-      summary: Gibt das Pro zu der passenden proGuid aus
-      parameters:
-        - name: proGuid
-          in: path
-          description: ''
-          required: true
-          schema:
-            type: string
-            format: uuid
+      - Simulations
       responses:
         '200':
-          description: Success
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /simulations/v1/vehicle-breakdown:
+    post:
+      tags:
+      - Simulations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+              format: uuid
+          text/json:
+            schema:
+              type: string
+              format: uuid
+          application/*+json:
+            schema:
+              type: string
+              format: uuid
+        required: true
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /simulations/v1/traffic-jam:
+    post:
+      tags:
+      - Simulations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrafficData'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/TrafficData'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/TrafficData'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /simulations/v1/optimize-fleet:
+    post:
+      tags:
+      - Simulations
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /simulations/v1/reset:
+    get:
+      tags:
+      - Simulations
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /simulations/v1/init-simulation-basedata:
+    post:
+      tags:
+      - Simulations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimulationBaseData'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/SimulationBaseData'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/SimulationBaseData'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /simulations/v1/simulate:
+    post:
+      tags:
+      - Simulations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimulationRunParameter'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/SimulationRunParameter'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/SimulationRunParameter'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /simulations/v1/status/{simulationGuid}:
+    get:
+      tags:
+      - Simulations
+      parameters:
+      - name: simulationGuid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /simulations/v1/result/{simulationGuid}:
+    get:
+      tags:
+      - Simulations
+      parameters:
+      - name: simulationGuid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /simulations/v1/cancel/{simulationGuid}:
+    get:
+      tags:
+      - Simulations
+      parameters:
+      - name: simulationGuid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /trips/v1/status/{guid}:
+    get:
+      tags:
+      - Trip
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule'
+                $ref: '#/components/schemas/TripStatusResponse'
             application/json:
               schema:
-                $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule'
+                $ref: '#/components/schemas/TripStatusResponse'
             text/json:
               schema:
-                $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule'
-    put:
+                $ref: '#/components/schemas/TripStatusResponse'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /trips/v1/request:
+    post:
       tags:
-        - VehicleSchedule
-      summary: Aktualisiert einen Pro-Schedule Eintrag
-      parameters:
-        - name: proGuid
-          in: path
-          description: ''
-          required: true
-          schema:
-            type: string
-            format: uuid
+      - Trip
       requestBody:
-        description: ''
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule'
+              $ref: '#/components/schemas/TripRequestParameter'
           text/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule'
+              $ref: '#/components/schemas/TripRequestParameter'
           application/*+json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule'
+              $ref: '#/components/schemas/TripRequestParameter'
+        required: true
       responses:
         '200':
-          description: Success
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/TripRequestResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TripRequestResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/TripRequestResponse'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /trips/v1/booking:
+    post:
+      tags:
+      - Trip
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookTripParameter'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/BookTripParameter'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/BookTripParameter'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/BookTripResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookTripResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/BookTripResponse'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /trips/v1/cancel/{guid}:
+    put:
+      tags:
+      - Trip
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: boolean
+            application/json:
+              schema:
+                type: boolean
+            text/json:
+              schema:
+                type: boolean
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /trips/v1/success/{guid}:
+    put:
+      tags:
+      - Trip
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /trips/v1/start/{guid}:
+    put:
+      tags:
+      - Trip
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /vehicleschedules/v1/cabs:
+    get:
+      tags:
+      - VehicleSchedule
+      summary: GetCabs
+      description: Get cabs
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CabSchedule'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /vehicleschedules/v1/pros:
+    get:
+      tags:
+      - VehicleSchedule
+      summary: GetPros
+      description: Get pros
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProSchedule'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /vehicleschedules/v1/cab/{cabGuid}:
+    get:
+      tags:
+      - VehicleSchedule
+      summary: GetCab
+      description: Get cab
+      parameters:
+      - name: cabGuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CabSchedule'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+    put:
+      tags:
+      - VehicleSchedule
+      summary: UpdateCab
+      description: Update Cab
+      parameters:
+      - name: cabGuid
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CabSchedule'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CabSchedule'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CabSchedule'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/IActionResult'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IActionResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/IActionResult'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
     delete:
       tags:
-        - VehicleSchedule
-      summary: Löscht den Pro-Schedule Eintrag
+      - VehicleSchedule
+      summary: DeleteCab
+      description: Delete Cab
       parameters:
-        - name: proGuid
-          in: path
-          description: ''
-          required: true
-          schema:
-            type: string
-            format: uuid
+      - name: cabGuid
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
-          description: Success
-  /VehicleSchedule/cab:
-    post:
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/IActionResult'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IActionResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/IActionResult'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /vehicleschedules/v1/pro/{proGuid}:
+    get:
       tags:
-        - VehicleSchedule
-      summary: Erstellt ein Cab-Schedule Eintrag
-      requestBody:
-        description: ''
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule'
+      - VehicleSchedule
+      summary: GetPro
+      description: Get pro
+      parameters:
+      - name: proGuid
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         '200':
-          description: Success
-  /VehicleSchedule/pro:
-    post:
-      tags:
-        - VehicleSchedule
-      summary: Erstellt ein Pro-Schedule Eintrag
-      requestBody:
-        description: ''
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule'
-      responses:
-        '200':
-          description: Success
-  /api/WeatherForecast:
-    post:
-      tags:
-        - WeatherForecast
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.WeatherForecast'
-          text/json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.WeatherForecast'
-          application/*+json:
-            schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.WeatherForecast'
-      responses:
-        '200':
-          description: Success
-  /api/WeatherForecast/{guid}:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProSchedule'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
     put:
       tags:
-        - WeatherForecast
+      - VehicleSchedule
+      summary: UpdatePro
+      description: Update Pro
       parameters:
-        - name: guid
-          in: path
-          required: true
-          schema:
-            type: string
-            format: uuid
+      - name: proGuid
+        in: path
+        required: true
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.WeatherForecast'
+              $ref: '#/components/schemas/ProSchedule'
           text/json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.WeatherForecast'
+              $ref: '#/components/schemas/ProSchedule'
           application/*+json:
             schema:
-              $ref: '#/components/schemas/NemobilAPI.Contracts.WeatherForecast'
+              $ref: '#/components/schemas/ProSchedule'
+        required: true
       responses:
         '200':
-          description: Success
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/IActionResult'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IActionResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/IActionResult'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+    delete:
+      tags:
+      - VehicleSchedule
+      summary: DeletePro
+      description: Delete Pro
+      parameters:
+      - name: proGuid
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/IActionResult'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IActionResult'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/IActionResult'
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /vehicleschedules/v1/cab:
+    post:
+      tags:
+      - VehicleSchedule
+      description: Create cab
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CabSchedule'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CabSchedule'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CabSchedule'
+        required: true
+      responses:
+        '201':
+          description: Created
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /vehicleschedules/v1/pro:
+    post:
+      tags:
+      - VehicleSchedule
+      description: Create pro
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProSchedule'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ProSchedule'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ProSchedule'
+        required: true
+      responses:
+        '201':
+          description: Created
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /weatherforecasts/v1:
+    post:
+      tags:
+      - WeatherForecast
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WeatherForecast'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/WeatherForecast'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/WeatherForecast'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
+  /weatherforecasts/v1/{guid}:
+    put:
+      tags:
+      - WeatherForecast
+      parameters:
+      - name: guid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WeatherForecast'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/WeatherForecast'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/WeatherForecast'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal server error
+      security:
+      - ApiKey: []
+        oauth2: []
 components:
   schemas:
-    Microsoft.AspNetCore.Mvc.IActionResult:
-      type: object
-      additionalProperties: false
-    NemobilAPI.Contracts.BaseData.Data.OperationArea:
+    AccessPoint:
+      required:
+      - guid
+      - location
       type: object
       properties:
         guid:
           type: string
-          description: Id der OperationArea
-          format: uuid
-        locationBorder:
+        location:
+          $ref: '#/components/schemas/Location'
+        area:
           type: array
           items:
-            $ref: '#/components/schemas/NemobilAPI.Model.Location'
-          description: Polygon in welchem Bereich das gültig sein soll
+            $ref: '#/components/schemas/Location'
           nullable: true
-        guiltyRange:
-          $ref: '#/components/schemas/NemobilAPI.Model.Interval'
-        operator:
-          type: string
-          description: Welchem Betreiber ist dieses Gebiet zugeordnet
-          format: uuid
-      additionalProperties: false
-      description: Arbeitsbereich von Betriebsgebiet
-    NemobilAPI.Contracts.BaseData.Data.ParkingLocation:
-      type: object
-      properties:
-        location:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
-        maximumStoppingTime:
-          type: number
-          description: Maximale Standzeit in Sekunden
-          format: float
-      additionalProperties: false
-      description: Objekt für eine Location
-    NemobilAPI.Contracts.Forecast.TrafficData:
-      type: object
-      additionalProperties: false
-      description: Verkehrsdaten
-    NemobilAPI.Contracts.RideRequest.CustomerPreferences:
-      type: object
-      properties:
-        allowCarpooling:
+        barrierFreeAccess:
           type: boolean
-          description: Der Kunde erlaubt Mitfahrer bei seiner Fahrt
-        toleratedDelayBefore:
+        maxStoppingTime:
           type: integer
-          description: Der Kunde erlaubt folgende Verzögerung auf seinem Weg
           format: int32
-        toleratedDelayAfter:
-          type: integer
-          description: Der Kunde erlaubt folgende Verzögerung auf seinem Weg
-          format: int32
-      additionalProperties: false
-      description: Wünsche des Kunden bei der Anfrage
-    NemobilAPI.Contracts.RideRequest.TripRequestParameter:
+    AccessPoint2:
+      required:
+      - guid
       type: object
       properties:
+        guid:
+          type: string
+        location:
+          $ref: '#/components/schemas/Location2'
+        area:
+          type: array
+          items:
+            $ref: '#/components/schemas/Location2'
+          nullable: true
+        barrierFreeAccess:
+          type: boolean
+        maxStoppingTime:
+          type: integer
+          format: int32
+    BookTripParameter:
+      required:
+      - transactionGuid
+      - userGuid
+      - proposalKey
+      - source
+      type: object
+      properties:
+        transactionGuid:
+          type: string
         userGuid:
           type: string
-          description: Anfragender User
-          format: uuid
-        currentLoction:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
-        targetLocation:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
-        targetTime:
+        proposalKey:
           type: string
-          description: "<br>Gewünschte Ankunftszeit \r\n<br>(Target - Toleranz davor)"
-          format: date-time
-          nullable: true
-        pickupTime:
+        source:
           type: string
-          description: "<br>Gewünschte Abholzeit\r\n<br>(Pickup + Toleranz danach)"
-          format: date-time
-          nullable: true
-        skills:
-          type: array
-          items:
-            $ref: '#/components/schemas/NemobilAPI.Model.Skill'
-          description: 'Besonderheiten z.B: Kinderwagen, Rollstuhl, sonst. Einschränkungen'
-          nullable: true
-        requestedAdults:
-          type: integer
-          description: Wie viele Erwachsene sollen transportiert werden
-          format: int32
-        requestedChilds:
-          type: integer
-          description: Wie viele Kinder sollen transportiert werden
-          format: int32
-        luggage:
-          type: integer
-          description: Gepäck
-          format: int32
-        maxCabs:
-          type: integer
-          description: Wie viele Cabs sollen für den Transport maximal kommen
-          format: int32
-        personalPreferences:
-          $ref: '#/components/schemas/NemobilAPI.Contracts.RideRequest.CustomerPreferences'
-      additionalProperties: false
-      description: "<br>Parameter für eine Fahrtanfrage\r\n<br>https://github.com/moia-oss/alonso-mora/blob/master/core/src/main/java/org/matsim/alonso_mora/algorithm/DefaultAlonsoMoraRequest.java"
-    NemobilAPI.Contracts.RideRequest.TripRequestResponse:
+    BookTripResponse:
       type: object
       properties:
-        bookingTransaction:
-          type: string
-          description: Guid der Buchung
-          format: uuid
-        proposals:
-          type: array
-          items:
-            $ref: '#/components/schemas/NemobilAPI.Model.TripRequestProposal'
-          description: Vorschläge, zwischen denen der Kunde auswählen kann
-          nullable: true
-      additionalProperties: false
-      description: Ergebnisse der Planung nach einer Fahrtanfrage
-    NemobilAPI.Contracts.SonsorData.Data.ChargingPointStatus:
-      type: object
-      properties:
-        chargingPointGuid:
-          type: string
-          description: Guid des Ladepunkts
-          format: uuid
-        state:
+        successful:
+          type: boolean
+        statusCode:
           enum:
-            - 0 - Free
-            - 1 - InUse
-            - 2 - Maintenance
-          type: integer
-          description: Status des Ladepunkts
-          format: int32
-      additionalProperties: false
-      description: Statusmeldung des Ladepunkts
-    NemobilAPI.Contracts.SonsorData.Data.DrivingState:
-      type: object
-      properties:
-        bearing:
-          type: integer
-          description: "Aktuelle Fahrtrichtung des Fahrzeugs\r\nDie aktuelle Peilung des Flottenfahrzeugs in Grad relativ zu Nord. Das Zeitstempel-Element des Attributs sollte angeben, wann der Messwert ermittelt wurde"
-          format: int32
-        speed:
-          type: integer
-          description: Die aktuelle Geschwindigkeit des Fahrzeugs (km/h).
-          format: int32
-      additionalProperties: false
-      description: Fahrdaten
-    NemobilAPI.Contracts.SonsorData.Data.VehicleStatus:
-      type: object
-      properties:
-        guid:
+          - Successful
+          - ProposalNotFound
+          - ProposalNotMatching
+          - CabNotFound
+          - ParameterInvalid
+          - TripNotFound
+          - TripNotCreated
+          - ProposalInvalid
+        createdTripGuid:
           type: string
-          description: Unique identifier of the entity
-          format: uuid
-        vehicleScheduleGuid:
-          type: string
-          description: Sensorwert des Vehicle Schedule Entry
-          format: uuid
-        stateOfSchedule:
-          enum:
-            - 0 - Running
-            - 1 - StartSchedule
-            - 2 - EndSchedule
-          type: integer
-          description: "State of Schedule\r\nAnmeldung, Abmeldung oder laufend der Schicht"
-          format: int32
-        batteryLevel:
-          type: number
-          description: "Der aktuelle Prozentsatz der verbleibenden Batterie im Falle eines Elektrofahrzeugs\r\nAngabe in Prozent"
-          format: float
-        remainingRange:
-          type: number
-          description: Aktuelle Restreichweite
-          format: float
-        consumption:
-          type: number
-          description: Aktueller Energieverbrauch
-          format: float
-        energyConsumptionSinceLastStop:
-          type: number
-          description: Energieverbrauch seit dem letzten Stop
-          format: float
-        location:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
-        state:
-          enum:
-            - 0 - None
-            - 1 - DoorsOpened
-            - 2 - Idle
-            - 4 - WaintingForCustomer
-            - 8 - Konvoi
-            - 16 - CustomerTransport
-            - 32 - Charging
-            - 64 - Accident
-            - 128 - TrafficJam
-          type: integer
-          description: "Status des Fahrzeugs\r\nEine Beschreibung des aktuellen Status des Fahrzeugs"
-          format: int32
-        drivingState:
-          $ref: '#/components/schemas/NemobilAPI.Contracts.SonsorData.Data.DrivingState'
-        deviation:
-          type: number
-          description: "+ => Besser als Vorgesehen\r\n- => Im Verzug"
-          format: float
-        chargingPower:
-          type: number
-          description: Aktuelle Ladeleistungs
-          format: float
-        chargedPower:
-          type: number
-          description: Aktuell geladene Energie (Nur wenn das Fahrzeug aktuell geladen wird)
-          format: float
-        tireAirPressure:
-          type: number
-          description: Für alle 4 Reifen oder wie am besten?
-          format: float
-        mileageFromOdometer:
-          type: integer
-          description: "Aktueller Kilometerstand\r\nDie Gesamtentfernung, die das Flottenfahrzeug gemäß dem eingebauten Kilometerzähler in Kilometern (unitCode KMT) oder Meilen (unitCode SMI) zurückgelegt hat. Siehe auch Schema.org Vehicle/ mileageFromOdometer. Das Element timestamp hält fest, wann der Kilometerstand gemessen wurde"
-          format: int32
-        load:
-          type: integer
-          description: "Aktuelle Beladung\r\nNur CAB?"
-          format: int32
-        weight:
-          type: integer
-          description: "Aktuelles Gesamtgewicht des Fahrzeugs\r\nNur CAB?"
-          format: int32
-        chainedVehicles:
-          type: integer
-          description: "Wie viele Cabs fahre ich gerade\r\nNur PRO"
-          format: int32
-        powerSupply:
-          type: integer
-          description: "Wie viele Energie geben ich gerade an zu ladene Cabs weiter?\r\nNur PRO"
-          format: int32
-        temperatureIndoor:
-          type: number
-          description: "Aktuelle Temperatur innerhalb des Fahrzeugs\r\nNur CAB"
-          format: float
-        temperatureOutside:
-          type: number
-          description: "Aktuelle Temperatur ausßerhalb des Fahrzeugs\r\nNur CAB oder auch PRO insteressant"
-          format: float
-        dateCreated:
-          type: string
-          description: Entity creation timestamp. This will usually be allocated by the storage platform
-          format: date-time
-      additionalProperties: false
-      description: "Sensor-Werte eines Fahrzeugs\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleStatus/doc/spec.md"
-    NemobilAPI.Contracts.TourReportResult:
-      type: object
-      properties:
-        vehicleGuid:
-          type: string
-          description: Fahrzeug
-          format: uuid
-        timeInterval:
-          $ref: '#/components/schemas/NemobilAPI.Model.Interval'
-        drivingTime:
-          type: integer
-          description: Fahrzeit in Sekunden
-          format: int64
-        drivingDistance:
-          type: number
-          description: Gefahrene Distanz
-          format: double
-        idleTime:
-          type: integer
-          description: Wartezeit
-          format: int64
-        trips:
-          type: array
-          items:
-            $ref: '#/components/schemas/NemobilAPI.Model.Trip'
-          description: Liste der Fahrten
           nullable: true
-        energyConsumption:
-          type: number
-          description: Energie verbraucht
-          format: double
-        energyCharged:
-          type: number
-          description: Energie geladen
-          format: double
-        revenue:
-          type: number
-          description: Umsatz
-          format: double
-        costs:
-          type: number
-          description: Kosten im Zeitraum
-          format: double
-      additionalProperties: false
-      description: Report einer Tour
-    NemobilAPI.Contracts.Trip.TripStatusResponse:
-      type: object
-      properties:
-        costs:
-          type: number
-          description: Kosten für die Fahrt
-          format: float
-        carpoolInformation:
-          $ref: '#/components/schemas/NemobilAPI.Model.CarpoolInformation'
-        skills:
-          type: array
-          items:
-            $ref: '#/components/schemas/NemobilAPI.Model.Skill'
-          description: 'Besonderheiten z.B: Kinderwagen, Rollstuhl, sonst. Einschränkungen'
-          nullable: true
-        requestedAdults:
-          type: integer
-          description: Wie viele Erwachsene sollen transportiert werden
-          format: int32
-        requestedChilds:
-          type: integer
-          description: Wie viele Kinder sollen transportiert werden
-          format: int32
-        luggage:
-          type: integer
-          description: Gepäck
-          format: int32
-        status:
-          enum:
-            - 0 - Unplanned
-            - 1 - Planned
-            - 2 - Started
-            - 3 - Performed
-          type: integer
-          description: Status der Fahrt
-          format: int32
-        pickupTime:
-          type: string
-          description: "Geplante Abholzeit\r\nToleranz - Range => Interval"
-          format: date-time
-        targetTime:
-          type: string
-          description: "Erwartete Ankunftszeit\r\nToleranz - Range => Interval"
-          format: date-time
-        targetTimeMin:
-          type: string
-          description: Frühste erwartete Ankunftszeit
-          format: date-time
-        targetTimeMax:
-          type: string
-          description: Späteste erwartete Ankunftszeit
-          format: date-time
-      additionalProperties: false
-      description: Rückgabe einer Statusabfrage der Buchung
-    NemobilAPI.Contracts.VehicleSchedule.Data.CabSchedule:
+    CabSchedule:
       required:
-        - label
-        - licensePlate
+      - id
+      - schedule
+      - label
+      - licensePlate
+      - powerConsumption
+      - totalEnergyCapacity
+      - initialEnergyCapacity
+      - initialLocation
+      - operatingCompany
+      - vehicleType
       type: object
       properties:
-        id:
-          type: string
-          description: Id des Fahrzeug Einsatzblocks
-          format: uuid
-        schedule:
-          $ref: '#/components/schemas/NemobilAPI.Model.Schedule'
-        label:
-          maxLength: 150
-          minLength: 1
-          type: string
-          description: Name des Fahrzeugs
-        licensePlate:
-          maxLength: 15
-          minLength: 1
-          type: string
-          description: Nummernschild des Fahrzeugs
-        powerConsumption:
-          $ref: '#/components/schemas/NemobilAPI.Model.PowerConsumptionParameter'
-        flatratPowerConsumption:
-          type: number
-          description: Pauschaler Energieverbrauch
-          format: float
-        risk:
-          type: number
-          description: Wie viel Toleranz sollen wir bei der Restreichweite lassen
-          format: float
-        totalEnergyCapacity:
-          type: number
-          description: Wie viel Energie kann das Fahrzeug insgesamt speichern
-          format: float
-        initialEnergyCapacity:
-          type: number
-          description: "Mit wie viel Energie startet das Fahrzeug den Dienst\r\nEnergie mit dem Start überprüfen"
-          format: float
-        initialLocation:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
-        maxSpeed:
-          type: number
-          description: Was ist die maximale Geschwindigkeit des Fahrzeugs
-          format: float
-        regenerativePower:
-          type: number
-          description: Energie, die das Fahrzeug ins Netz speisen kann
-          format: float
-        operatingCompany:
-          type: string
-          description: "Welchem Betreiber ist dieses Fahrzeug zugeordnet\r\nDetails of the organization that is operating this fleet vehicle."
-          format: uuid
-        maxiumRegenerativePower:
-          type: number
-          description: Maximale Rückspeiseleistung
-          format: float
-        defaultEnergyConsuptionPerKm:
+        hasRamp:
+          type: boolean
+        seats:
           type: integer
-          description: Geschätzer Durchschnittsverbrauch pro Kilometer
           format: int32
-        skills:
-          type: array
-          items:
-            type: integer
-            format: int32
-          description: "Welche Features bietet das Cab?\r\n- 1 => Rollstuhl bspw."
-          nullable: true
-        restrictions:
-          type: object
-          additionalProperties:
-            type: number
-            format: float
-            nullable: true
-          description: "Kapazitäten des Cabs\r\nBspw. \"Personen\": 4"
-          nullable: true
+        childSeats:
+          type: integer
+          format: int32
+        luggage:
+          type: integer
+          format: int32
         chargingCurve:
           type: array
           items:
             type: number
             format: float
-          description: "Wie entwickelt sich die Ladekurve\r\n[0] => 0% \r\nAlternativ: Wie viel lange wird für 5% im passenden Korridor gebraucht?"
-          nullable: true
         maxSpeedAutonomous:
           type: number
-          description: Maximale Geschwindigkeit autonom
           format: float
-      additionalProperties: false
-      description: Cab-Fahrzeug Eintrag
-    NemobilAPI.Contracts.VehicleSchedule.Data.ProSchedule:
-      required:
-        - label
-        - licensePlate
-      type: object
-      properties:
         id:
           type: string
-          description: Id des Fahrzeug Einsatzblocks
-          format: uuid
         schedule:
-          $ref: '#/components/schemas/NemobilAPI.Model.Schedule'
+          $ref: '#/components/schemas/Schedule'
         label:
           maxLength: 150
-          minLength: 1
           type: string
-          description: Name des Fahrzeugs
         licensePlate:
           maxLength: 15
-          minLength: 1
           type: string
-          description: Nummernschild des Fahrzeugs
         powerConsumption:
-          $ref: '#/components/schemas/NemobilAPI.Model.PowerConsumptionParameter'
-        flatratPowerConsumption:
+          $ref: '#/components/schemas/PowerConsumptionParameter'
+        flatratEnergyConsumption:
           type: number
-          description: Pauschaler Energieverbrauch
           format: float
         risk:
           type: number
-          description: Wie viel Toleranz sollen wir bei der Restreichweite lassen
           format: float
         totalEnergyCapacity:
           type: number
-          description: Wie viel Energie kann das Fahrzeug insgesamt speichern
           format: float
         initialEnergyCapacity:
           type: number
-          description: "Mit wie viel Energie startet das Fahrzeug den Dienst\r\nEnergie mit dem Start überprüfen"
           format: float
         initialLocation:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
+          $ref: '#/components/schemas/Location'
         maxSpeed:
           type: number
-          description: Was ist die maximale Geschwindigkeit des Fahrzeugs
           format: float
         regenerativePower:
           type: number
-          description: Energie, die das Fahrzeug ins Netz speisen kann
           format: float
         operatingCompany:
           type: string
-          description: "Welchem Betreiber ist dieses Fahrzeug zugeordnet\r\nDetails of the organization that is operating this fleet vehicle."
-          format: uuid
-        maxiumRegenerativePower:
+        maximumRegenerativePower:
           type: number
-          description: Maximale Rückspeiseleistung
           format: float
-        defaultEnergyConsuptionPerKm:
-          type: integer
-          description: Geschätzer Durchschnittsverbrauch pro Kilometer
-          format: int32
-        maxCabChain:
-          type: integer
-          description: Wie viele Cabs können maximal an das Pro gehangen werden
-          format: int32
-        additionalEnergyConsumptionPerCab:
-          type: array
-          items:
-            type: number
-            format: float
-          description: Liste mit zusätzlichem Verbrauch pro angehangenem Cab
-          nullable: true
-      additionalProperties: false
-      description: Pro-Fahrzeug Eintrag
-    NemobilAPI.Contracts.WeatherForecast:
+        defaultEnergyConsuptionPerM:
+          type: number
+          format: float
+        vehicleType:
+          type: string
+        stateOfSchedule:
+          enum:
+          - Planned
+          - Active
+          - Started
+          - Completed
+    CabStop:
+      required:
+      - vehicleSchedule
+      - tripGuid
+      - userGuid
+      - stopType
+      - consumedEnergy
+      - chargedEnergy
+      - remainingEnergy
+      - key
+      - location
+      - latestStartDrivingToStop
+      - arrival
+      - departure
+      - duration
+      - drivingTime
+      - distance
       type: object
       properties:
-        forecastGuid:
-          type: string
-          description: Unique identifier of the entity
-          format: uuid
-        dateCreated:
-          type: string
-          description: Entity creation timestamp
-          format: date-time
-        temperature:
-          type: number
-          description: Temperature of the item
-          format: float
-        region:
-          type: array
-          items:
-            $ref: '#/components/schemas/NemobilAPI.Model.Location'
-          description: Bereich, in dem die Wettervorhersage gültig ist
-          nullable: true
-        areaServed:
-          type: array
-          items:
-            $ref: '#/components/schemas/NemobilAPI.Model.Location'
-          description: "Alternative zu Region\r\nThe geographic area where a service or offered item is provided"
-          nullable: true
-        gustSpeed:
-          type: number
-          description: A sudden burst of high-speed wind over the observed average wind speed lasting only for a few seconds
-          format: float
-        wetStreet:
-          type: boolean
-          description: Nasse Straßen brauchen mehr Energie
-        snowHeight:
-          type: number
-          description: https://github.com/smart-data-models/dataModel.Weather/blob/master/WeatherObserved/doc/spec.md
-          format: float
-        validFrom:
-          type: string
-          description: Validity period start date and time
-          format: date-time
-        validTo:
-          type: string
-          description: Validity period end date and time
-          format: date-time
-        windDirection:
+        status:
           type: integer
-          description: Direction of the wind bet
-          format: int32
-        windSpeed:
+        vehicleSchedule:
+          type: string
+        tripGuid:
+          type: string
+        userGuid:
+          type: string
+        stopType:
+          enum:
+          - Pickup
+          - Dropoff
+          - Relocation
+          - Charging
+          - Parking
+          - BusinessTrip
+          - Maintenance
+          - Absence
+          - Depot
+          - Chaining
+          - Unchaining
+        consumedEnergy:
+          type: number
+          format: float
+        chargedEnergy:
+          type: number
+          format: float
+        remainingEnergy:
+          type: number
+          format: float
+        currentQuantities:
+          type: number
+          format: float
+        appointment:
+          $ref: '#/components/schemas/Interval2'
+        guidChainRouteSegment:
+          type: string
+          nullable: true
+        key:
+          type: string
+        location:
+          $ref: '#/components/schemas/Location'
+        latestStartDrivingToStop:
+          type: string
+          format: date-time
+        arrival:
+          type: string
+          format: date-time
+        departure:
+          type: string
+          format: date-time
+        duration:
           type: integer
-          description: Intensity of the wind
           format: int32
-      additionalProperties: false
-      description: "Wettervorhersage\r\nhttps://github.com/smart-data-models/dataModel.Weather/blob/master/WeatherForecast/doc/spec.md"
-    NemobilAPI.Model.CarpoolInformation:
+        drivingTime:
+          type: integer
+          format: int32
+        distance:
+          type: integer
+          format: int32
+    CarpoolInformation:
       type: object
       properties:
         passengersOnBoard:
           type: boolean
-          description: Sind bereits Mitfahrer im Cab
         passengerBoarding:
           type: boolean
-          description: Steigt während der Fahrt jemand hinzu
-      additionalProperties: false
-      description: Informationen über Carpooling
-    NemobilAPI.Model.ChainingLocation:
+      nullable: true
+    ChainingLocation:
+      required:
+      - guid
+      - locationStart
+      - locationEnd
+      - type
       type: object
       properties:
-        locationStart:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
-        locationEnd:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
-        additionalTime:
-          type: integer
-          description: Zusätzliche Zeit durch besondere Gegebenheiten
-          format: int32
-      additionalProperties: false
-      description: "Ort an dem ein Kupplungsvorgang stattfinden kann\r\nDie Kopplung soll langfristig auf geraden Strecken ermöglicht werden, daher gibt es einen Start und einen Endpunkt."
-    NemobilAPI.Model.Charging.ChargingOperator:
-      type: object
-      additionalProperties: false
-      description: "Betreiber: operator\r\nWie bildet man die Preisprofile ab?\r\nFortlaufende Daten. Zeitreihentabelle. Werden die Daten später nochmal gebraucht?\r\nPreisprofil (15 Min pro Anbieter (pro 24h)) (Sensor)\r\nEinspeise-Preisprofil (15 Min pro Anbieter (pro 24h)) (Sensor)\r\nPro Profil einen Betreiber hinterlegen, eine Station kann x Profile haben"
-    NemobilAPI.Model.Charging.ChargingPoint:
-      type: object
-      properties:
-        location:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
-        maximumStoppingTime:
-          type: number
-          description: Maximale Standzeit in Sekunden
-          format: float
         guid:
           type: string
-          description: Kennung der Ladesäule
-          format: uuid
+        locationStart:
+          $ref: '#/components/schemas/Location'
+        locationEnd:
+          $ref: '#/components/schemas/Location'
         type:
           enum:
-            - 0 - Electric
-            - 1 - Hydrogen
+          - NotAllowed
+          - Chain
+          - Unchain
+          - ChainAndUnchain
+        additionalTime:
           type: integer
-          description: Typ der Ladesäule
           format: int32
+    ChainingStop:
+      required:
+      - key
+      - location
+      - latestStartDrivingToStop
+      - arrival
+      - departure
+      - duration
+      - drivingTime
+      - distance
+      type: object
+      properties:
+        vehicleSchedule:
+          type: string
+        chainedCabs:
+          type: integer
+          format: int32
+        key:
+          type: string
+        location:
+          $ref: '#/components/schemas/Location'
+        latestStartDrivingToStop:
+          type: string
+          format: date-time
+        arrival:
+          type: string
+          format: date-time
+        departure:
+          type: string
+          format: date-time
+        duration:
+          type: integer
+          format: int32
+        drivingTime:
+          type: integer
+          format: int32
+        distance:
+          type: integer
+          format: int32
+    ChainRouteDto:
+      required:
+      - guid
+      - startLocation
+      - endLocation
+      type: object
+      properties:
+        guid:
+          type: string
+        startLocation:
+          type: string
+        intermediateChainingLocations:
+          type: array
+          items:
+            $ref: '#/components/schemas/IntermediateChainingLocation'
+        endLocation:
+          type: string
+        duration:
+          type: integer
+          format: int32
+        distance:
+          type: integer
+          format: int32
+    ChainRouteSchedule:
+      required:
+      - guid
+      - chainRoute
+      - proSchedule
+      type: object
+      properties:
+        guid:
+          type: string
+        chainRoute:
+          type: string
+        proSchedule:
+          type: string
+        departure:
+          type: string
+          format: date-time
+        arrival:
+          type: string
+          format: date-time
+        duration:
+          type: integer
+          format: int32
+          nullable: true
+    ChargingOperator:
+      required:
+      - name
+      type: object
+      properties:
+        chargingOperatorGuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        defaultPrice:
+          type: number
+          format: float
+    ChargingPoint:
+      required:
+      - guid
+      - location
+      type: object
+      properties:
+        type:
+          enum:
+          - Electric
+          - Hydrogen
+          - AC
+          - DC
         state:
           enum:
-            - 0 - Free
-            - 1 - InUse
-            - 2 - Maintenance
-          type: integer
-          description: "Status der Ladesäule\r\n\r\nstatus[string]: Status der Ladestation.Enum:'almostEmpty, almostFull, empty, full, outOfService, withIncidence, working'. Oder jede andere anwendungsspezifische."
-          format: int32
+          - Free
+          - InUse
+          - Maintenance
         maximumPowerSupply:
           type: number
-          description: Maximale Leistung der Ladesäule
           format: float
         maximumRegenerativePower:
           type: number
-          description: Maximale Einspeiseleistung von Fahrzeugen
           format: float
         openingHours:
           type: array
           items:
-            $ref: '#/components/schemas/NemobilAPI.Model.OpeningTimeEntry'
-          description: Öffnungszeiten der Ladestation
-          nullable: true
+            $ref: '#/components/schemas/OpeningTimeEntry'
         operators:
           type: array
           items:
-            $ref: '#/components/schemas/NemobilAPI.Model.Charging.ChargingOperator'
-          description: Welche Betreiber gibt es an diesem Ladepunkt
-          nullable: true
+            $ref: '#/components/schemas/ChargingOperator'
         voltage:
           type: number
-          description: Die von der Ladestation angebotene Gesamtspannung
           format: float
         amperage:
           type: number
-          description: Die von der Ladestation angebotene Gesamtstromstärke
           format: float
         owner:
           type: string
-          description: Eine Liste mit einer JSON-kodierten Zeichenfolge, die auf die eindeutigen Kennungen der Eigentümer verweist
           format: uuid
-      additionalProperties: false
-      description: "<br>Ladepunkt für ein Fahrzeug\r\n<br>https://github.com/smart-data-models/dataModel.Transportation/blob/master/EVChargingStation/doc/spec_DE.md\r\n<br>\r\n            TODO:\r\n            Trennung von Wasserstoff und Sauerstoff\r\n            Aktuelle Infos über Ladeleistung und freie Ladestellen\r\n            \r\n<br>\r\n            TODO:\r\n            ChargingHub ist eine erweiterte ParkingLocation mit weiteren Anzeigen - Charginghub Cab 1 - 1\r\n            Maximale Parkdauer\r\n            Betriebszeit (Tagesweise)\r\n            Status (Wartung, Belegt, Frei) (Sensor)\r\n            Preisprofil (15 Min pro Anbieter (pro 24h)) (Sensor)\r\n            \r\n<br>Maximale Rückspeiseleistung (+ Preis)"
-    NemobilAPI.Model.Charging.PricingInfo:
+        guid:
+          type: string
+        location:
+          $ref: '#/components/schemas/Location'
+        maximumStoppingTime:
+          type: number
+          format: float
+    ChargingPointAssignment:
+      required:
+      - chargingPoint
       type: object
       properties:
-        operator:
+        chargingPoint:
+          $ref: '#/components/schemas/ChargingPoint'
+        startTime:
           type: string
-          description: Lieferant des Stroms
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+        state:
+          enum:
+          - None
+          - Active
+          - Planned
+          - Completed
+        chargedEnergy:
+          type: number
+          format: float
+    ChargingPointStatus:
+      type: object
+      properties:
+        chargingPointGuid:
+          type: string
           format: uuid
-        costPerInterval:
+        state:
+          enum:
+          - Free
+          - InUse
+          - Maintenance
+    CreateApiKeyRequest:
+      required:
+      - name
+      - scopes
+      type: object
+      properties:
+        name:
+          type: string
+        scopes:
           type: array
           items:
-            type: integer
-            format: int32
-          description: "Cost of the energy in cent. 15 min intervals \r\n0 => 0 - 0:14\r\n1 => 0:15 - 0:29\r\n...\r\n95 => 23:45 - 23:59"
-          nullable: true
-      additionalProperties: false
-      description: Kosten für das Laden oder Vergütung für eingespeiste Energie pro kWh
-    NemobilAPI.Model.Interval:
+            type: string
+    CreateChargingAssignmentParameter:
+      required:
+      - chargingPointGuid
+      - vehicleGuid
+      - startTime
+      - endTime
       type: object
-      additionalProperties: false
-    NemobilAPI.Model.Location:
+      properties:
+        chargingPointGuid:
+          type: string
+        vehicleGuid:
+          type: string
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+    CustomerPreferences:
+      type: object
+      properties:
+        allowCarpooling:
+          type: boolean
+        toleratedDelayBefore:
+          type: integer
+          format: int32
+        toleratedDelayAfter:
+          type: integer
+          format: int32
+      nullable: true
+    DrivingState:
+      type: object
+      properties:
+        bearing:
+          type: integer
+          format: int32
+        speed:
+          type: integer
+          format: int32
+    Endpoint:
+      type: object
+      properties:
+        uri:
+          type: string
+        accept:
+          type: string
+    Entity:
+      type: object
+      properties:
+        type:
+          type: string
+    GeoProperty:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/GeoValue'
+        coordinates:
+          type: array
+          items:
+            type: number
+            format: double
+        type:
+          type: string
+    GeoValue:
+      type: object
+      properties:
+        coordinates:
+          type: array
+          items:
+            type: number
+            format: double
+        type:
+          type: string
+    GetRouteRequest:
+      required:
+      - start
+      - end
+      - time
+      - vehicleType
+      type: object
+      properties:
+        start:
+          $ref: '#/components/schemas/Location'
+        end:
+          $ref: '#/components/schemas/Location'
+        time:
+          type: string
+          format: date-time
+        vehicleType:
+          type: string
+    GetSchedulePlanParameter:
+      required:
+      - vehicleGuids
+      - timeRange
+      type: object
+      properties:
+        vehicleGuids:
+          type: array
+          items:
+            type: string
+            format: uuid
+        timeRange:
+          $ref: '#/components/schemas/Interval'
+    IActionResult:
+      type: object
+    IntermediateChainingLocation:
+      required:
+      - chainingLocation
+      type: object
+      properties:
+        chainingLocation:
+          type: string
+        type:
+          enum:
+          - NotAllowed
+          - Chain
+          - Unchain
+          - ChainAndUnchain
+        offsetArrival:
+          pattern: ^-?(\d+\.)?\d{2}:\d{2}:\d{2}(\.\d{1,7})?$
+          type: string
+        offsetDeparture:
+          pattern: ^-?(\d+\.)?\d{2}:\d{2}:\d{2}(\.\d{1,7})?$
+          type: string
+    Interval:
+      type: object
+      properties:
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+    Interval2:
+      type: object
+      properties:
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+      nullable: true
+    Location:
+      required:
+      - longitude
+      - latitude
       type: object
       properties:
         longitude:
@@ -1776,315 +2838,983 @@ components:
         latitude:
           type: number
           format: double
-      additionalProperties: false
-    NemobilAPI.Model.OpeningTimeEntry:
+    Location2:
+      type: object
+      properties:
+        locationHashCode:
+          type: integer
+          format: int32
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+    Location3:
+      required:
+      - longitude
+      - latitude
+      type: object
+      properties:
+        longitude:
+          type: number
+          format: double
+        latitude:
+          type: number
+          format: double
+      nullable: true
+    LoginRequest:
+      type: object
+      properties:
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+        scope:
+          type: string
+    Notification:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        subscriptionId:
+          type: string
+        notifiedAt:
+          type: string
+          format: date-time
+        data:
+          type: array
+    NotificationSub:
+      type: object
+      properties:
+        attributes:
+          type: array
+          items:
+            type: string
+        format:
+          type: string
+        endpoint:
+          $ref: '#/components/schemas/Endpoint'
+        status:
+          type: string
+        timesSent:
+          type: integer
+          format: int32
+        lastNotification:
+          type: string
+        lastFailure:
+          type: string
+    OpeningTimeEntry:
+      required:
+      - weekDays
+      - min
+      - max
       type: object
       properties:
         weekDays:
-          enum:
-            - 0 - None
-            - 1 - Sunday
-            - 2 - Monday
-            - 4 - Tuesday
-            - 8 - Wednesday
-            - 16 - Thursday
-            - 32 - Friday
-            - 64 - Saturday
-            - 127 - All
-          type: integer
-          description: Gets or sets the weekday.
-          format: int32
+          type: string
         min:
-          $ref: '#/components/schemas/System.TimeSpan'
+          pattern: ^-?(\d+\.)?\d{2}:\d{2}:\d{2}(\.\d{1,7})?$
+          type: string
         max:
-          $ref: '#/components/schemas/System.TimeSpan'
-      additionalProperties: false
-      description: Element einer Öffnungszeit
-    NemobilAPI.Model.PlanningConfiguration:
+          pattern: ^-?(\d+\.)?\d{2}:\d{2}:\d{2}(\.\d{1,7})?$
+          type: string
+    OperationArea:
+      required:
+      - locationBorder
+      - guiltyRange
+      type: object
+      properties:
+        guid:
+          type: string
+          format: uuid
+        locationBorder:
+          type: array
+          items: {}
+        guiltyRange:
+          $ref: '#/components/schemas/Interval'
+        operator:
+          type: string
+          format: uuid
+    ParkingLocation:
+      required:
+      - guid
+      - location
+      type: object
+      properties:
+        guid:
+          type: string
+        location:
+          $ref: '#/components/schemas/Location'
+        maximumStoppingTime:
+          type: number
+          format: float
+    PlanningCab:
+      required:
+      - currentLocation
+      type: object
+      properties:
+        vehicle:
+          $ref: '#/components/schemas/CabSchedule'
+        currentLocation:
+          $ref: '#/components/schemas/Location'
+        estimatedTimeAtStop:
+          type: string
+          format: date-time
+        estimatedEnergyAtStop:
+          type: number
+          format: float
+        tripStops:
+          type: array
+          items:
+            $ref: '#/components/schemas/CabStop'
+        archivedStops:
+          type: array
+          items: {}
+    PlanningConfiguration:
       type: object
       properties:
         toleranceDrivingTime:
           type: number
-          description: Wie viel Toleranz sollen wir bei den Fahrzeiten beachten
           format: float
         toleranceCapacity:
           type: number
-          description: Wie viel Toleranz sollen wir bei den Akkus berücksichtigen
           format: float
         chainTime:
           type: integer
-          description: Zeit für die Kupplung einplanen
+          format: int32
+        boardingTimeSeconds:
+          type: integer
+          format: int32
+        alightingTimeSeconds:
+          type: integer
+          format: int32
+        chargingPlugInTimeSeconds:
+          type: integer
+          format: int32
+        chargingPlugOutTimeSeconds:
+          type: integer
           format: int32
         proposalTimer:
           type: integer
-          description: Wie lange sind die Vorschläge für die Kunden gültig
           format: int32
         proposalCount:
           type: integer
-          description: Wie viele Vorschläge soll der Kunde bekommen
           format: int32
         planningHorizon:
           type: integer
-          description: Wie viele Stunden im vorraus soll geplant werden
           format: int32
-        chargingStartThreshold:
+        chargingStartThreshhold:
           type: number
-          description: "Ab wann soll auf jeden Fall geladen werden\r\nPro und Cab trennen?"
           format: float
-        chargingEndThreshold:
+        chargingEndThreshhold:
           type: number
-          description: "Ab wann kann aufegrhört werden zu laden\r\nPro und Cab trennen?"
           format: float
         useProThreshhold:
-          type: number
-          description: Bis zu welcher Distanz soll das Cab direkt fahren, ohne das ein Pro verwendet wird
-          format: float
+          type: integer
+          format: int32
         mode:
           enum:
-            - 0 - Insert
-            - 1 - InsertOpt
-            - 2 - InsertOptRelocate
-          type: integer
-          description: Planungs- und Optimierungsansatz
-          format: int32
-      additionalProperties: false
-      description: Einstellungsmöglichkeiten der Planung
-    NemobilAPI.Model.PowerConsumptionParameter:
+          - Insert
+          - InsertOpt
+          - InsertOptRelocate
+        mapStartAndOnMap:
+          type: boolean
+        analyzeMode:
+          type: boolean
+    PlanningPro:
+      required:
+      - currentLocation
+      type: object
+      properties:
+        vehicle:
+          $ref: '#/components/schemas/ProSchedule'
+        currentLocation:
+          $ref: '#/components/schemas/Location'
+        chainingStops:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChainingStop'
+    PowerConsumptionParameter:
       type: object
       properties:
         speed:
           type: number
-          description: Hohe Geschwindigkeiten(über 65 MPH oder 105 km/h) können die Effizienz eines E-Autos erheblich verringern, was zu einem höheren Verbrauch führt.
           format: float
         wind:
           type: number
-          description: Ein starker Gegenwind kann zu einem höheren Energieverbrauch führen.
           format: float
         loadCapacity:
           type: number
-          description: Schwerere Lasten erhöhen den Energieverbrauch.Mehr Gewicht bedeutet, dass der Motor härter arbeiten muss.
           format: float
         tireTraction:
           type: number
-          description: Eine schlechte Reifentraktion kann die Effizienz verringern und zu einem höheren Verbrauch führen.Eine ordnungsgemäße Wartung der Reifen gewährleistet eine optimale Traktion und kann dazu beitragen, den Energieverbrauch zu senken.
           format: float
         weatherConditions:
           type: number
-          description: Extreme Temperaturen, sowohl heiß als auch kalt, beeinträchtigen die Batterieleistung, was zu einem höheren Energieverbrauch führen kann.
           format: float
         climatronic:
           type: number
-          description: Die Nutzung der Heizungs-, Lüftungs- und Klimaanlagen in einem E-Auto verbraucht Energie.Daher kann eine übermäßige Nutzung der Klimaanlage die Reichweite verringern.
           format: float
         regenerativeBraking:
           type: number
-          description: Es steigert die Effizienz von Elektroautos, wenn die kinetische Energie beim Bremsen in elektrische Energie umgewandelt wird und so die Fahrzeugbatterie wieder auflädt und den Energieverbrauch senkt.
           format: float
-      additionalProperties: false
-      description: "Faktoren, die den Verbrauch von Elektroautos beeinflussen\r\nhttps://www.cardino.de/blog-posts/berechnung-des-verbrauchs-ihres-elektroautos?0c368a56_page=2"
-    NemobilAPI.Model.Schedule:
-      type: object
-      additionalProperties: false
-      description: Zeitbereich
-    NemobilAPI.Model.Skill:
+    PricingInfo:
+      required:
+      - costPerInterval
       type: object
       properties:
-        skillId:
-          type: integer
-          description: Id des Skills
-          format: int32
-        skillName:
+        operator:
           type: string
-          description: Name des Skills
+          format: uuid
+        costPerInterval:
+          type: array
+          items:
+            type: integer
+            format: int32
+    ProblemDetails:
+      type: object
+      properties:
+        type:
+          type: string
           nullable: true
-      additionalProperties: false
-      description: Skills, die Cabs von Nemobil erfüllen können
-    NemobilAPI.Model.Trip:
+        title:
+          type: string
+          nullable: true
+        status:
+          type: integer
+          format: int32
+          nullable: true
+        detail:
+          type: string
+          nullable: true
+        instance:
+          type: string
+          nullable: true
+    PropertyOfint: {}
+    PropertyOfstring: {}
+    ProSchedule:
+      required:
+      - id
+      - schedule
+      - label
+      - licensePlate
+      - powerConsumption
+      - totalEnergyCapacity
+      - initialEnergyCapacity
+      - initialLocation
+      - operatingCompany
+      - vehicleType
+      type: object
+      properties:
+        maxCabChain:
+          type: integer
+          format: int32
+        additionalEnergyConsumptionPerCab:
+          type: array
+          items:
+            type: number
+            format: float
+        maxCabChargingPower:
+          type: integer
+          format: int32
+        id:
+          type: string
+        schedule:
+          $ref: '#/components/schemas/Schedule'
+        label:
+          maxLength: 150
+          type: string
+        licensePlate:
+          maxLength: 15
+          type: string
+        powerConsumption:
+          $ref: '#/components/schemas/PowerConsumptionParameter'
+        flatratEnergyConsumption:
+          type: number
+          format: float
+        risk:
+          type: number
+          format: float
+        totalEnergyCapacity:
+          type: number
+          format: float
+        initialEnergyCapacity:
+          type: number
+          format: float
+        initialLocation:
+          $ref: '#/components/schemas/Location'
+        maxSpeed:
+          type: number
+          format: float
+        regenerativePower:
+          type: number
+          format: float
+        operatingCompany:
+          type: string
+        maximumRegenerativePower:
+          type: number
+          format: float
+        defaultEnergyConsuptionPerM:
+          type: number
+          format: float
+        vehicleType:
+          type: string
+        stateOfSchedule:
+          enum:
+          - Planned
+          - Active
+          - Started
+          - Completed
+    RouteResponse:
+      required:
+      - distance
+      - drivingTime
+      - energyConsumption
+      type: object
+      properties:
+        distance:
+          type: integer
+          format: int32
+        drivingTime:
+          type: integer
+          format: int32
+        energyConsumption:
+          type: integer
+          format: int32
+    Schedule:
+      type: object
+      properties:
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
+    SetApiKeyActiveRequest:
+      type: object
+      properties:
+        isActive:
+          type: boolean
+    SimulationBaseData:
+      required:
+      - simulationInitTime
+      - planningConfiguration
+      type: object
+      properties:
+        cabSchedules:
+          type: array
+          items:
+            $ref: '#/components/schemas/CabSchedule'
+        proSchedules:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProSchedule'
+        chargingPoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargingPoint'
+        chainingLocations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChainingLocation'
+        chainRoutes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChainRouteDto'
+        chainRouteSchedules:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChainRouteSchedule'
+        accessPoints:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessPoint'
+        parkingLocations:
+          type: array
+          items:
+            $ref: '#/components/schemas/ParkingLocation'
+        operationAreas:
+          type: array
+          items:
+            $ref: '#/components/schemas/OperationArea'
+        simulationInitTime:
+          type: string
+          format: date-time
+        planningConfiguration:
+          $ref: '#/components/schemas/PlanningConfiguration'
+    SimulationRunParameter:
+      type: object
+      properties:
+        simulationSteps:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimulationStep'
+        createInitialReport:
+          type: boolean
+    SimulationStep:
+      required:
+      - requestParameter
+      type: object
+      properties:
+        requestParameter:
+          $ref: '#/components/schemas/TripRequestParameter'
+        simulatedTime:
+          type: string
+          format: date-time
+        bookProposal:
+          type: boolean
+        createReport:
+          type: boolean
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+        notificationTrigger:
+          type: array
+          items:
+            type: string
+        entities:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entity'
+        watchedAttributes:
+          type: array
+          items:
+            type: string
+        q:
+          type: string
+        notification:
+          $ref: '#/components/schemas/NotificationSub'
+        '@context':
+          type: array
+          items:
+            type: string
+        status:
+          type: string
+    TourReportParameter:
+      required:
+      - timeRange
+      type: object
+      properties:
+        timeRange:
+          $ref: '#/components/schemas/Interval'
+        operator:
+          type: string
+        vehicleScheduleGuids:
+          type: array
+          items:
+            type: string
+    TourReportResult:
+      required:
+      - vehicleGuid
+      - timeInterval
+      type: object
+      properties:
+        vehicleGuid:
+          type: string
+        timeInterval:
+          $ref: '#/components/schemas/Interval'
+        drivingTime:
+          type: integer
+          format: int64
+        drivingDistance:
+          type: number
+          format: double
+        idleTime:
+          type: integer
+          format: int64
+        trips:
+          type: array
+          items:
+            $ref: '#/components/schemas/Trip'
+        energyConsumption:
+          type: number
+          format: double
+        energyCharged:
+          type: number
+          format: double
+        revenue:
+          type: number
+          format: double
+        costs:
+          type: number
+          format: double
+    TrafficData:
+      type: object
+      properties:
+        affectedVehicleGuids:
+          type: array
+          items:
+            type: string
+            format: uuid
+        drivingTimeMultiplier:
+          type: number
+          format: double
+        estimatedDuration:
+          pattern: ^-?(\d+\.)?\d{2}:\d{2}:\d{2}(\.\d{1,7})?$
+          type: string
+        effectiveFrom:
+          type: string
+          format: date-time
+    Trip:
+      required:
+      - tripGuid
+      - userGuid
+      - cabStartLocation
+      - cabDropoffLocation
       type: object
       properties:
         tripGuid:
           type: string
-          description: Kennung der Fahrt
-          format: uuid
         userGuid:
           type: string
-          description: Anfragender User
-          format: uuid
         creationTime:
           type: string
-          description: Zeit der Anfrage
           format: date-time
         vehicleLabel:
           type: string
-          description: "Fahrzeug für den Transport\r\nMehr Infos notwendig"
           nullable: true
         cabStartLocation:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
-        cabTargetLocation:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
-        pickupTime:
+          $ref: '#/components/schemas/Location'
+        cabDropoffLocation:
+          $ref: '#/components/schemas/Location'
+        estimatedPickupTime:
           type: string
-          description: "Geplante Abholzeit\r\nToleranz - Range => Interval"
           format: date-time
-        targetTime:
+        estimatedDropoffTime:
           type: string
-          description: "Erwartete Ankunftszeit\r\nToleranz - Range => Interval"
           format: date-time
         costs:
           type: number
-          description: Kosten für die Fahrt
           format: float
         carpoolInformation:
-          $ref: '#/components/schemas/NemobilAPI.Model.CarpoolInformation'
-        skills:
-          type: array
-          items:
-            $ref: '#/components/schemas/NemobilAPI.Model.Skill'
-          description: 'Besonderheiten z.B: Kinderwagen, Rollstuhl, sonst. Einschränkungen'
-          nullable: true
+          $ref: '#/components/schemas/CarpoolInformation'
+        rampNeeded:
+          type: boolean
         requestedAdults:
           type: integer
-          description: Wie viele Erwachsene sollen transportiert werden
           format: int32
         requestedChilds:
           type: integer
-          description: Wie viele Kinder sollen transportiert werden
           format: int32
         luggage:
           type: integer
-          description: Gepäck
           format: int32
         maxCabs:
           type: integer
-          description: Wie viele Cabs sollen für den Transport maximal kommen
           format: int32
         personalPreferences:
-          $ref: '#/components/schemas/NemobilAPI.Contracts.RideRequest.CustomerPreferences'
+          $ref: '#/components/schemas/CustomerPreferences'
         status:
           enum:
-            - 0 - Unplanned
-            - 1 - Planned
-            - 2 - Started
-            - 3 - Performed
-          type: integer
-          description: Status der Fahrt
-          format: int32
+          - Unplanned
+          - Planned
+          - Started
+          - Completed
+          - Canceled
+        cabArrival:
+          type: string
+          format: date-time
+        customerCheckin:
+          type: string
+          format: date-time
+        customerCheckout:
+          type: string
+          format: date-time
         modificationDate:
           type: string
-          description: Letztes Änderungsdatum
           format: date-time
         expectedEnergyRequired:
           type: number
-          description: Geschätzte Energie für die Strecke
           format: float
         expectedDrivingTime:
           type: number
-          description: Geschätzte Fahrzeit für die Strecke
           format: float
         expectedDistance:
           type: number
-          description: Geschätzte Distanz für die Strecke
           format: float
-      additionalProperties: false
-      description: "Daten eines Trips\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleOperation/doc/spec.md"
-    NemobilAPI.Model.TripHistory:
+    TripDto:
+      type: object
+      properties:
+        id:
+          type: string
+        pickupTime:
+          $ref: '#/components/schemas/PropertyOfstring'
+        pickupLocation:
+          $ref: '#/components/schemas/GeoProperty'
+        dropoffLocation:
+          $ref: '#/components/schemas/GeoProperty'
+        requestedAdults:
+          $ref: '#/components/schemas/PropertyOfint'
+        user:
+          $ref: '#/components/schemas/PropertyOfstring'
+        status:
+          $ref: '#/components/schemas/PropertyOfstring'
+        type:
+          type: string
+    TripHistory:
       type: object
       properties:
         tripGuid:
           type: string
-          description: Kennung des Trips zu dem der Eintrag gehört
           format: uuid
         history:
           type: array
           items:
-            $ref: '#/components/schemas/NemobilAPI.Model.TripHistoryEntry'
-          description: Einträge der History
+            $ref: '#/components/schemas/TripHistoryEntry'
           nullable: true
-      additionalProperties: false
-      description: Änderungshistorie eines Trips
-    NemobilAPI.Model.TripHistoryEntry:
-      type: object
-      additionalProperties: false
-      description: Eintrag über Änderung an einer Fahrt
-    NemobilAPI.Model.TripRequestProposal:
+    TripHistoryEntry:
+      required:
+      - reason
       type: object
       properties:
+        guid:
+          type: string
+          format: uuid
+        tripGuid:
+          type: string
+          format: uuid
+        reason:
+          type: string
+        modificationTime:
+          type: string
+          format: date-time
+    TripProposalDto:
+      type: object
+      properties:
+        id:
+          type: string
+        request:
+          $ref: '#/components/schemas/PropertyOfstring'
+        pickupTime:
+          $ref: '#/components/schemas/PropertyOfstring'
+        cabPickupLocation:
+          $ref: '#/components/schemas/GeoProperty'
+        cabDropoffLocation:
+          $ref: '#/components/schemas/GeoProperty'
+        proposalReleaseTime:
+          $ref: '#/components/schemas/PropertyOfstring'
+        type:
+          type: string
+    TripRequestParameter:
+      required:
+      - userGuid
+      - currentLocation
+      - targetLocation
+      type: object
+      properties:
+        userGuid:
+          type: string
+        currentLocation:
+          $ref: '#/components/schemas/Location'
+        targetLocation:
+          $ref: '#/components/schemas/Location'
+        targetTime:
+          $ref: '#/components/schemas/Interval2'
+        pickupTime:
+          $ref: '#/components/schemas/Interval2'
+        needRamp:
+          type: boolean
+        requestedAdults:
+          type: integer
+          format: int32
+        requestedChilds:
+          type: integer
+          format: int32
+        luggage:
+          type: integer
+          format: int32
+        maxCabs:
+          type: integer
+          format: int32
+        personalPreferences:
+          $ref: '#/components/schemas/CustomerPreferences'
+        transactionGuid:
+          type: string
+          nullable: true
+        priority:
+          type: integer
+          format: int32
+        vehicleGuid:
+          type: string
+    TripRequestProposal:
+      required:
+      - guid
+      - cabStartLocation
+      - cabTargetLocation
+      - requestedStartLocation
+      - requestedTargetLocation
+      type: object
+      properties:
+        guid:
+          type: string
         vehicleLabel:
           type: string
-          description: "Fahrzeug für den Transport\r\nMehr Infos notwendig"
           nullable: true
         cabStartLocation:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
+          $ref: '#/components/schemas/Location'
         cabTargetLocation:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
+          $ref: '#/components/schemas/Location'
         requestedStartLocation:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
+          $ref: '#/components/schemas/Location'
         requestedTargetLocation:
-          $ref: '#/components/schemas/NemobilAPI.Model.Location'
+          $ref: '#/components/schemas/Location'
         pickupTime:
           type: string
-          description: "Geplante Abholzeit\r\nToleranz - Range => Interval"
           format: date-time
-        targetTime:
+        dropoffTime:
           type: string
-          description: "Erwartete Ankunftszeit\r\nToleranz - Range => Interval"
           format: date-time
         costs:
           type: number
-          description: Kosten für die Fahrt
           format: float
         carpoolInformation:
-          $ref: '#/components/schemas/NemobilAPI.Model.CarpoolInformation'
+          $ref: '#/components/schemas/CarpoolInformation'
         proposalReleaseTime:
           type: string
-          description: Bis wann wird der Proposal freigehalten
           format: date-time
-      additionalProperties: false
-      description: Vorschlag für eine Fahrtanfrage
-    System.TimeSpan:
+    TripRequestResponse:
+      required:
+      - bookingTransaction
+      - userGuid
       type: object
       properties:
-        ticks:
-          type: integer
-          format: int64
-        days:
+        bookingTransaction:
+          type: string
+        userGuid:
+          type: string
+        successful:
+          type: boolean
+        possibleStartLocation:
+          $ref: '#/components/schemas/Location3'
+        possibleTargetLocation:
+          $ref: '#/components/schemas/Location3'
+        earliestPossibleStart:
+          type: string
+          format: date-time
+          nullable: true
+        proposals:
+          type: array
+          items:
+            $ref: '#/components/schemas/TripRequestProposal'
+          nullable: true
+    TripStatusResponse:
+      type: object
+      properties:
+        costs:
+          type: number
+          format: float
+        carpoolInformation:
+          $ref: '#/components/schemas/CarpoolInformation'
+        rampNeeded:
+          type: boolean
+        requestedAdults:
           type: integer
           format: int32
-          readOnly: true
-        hours:
+        requestedChilds:
           type: integer
           format: int32
-          readOnly: true
-        milliseconds:
+        luggage:
           type: integer
           format: int32
-          readOnly: true
-        minutes:
+        status:
+          enum:
+          - Unplanned
+          - Planned
+          - Started
+          - Completed
+          - Canceled
+        pickupTime:
+          type: string
+          format: date-time
+        dropoffTime:
+          type: string
+          format: date-time
+        pickupTimeMin:
+          type: string
+          format: date-time
+        pickupTimeMax:
+          type: string
+          format: date-time
+        dropoffTimeMin:
+          type: string
+          format: date-time
+        dropoffTimeMax:
+          type: string
+          format: date-time
+    UpdateCabStopStatusRequest:
+      required:
+      - status
+      type: object
+      properties:
+        status:
+          type: integer
+    VehicleSchedulePlan:
+      required:
+      - vehicleSchedule
+      type: object
+      properties:
+        vehicleSchedule:
+          $ref: '#/components/schemas/CabSchedule'
+        schedulePlan:
+          type: array
+          items:
+            $ref: '#/components/schemas/CabStop'
+    VehicleSchedulePlanResult:
+      required:
+      - vehicleSchedulePlans
+      type: object
+      properties:
+        vehicleSchedulePlans:
+          type: array
+          items:
+            $ref: '#/components/schemas/VehicleSchedulePlan'
+    VehicleStatus:
+      required:
+      - location
+      type: object
+      properties:
+        guid:
+          type: string
+          format: uuid
+        vehicleScheduleGuid:
+          type: string
+          format: uuid
+        stateOfSchedule:
+          enum:
+          - Planned
+          - Active
+          - Started
+          - Completed
+        batteryLevel:
+          type: number
+          format: float
+        remainingRange:
+          type: number
+          format: float
+        consumption:
+          type: number
+          format: float
+        energyConsumptionSinceLastStop:
+          type: number
+          format: float
+        location:
+          $ref: '#/components/schemas/Location'
+        state:
+          type: string
+        drivingState:
+          $ref: '#/components/schemas/DrivingState'
+        deviation:
+          type: number
+          format: float
+        chargingPower:
+          type: number
+          format: float
+        chargedPower:
+          type: number
+          format: float
+        tireAirPressure:
+          type: number
+          format: float
+        mileageFromOdometer:
           type: integer
           format: int32
-          readOnly: true
-        seconds:
+        load:
           type: integer
           format: int32
-          readOnly: true
-        totalDays:
+        weight:
+          type: integer
+          format: int32
+        chainedVehicles:
+          type: integer
+          format: int32
+        powerSupply:
+          type: integer
+          format: int32
+        temperatureIndoor:
           type: number
-          format: double
-          readOnly: true
-        totalHours:
+          format: float
+        temperatureOutside:
           type: number
-          format: double
-          readOnly: true
-        totalMilliseconds:
+          format: float
+        dateCreated:
+          type: string
+          format: date-time
+    VehicleTypeSetting:
+      required:
+      - key
+      - bezeichnung
+      - reisewitzRouteServiceUrl
+      type: object
+      properties:
+        key:
+          type: string
+        bezeichnung:
+          type: string
+        reisewitzRouteServiceUrl:
+          type: string
+    WeatherForecast:
+      type: object
+      properties:
+        forecastGuid:
+          type: string
+          format: uuid
+        dateCreated:
+          type: string
+          format: date-time
+        temperature:
           type: number
-          format: double
-          readOnly: true
-        totalMinutes:
+          format: float
+        region:
+          type: array
+          items:
+            $ref: '#/components/schemas/Location'
+        areaServed:
+          type: array
+          items: {}
+        gustSpeed:
           type: number
-          format: double
-          readOnly: true
-        totalSeconds:
+          format: float
+        wetStreet:
+          type: boolean
+        snowHeight:
           type: number
-          format: double
-          readOnly: true
-      additionalProperties: false
+          format: float
+        validFrom:
+          type: string
+          format: date-time
+        validTo:
+          type: string
+          format: date-time
+        windDirection:
+          type: integer
+          format: int32
+        windSpeed:
+          type: integer
+          format: int32
+  securitySchemes:
+tags:
+- name: ApiKey
+- name: Auth
+- name: BaseData
+- name: Broker
+- name: Charging
+- name: Debug
+- name: Forecast
+- name: Locations
+- name: Notification
+- name: Report
+- name: Schedule
+- name: Sensor
+- name: Simulations
+- name: Trip
+- name: VehicleSchedule
+- name: WeatherForecast
