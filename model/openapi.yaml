@@ -486,9 +486,11 @@ components:
             type: Relationship
         stateOfSchedule:
           enum:
-            - Running
-            - StartSchedule
-            - EndSchedule
+            - Planned
+            - Active
+            - Started
+            - Completed
+            - OutOfService
           type: string
           description: "State of Schedule"
           example: Running
