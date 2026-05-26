@@ -523,9 +523,20 @@ components:
           type: string
           enum:
             - Idle
+            - Approaching
+            - Boarding
+            - Riding
+            - Pooling
             - Konvoi
+            - OffBoarding
+            - Parking
+            - Charging
             - Accident
-            - TrafficJam
+            - Maintenance
+            - Defect
+            - PassengerIssue
+            - Misc
+            - Unknown            
           description: General state of the vehicle
           example: Idle
         bearing:
