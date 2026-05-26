@@ -434,13 +434,13 @@ components:
               description: Mass flow of hydrogen into the fuel cell
               format: float
               example: 100.0
-          hydrogenTanks:
-            type: array
-            description: List of hydrogen tanks installed in the vehicle. To be replaced by devices linked by a relationship list.
-            items:
-              type: string
-            example:
-              - urn:ngsi-ld:HydrogenTank:11ea1c5c-5aa6-11e3-8244-4b32063ca31c
+            hydrogenTanks:
+              type: array
+              description: List of hydrogen tanks installed in the vehicle. To be replaced by devices linked by a relationship list.
+              items:
+                type: string
+              example:
+                - urn:ngsi-ld:HydrogenTank:11ea1c5c-5aa6-11e3-8244-4b32063ca31c
 
 
     Vehicle:
