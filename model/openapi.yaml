@@ -452,7 +452,7 @@ components:
                   enum: 
                     - Locked
                     - Unlocked
-                  example: Locked"
+                  example: "Locked"
               
     Pro:
       type: object
