@@ -279,23 +279,23 @@ components:
         allowCarpooling:
           type: boolean
           description: User allows car pooling on the trip
-          example: true
+          example: false
         toleratedDelayBefore:
           type: integer
-          description: Amount of allowed difference in the pickup time
+          description: Amount of allowed difference (seconds) in the pickup time
           format: int32
-          example: 5
+          example: 300
         toleratedDelayAfter:
           type: integer
-          description: Amount of allowed difference in the drop off time
+          description: Amount of allowed difference  (seconds) in the drop off time
           format: int32
-          example: 5
+          example: 300
       additionalProperties: false
       description: Customer preferences when booking a trip
 
     User:
       type: object
-      description: Information about the customer
+      description: Information about the user
       properties:
         id:
           type: string
@@ -311,6 +311,14 @@ components:
           type: string
           description: User surname
           example: Meier
+        firstName:
+          type: string
+          description: User first name
+          example: Hans
+        keycloakId:
+          type: string
+          description: Keycloak Id
+          example: 34d16d95-2a61-4c64-b675-af7b078e8466
       required:
         - id
         - type
