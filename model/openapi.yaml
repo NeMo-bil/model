@@ -1,8 +1,8 @@
 openapi: 3.0.1
 info:
   title: NeMoBil Datamodel
-  description: Reduced data model to be used in the NeMoBil project
-  version: 1.0.0
+  description: Reduced data model to be used in the NeMo.bil project
+  version: 1.0.1
 paths:
   /test:
     get:
@@ -36,12 +36,12 @@ components:
         vehicle:
           type: string
           description: Vehicle used to fulfill the trip
-          example: urn:ngsi-ld:Vehicle:21ea1c5c-5aa6-11e3-8244-4b82063ca31c
+          example: urn:ngsi-ld:Cab:21ea1c5c-5aa6-11e3-8244-4b82063ca31c
           x-ngsi:
             type: Relationship
         pickupLocation:
           $ref: '#/components/schemas/Place'
-          description: Location from where the transport was started
+          description: Location where the transport starts
           example:
             type: "Point"
             coordinates: [
@@ -50,7 +50,7 @@ components:
             ]
         dropoffLocation:
           $ref: '#/components/schemas/Place'
-          description: Location where the transport ended
+          description: Location where the transport ends
           example:
             type: "Point"
             coordinates: [
@@ -59,12 +59,12 @@ components:
             ]
         pickupTime:
           type: string
-          description: Planned time of user pickup
+          description: Planned time of pickup
           format: date-time
           example: 2025-02-02T10:18:16Z
         targetTime:
           type: string
-          description: Planned time of user dropoff
+          description: Planned time of dropoff
           format: date-time
           example: 2025-02-02T10:18:16Z
         costs:
@@ -104,7 +104,7 @@ components:
           example: 1
         personalPreferences:
           $ref: '#/components/schemas/CustomerPreferences'
-          description: User preferences regarding time tolerances and car pooling
+          description: User preferences regarding car pooling and time tolerances in seconds
           example:
             allowCarpooling: false
             toleratedDelayBefore: 1
@@ -122,7 +122,7 @@ components:
           example: Started
         payment:
           type: string
-          description: payment information of the trip
+          description: Payment information of the trip
           enum:
             - Permitted
             - Denied
