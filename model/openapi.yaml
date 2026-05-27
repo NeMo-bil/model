@@ -20,37 +20,54 @@ components:
         id:
           type: string
           description: Unique identifier of the trip
-          example: urn:ngsi-ld:Trip:16ea1c5c-5aa6-11e3-8244-4b82063ca31c
+          example: "urn:ngsi-ld:Trip:16ea1c5c-5aa6-11e3-8244-4b82063ca31c"
         type:
           type: string
           description: NGSI Entity type. It has to be Trip
           enum:
             - Trip
-          example: Trip
+          example: "Trip"
+        status:
+          enum:
+            - Unplanned
+            - Planned
+            - Started
+            - Canceled
+            - Rejected
+            - Performed
+          type: string
+          description: Status of the trip
+          example: "Started"
         user:
           type: string
           description: User that booked the trip
-          example: urn:ngsi-ld:User:11ea1c5c-5aa6-11e3-8244-4b82063ca31c
+          example: "urn:ngsi-ld:User:11ea1c5c-5aa6-11e3-8244-4b82063ca31c"
+          x-ngsi:
+            type: Relationship
+        proposal:
+          type: string
+          description: Proposal the trip relates to 
+          example: "urn:ngsi-ld:TripProposal:11ea1c5c-5aa6-11e3-8244-4b82063ca31c"
           x-ngsi:
             type: Relationship
         vehicle:
           type: string
           description: Vehicle used to fulfill the trip
-          example: urn:ngsi-ld:Cab:21ea1c5c-5aa6-11e3-8244-4b82063ca31c
+          example: "urn:ngsi-ld:Cab:21ea1c5c-5aa6-11e3-8244-4b82063ca31c"
           x-ngsi:
             type: Relationship
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/Skill'
+          description: Required vehicle features. eg wheelchair capabilities
+          nullable: true
+          example:
+            - id: 1
+              name: "WheelChair"
         pickupLocation:
           $ref: '#/components/schemas/Place'
           description: Location where the transport starts
-          example:
-            type: "Point"
-            coordinates: [
-              1.2,
-              3.4
-            ]
-        dropoffLocation:
-          $ref: '#/components/schemas/Place'
-          description: Location where the transport ends
           example:
             type: "Point"
             coordinates: [
@@ -61,32 +78,33 @@ components:
           type: string
           description: Planned time of pickup
           format: date-time
-          example: 2025-02-02T10:18:16Z
+          example: "2025-02-02T10:18:16Z"
+        dropoffLocation:
+          $ref: '#/components/schemas/Place'
+          description: Location where the transport ends
+          example:
+            type: "Point"
+            coordinates: [
+              1.2,
+              3.4
+            ]
         targetTime:
           type: string
           description: Planned time of dropoff
           format: date-time
-          example: 2025-02-02T10:18:16Z
+          example: "2025-02-02T10:18:16Z"
         costs:
           type: number
           description: Cost of the trip
           format: float
           example: 1.5
-        carpoolInformation:
-          $ref: '#/components/schemas/CarpoolInformation'
-          description: Information regarding carpooling for this trip
-          example:
-            passengersOnBoard: false
-            passengerBoarding: false
-        skills:
-          type: array
-          items:
-            $ref: '#/components/schemas/Skill'
-          description: Required vehicle features. eg wheelchair capabilities
-          nullable: true
-          example:
-            - id: 1
-              name: WheelChair
+        payment:
+          type: string
+          description: Payment information of the trip
+          enum:
+            - Permitted
+            - Denied
+          example: "Permitted"
         requestedAdults:
           type: integer
           description: Amount of adults to be transported
@@ -109,24 +127,12 @@ components:
             allowCarpooling: false
             toleratedDelayBefore: 300
             toleratedDelayAfter: 300
-        status:
-          enum:
-            - Unplanned
-            - Planned
-            - Started
-            - Canceled
-            - Rejected
-            - Performed
-          type: string
-          description: Status of the trip
-          example: Started
-        payment:
-          type: string
-          description: Payment information of the trip
-          enum:
-            - Permitted
-            - Denied
-          example: Permitted
+        carpoolInformation:
+          $ref: '#/components/schemas/CarpoolInformation'
+          description: Information regarding carpooling for this trip
+          example:
+            passengersOnBoard: false
+            passengerBoarding: false
         expectedEnergyRequired:
           type: number
           description: Expected energy consumption of the trip
@@ -148,8 +154,11 @@ components:
         - id
         - type
       example:
-        user: urn:ngsi-ld:User:11ea1c5c-5aa6-11e3-8244-4b82063ca31c
-        vehicle: urn:ngsi-ld:Vehicle:21ea1c5c-5aa6-11e3-8244-4b82063ca31c
+        id: "urn:ngsi-ld:Trip:16ea1c5c-5aa6-11e3-8244-4b82063ca31c"
+        type: "Trip"
+        status: "Unplanned"
+        user: "urn:ngsi-ld:User:11ea1c5c-5aa6-11e3-8244-4b82063ca31c"
+        vehicle: "urn:ngsi-ld:Vehicle:21ea1c5c-5aa6-11e3-8244-4b82063ca31c"
         pickupLocation:
           type: "Point"
           coordinates: [
@@ -162,13 +171,13 @@ components:
             1.2,
             3.4
           ]
-        carpoolInformation:
-          passengersOnBoard: false
-          passengerBoarding: false
         personalPreferences:
           allowCarpooling: false
           toleratedDelayBefore: 300
           toleratedDelayAfter: 300
+        carpoolInformation:
+          passengersOnBoard: false
+          passengerBoarding: false
 
     TripRequest:
       type: object
@@ -176,36 +185,24 @@ components:
         id:
           type: string
           description: Request ID
-          example: urn:ngsi-ld:TripRequest:16ea1c5c-5aa6-11e3-8244-4b82063ca31c
+          example: "urn:ngsi-ld:TripRequest:16ea1c5c-5aa6-11e3-8244-4b82063ca31c"
         type:
           type: string
           description: NGSI Entity type. It has to be TripRequest
           enum:
             - TripRequest
-          example: TripRequest
+          example: "TripRequest"
         user:
           type: string
           description: User that booked the trip
           x-ngsi:
             type: Relationship
-        startLocation:
-          $ref: '#/components/schemas/Place'
-          description: Location where the transport should start
-        targetLocation:
-          $ref: '#/components/schemas/Place'
-          description: Location where the transport should end
-        targetTime:
+        vehicle:
           type: string
-          description: Requested time of drop off
-          format: date-time
+          description: Specific vehicle to be requested
           nullable: true
-          example: 2025-02-02T10:18:16Z
-        pickupTime:
-          type: string
-          description: Requested time of pickup
-          format: date-time
-          nullable: true
-          example: 2025-02-02T10:18:16Z
+          x-ngsi:
+            type: Relationship
         skills:
           type: array
           items:
@@ -214,7 +211,25 @@ components:
           nullable: true
           example:
             - id: 1
-              name: WheelChair
+              name: "WheelChair"
+        startLocation:
+          $ref: '#/components/schemas/Place'
+          description: Location where the transport should start
+        pickupTime:
+          type: string
+          description: Requested time of pickup
+          format: date-time
+          nullable: true
+          example: "2025-02-02T10:18:16Z"
+        targetLocation:
+          $ref: '#/components/schemas/Place'
+          description: Location where the transport should end
+        targetTime:
+          type: string
+          description: Requested time of drop off
+          format: date-time
+          nullable: true
+          example: "2025-02-02T10:18:16Z"
         requestedAdults:
           type: integer
           description: Amount of adults to be transported
@@ -237,12 +252,6 @@ components:
             allowCarpooling: false
             toleratedDelayBefore: 300
             toleratedDelayAfter: 300
-        vehicle:
-          type: string
-          description: Specific vehicle to be requested
-          nullable: true
-          x-ngsi:
-            type: Relationship
         priority:
           type: integer
           description: Priority of the request. Higher values represent more important requests
@@ -254,8 +263,8 @@ components:
         - id
         - type
       example:
-        user: urn:ngsi-ld:User:11ea1c5c-5aa6-11e3-8244-4b82063ca31c
-        vehicle: urn:ngsi-ld:Vehicle:21ea1c5c-5aa6-11e3-8244-4b82063ca31c
+        user: "urn:ngsi-ld:User:11ea1c5c-5aa6-11e3-8244-4b82063ca31c"
+        vehicle: "urn:ngsi-ld:Vehicle:21ea1c5c-5aa6-11e3-8244-4b82063ca31c"
         startLocation:
           type: "Point"
           coordinates: [
@@ -300,25 +309,25 @@ components:
         id:
           type: string
           description: User ID
-          example: urn:ngsi-ld:User:16ea1c5c-5aa6-11e3-8244-4b82063ca31c
+          example: "urn:ngsi-ld:User:16ea1c5c-5aa6-11e3-8244-4b82063ca31c"
         type:
           type: string
           description: NGSI Entity type. It has to be User
           enum:
             - User
-          example: User
+          example: "User"
         surname:
           type: string
           description: User surname
-          example: Meier
+          example: "Meier"
         firstName:
           type: string
           description: User first name
-          example: Hans
+          example: "Hans"
         keycloakId:
           type: string
           description: Keycloak Id
-          example: 34d16d95-2a61-4c64-b675-af7b078e8466
+          example: "34d16d95-2a61-4c64-b675-af7b078e8466"
       required:
         - id
         - type
@@ -329,29 +338,35 @@ components:
         id:
           type: string
           description: Proposal ID
-          example: urn:ngsi-ld:TripProposal:16ea1c5c-5aa6-11e3-8244-4b82063ca31c
-        request:
+          example: "urn:ngsi-ld:TripProposal:16ea1c5c-5aa6-11e3-8244-4b82063ca31c"
+        type:
           type: string
-          description: The request that resulted in this proposal
+          description: NGSI Entity type. It has to be TripProposal
+          enum:
+            - TripProposal
+          example: "TripProposal"
         user:
           type: string
           description: The customer that issued the request
+        request:
+          type: string
+          description: The request that resulted in this proposal
         pickupLocation:
           $ref: '#/components/schemas/Place'
           description: Location from where the transport was started
-        dropoffLocation:
-          $ref: '#/components/schemas/Place'
-          description: Location where the transport ended
         pickupTime:
           type: string
           description: Planned time of user pickup
           format: date-time
-          example: 2025-02-02T10:18:16Z
+          example: "2025-02-02T10:18:16Z"
+        dropoffLocation:
+          $ref: '#/components/schemas/Place'
+          description: Location where the transport ended
         targetTime:
           type: string
           description: Planned time of user dropoff
           format: date-time
-          example: 2025-02-02T10:18:16Z
+          example: "2025-02-02T10:18:16Z"
         costs:
           type: number
           description: Estimated cost of the trip
@@ -368,8 +383,8 @@ components:
         - id
         - type
       example:
-        user: urn:ngsi-ld:User:11ea1c5c-5aa6-11e3-8244-4b82063ca31c
-        request: urn:ngsi-ld:TripRequest:21ea1c5c-5aa6-11e3-8244-4b82063ca31c
+        user: "urn:ngsi-ld:User:11ea1c5c-5aa6-11e3-8244-4b82063ca31c"
+        request: "urn:ngsi-ld:TripRequest:21ea1c5c-5aa6-11e3-8244-4b82063ca31c"
         pickupLocation:
           type: "Point"
           coordinates: [
@@ -396,12 +411,12 @@ components:
           description: NGSI Entity type. It has to be Skill
           enum:
             - Skill
-          example: Skill
+          example: "Skill"
         name:
           type: string
           description: Name of the skill
           nullable: true
-          example: Wheelchair
+          example: "Wheelchair"
       additionalProperties: false
       description: Skills and features, which can be fulfilled by vehicles
       required:
@@ -418,13 +433,27 @@ components:
               type: string
               description: Information to be displayed in the vehicle display
               example: "Welcome"
+              properties:
+                confirmedPassengerInformation:
+                  type: string
+                  description: Confirmed information to be displayed in the vehicle display
+                  example: "Welcome"                
             doorLock:
               type: string
               description: State of the vehicles door locks
-              enum:
+              enum: 
                 - Locked
                 - Unlocked
-              example: Locked
+              example: "Locked"
+              properties:
+                confirmedDoorLock:
+                  type: string
+                  description: Confirmatied state of the vehicles door locks
+                  enum: 
+                    - Locked
+                    - Unlocked
+                  example: Locked"
+              
     Pro:
       type: object
       description: Vehice of type Pro
