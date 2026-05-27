@@ -76,8 +76,8 @@ components:
           $ref: '#/components/schemas/CarpoolInformation'
           description: Information regarding carpooling for this trip
           example:
-            passengersOnBoard: true
-            passengerBoarding: true
+            passengersOnBoard: false
+            passengerBoarding: false
         skills:
           type: array
           items:
@@ -107,8 +107,8 @@ components:
           description: User preferences regarding car pooling and time tolerances in seconds
           example:
             allowCarpooling: false
-            toleratedDelayBefore: 1
-            toleratedDelayAfter: 1
+            toleratedDelayBefore: 300
+            toleratedDelayAfter: 300
         status:
           enum:
             - Unplanned
@@ -163,12 +163,12 @@ components:
             3.4
           ]
         carpoolInformation:
-          passengersOnBoard: true
-          passengerBoarding: true
+          passengersOnBoard: false
+          passengerBoarding: false
         personalPreferences:
           allowCarpooling: false
-          toleratedDelayBefore: 1
-          toleratedDelayAfter: 1
+          toleratedDelayBefore: 300
+          toleratedDelayAfter: 300
 
     TripRequest:
       type: object
@@ -190,19 +190,19 @@ components:
             type: Relationship
         startLocation:
           $ref: '#/components/schemas/Place'
-          description: Location where the user would like to be picked up
+          description: Location where the transport should start
         targetLocation:
           $ref: '#/components/schemas/Place'
-          description: Location where the user would like to be dropped off
+          description: Location where the transport should end
         targetTime:
           type: string
-          description: Requested time of user drop off
+          description: Requested time of drop off
           format: date-time
           nullable: true
           example: 2025-02-02T10:18:16Z
         pickupTime:
           type: string
-          description: Requested time of user pickup
+          description: Requested time of pickup
           format: date-time
           nullable: true
           example: 2025-02-02T10:18:16Z
@@ -233,6 +233,10 @@ components:
         personalPreferences:
           $ref: '#/components/schemas/CustomerPreferences'
           description: User preferences regarding time tolerances and car pooling
+          example:
+            allowCarpooling: false
+            toleratedDelayBefore: 300
+            toleratedDelayAfter: 300
         vehicle:
           type: string
           description: Specific vehicle to be requested
@@ -266,8 +270,8 @@ components:
           ]
         personalPreferences:
           allowCarpooling: false
-          toleratedDelayBefore: 1
-          toleratedDelayAfter: 1
+          toleratedDelayBefore: 300
+          toleratedDelayAfter: 300
 
     CustomerPreferences:
       type: object
