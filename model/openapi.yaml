@@ -453,12 +453,12 @@ components:
           example: urn:ngsi-ld:Vehicle:11ea1c5c-5aa6-11e3-8244-4b82063ca31c
         type:
           type: string
-          description: NGSI Entity type. It has to be Vehicle or overridden by a subtype
+          description: NGSI Entity type. It has to be rather Pro or Cab overriding the type Vehicle missing some attributes
           enum:
-            - Vehicle
-            - Cab
             - Pro
-          example: Vehicle
+            - Cab
+            - Vehicle
+          example: Cab
         shortId:
           type: integer
           description: Identifier to be used in vehicle to vehicle communication.
