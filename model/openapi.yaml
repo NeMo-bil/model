@@ -568,7 +568,6 @@ components:
             - Boarding
             - Riding
             - Pooling
-            - Konvoi
             - OffBoarding
             - Parking
             - Charging
