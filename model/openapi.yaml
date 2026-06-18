@@ -32,7 +32,7 @@ components:
             - Unplanned
             - Planned
             - Started
-            - Canceled
+            - Cancelled
             - Rejected
             - Performed
           type: string
@@ -52,7 +52,7 @@ components:
             type: Relationship
         vehicle:
           type: string
-          description: Vehicle used to fulfill the trip
+          description: Vehicle used to fulfill the trip, empty string at first, will be booked by payment service
           example: "urn:ngsi-ld:Cab:21ea1c5c-5aa6-11e3-8244-4b82063ca31c"
           x-ngsi:
             type: Relationship
@@ -79,6 +79,10 @@ components:
           description: Planned time of pickup
           format: date-time
           example: "2025-02-02T10:18:16Z"
+        pickupAddress:
+          type: string
+          description: Address string from the start location autocomplete in the App
+          example: "1, Andreasstraße, Paderborn, Paderborn, Kreis Paderborn, Nordrhein-Westfalen, 33098, Deutschland"
         dropoffLocation:
           $ref: '#/components/schemas/Place'
           description: Location where the transport ends
@@ -93,6 +97,10 @@ components:
           description: Planned time of dropoff
           format: date-time
           example: "2025-02-02T10:18:16Z"
+        dropoffAddress:
+          type: string
+          description: Address string from the target location autocomplete in the App
+          example: "6, Florianstraße, Riemekeviertel, Paderborn, Paderborn, Kreis Paderborn, Nordrhein-Westfalen, 33102, Deutschland"
         costs:
           type: number
           description: Cost of the trip
@@ -100,7 +108,7 @@ components:
           example: 1.5
         payment:
           type: string
-          description: Payment information of the trip
+          description: Payment information of the trip, empty string at first, will be booked by payment service
           enum:
             - Permitted
             - Denied
@@ -148,7 +156,7 @@ components:
           description: Expected distance of the trip
           format: float
           example: 100.0
-      additionalProperties: false
+      additionalProperties: true
       description: "Trip data\r\nhttps://github.com/smart-data-models/dataModel.Transportation/blob/master/FleetVehicleOperation/doc/spec.md"
       required:
         - id
@@ -199,7 +207,7 @@ components:
             type: Relationship
         vehicle:
           type: string
-          description: Specific vehicle to be requested
+          description: Optional, specific vehicle to be requested
           nullable: true
           x-ngsi:
             type: Relationship
@@ -215,6 +223,10 @@ components:
         startLocation:
           $ref: '#/components/schemas/Place'
           description: Location where the transport should start
+        startAddress:
+          type: string
+          description: Address string from the start location autocomplete in the App
+          example: "1, Andreasstraße, Paderborn, Paderborn, Kreis Paderborn, Nordrhein-Westfalen, 33098, Deutschland"
         pickupTime:
           type: string
           description: Requested time of pickup
@@ -224,6 +236,10 @@ components:
         targetLocation:
           $ref: '#/components/schemas/Place'
           description: Location where the transport should end
+        targetAddress:
+          type: string
+          description: Address string from the target location autocomplete in the App
+          example: "6, Florianstraße, Riemekeviertel, Paderborn, Paderborn, Kreis Paderborn, Nordrhein-Westfalen, 33102, Deutschland"
         targetTime:
           type: string
           description: Requested time of drop off
@@ -250,8 +266,8 @@ components:
           description: User preferences regarding time tolerances and car pooling
           example:
             allowCarpooling: false
-            toleratedDelayBefore: 300
-            toleratedDelayAfter: 300
+            toleratedDelayBefore: 900
+            toleratedDelayAfter: 900
         priority:
           type: integer
           description: Priority of the request. Higher values represent more important requests
@@ -345,6 +361,16 @@ components:
           enum:
             - TripProposal
           example: "TripProposal"
+        status:
+          type: string
+          description: Result of Trip Propsal creation
+          enum:
+            - Successful
+          example: "Successful"
+        reason:
+          type: string
+          description: Optional attribute for assisting debugging, describing reasons for having not having Trip Proposals to be delivered
+          example: "TimeRangeMaxBeforeCutOff×13"
         user:
           type: string
           description: The customer that issued the request
@@ -368,10 +394,19 @@ components:
           format: date-time
           example: "2025-02-02T10:18:16Z"
         costs:
+          type: string
+          description: Estimated cost of the trip, first delivered from planning tool with "" because fare calculation is not part of route planning
+          example: "10.50"
+        efficiency: Additional effort of the fleet for planning. Unit is meter. Example value 3575 is ~3.6 km.
+          type: integer
+          description: 
+          format: int32
+          example: 3575
+        proposalTripDistanceKM:
           type: number
-          description: Estimated cost of the trip
+          description: The distance in kilometers traveled by the passenger from pickUp to dropOff 
           format: float
-          example: 1.5
+          example: 4.5
         proposalReleaseTime:
           type: string
           description: Time when the proposal is invalidated
