@@ -407,6 +407,10 @@ components:
           description: The distance in kilometers traveled by the passenger from pickUp to dropOff 
           format: float
           example: 4.5
+        isConvoyTrip:
+          type: boolean
+          description: Does the route planning for the trip contain convoi legs?
+          example: false
         proposalReleaseTime:
           type: string
           description: Time when the proposal is invalidated
