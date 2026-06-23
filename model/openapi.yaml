@@ -468,15 +468,29 @@ components:
       allOf:
         - $ref: '#/components/schemas/Vehicle'
         - properties:
+            seats:
+              type: integer
+              description: Number of seats for adults
+              format: int32
+              example: 4
+            childSeats:
+              type: integer
+              description: Number of seats for children
+              format: int32
+              example: 4
+            luggage:
+              type: integer
+              description: Number of possible luggage items
+              format: int32
+              example: 2
             passengerInformation:
               type: string
               description: Information to be displayed in the vehicle display
               example: "Welcome"
-              properties:
-                confirmedPassengerInformation:
-                  type: string
-                  description: Confirmed information to be displayed in the vehicle display
-                  example: "Welcome"                
+            confirmedPassengerInformation:
+              type: string
+              description: Confirmed information to be displayed in the vehicle display
+              example: "Welcome"                
             doorLock:
               type: string
               description: State of the vehicles door locks
