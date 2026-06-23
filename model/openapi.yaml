@@ -484,14 +484,13 @@ components:
                 - Locked
                 - Unlocked
               example: "Locked"
-              properties:
-                confirmedDoorLock:
-                  type: string
-                  description: Confirmatied state of the vehicles door locks
-                  enum: 
-                    - Locked
-                    - Unlocked
-                  example: "Locked"
+            confirmedDoorLock:
+              type: string
+              description: Confirmatied state of the vehicles door locks
+              enum: 
+                - Locked
+                - Unlocked
+              example: "Locked"
               
     Pro:
       type: object
