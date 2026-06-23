@@ -627,7 +627,7 @@ components:
             - Charging
             - Accident
             - Maintenance
-            - Defect
+            - Error
             - PassengerIssue
             - Misc
             - Unknown            
