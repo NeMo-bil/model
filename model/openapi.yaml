@@ -522,6 +522,10 @@ components:
               description: Concentration of hydrogen in the vehicle
               format: float
               example: 1.0
+            maxCabChain:
+              type: integer
+              description: Number of cabs that can be chained to a Pro
+              example: 2
             massFlowHydrogen:
               type: number
               description: Mass flow of hydrogen into the fuel cell
@@ -619,6 +623,8 @@ components:
             - Approaching
             - Boarding
             - BoardingFinished
+            - RidingToKonvoi
+            - RidingInKonvoi
             - Riding
             - Pooling
             - OffBoarding
